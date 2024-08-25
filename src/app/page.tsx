@@ -97,7 +97,11 @@ export default function Leaderboard() {
                     return response.json();
                 })
                 .then((data) => {
-                    setLeaderboard(data);
+                    if (data.leaderboard && Array.isArray(data.leaderboard)) {
+                        setLeaderboard(data.leaderboard);
+                    } else {
+                        throw new Error("Invalid leaderboard data structure");
+                    }
                     setIsLoading(false);
                 })
                 .catch((err) => {
