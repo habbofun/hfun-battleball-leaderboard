@@ -48,7 +48,7 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
         </TooltipTrigger>
         <TooltipContent>
           <p>When this timer finishes, the top 45 users will be added to the queue to be updated.</p>
-          <p>Check the queue order and progress in our Discord server panel.</p>
+          <p>Check the queue order and progress in our <a href="https://discord.gg/originses" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Discord</a> server panel.</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
