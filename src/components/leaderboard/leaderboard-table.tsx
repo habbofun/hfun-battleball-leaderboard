@@ -16,6 +16,7 @@ import {
     type ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface LeaderboardTableProps<TData, TValue> {
     data: TData[];
@@ -41,9 +42,13 @@ export function LeaderboardTable<TData, TValue>({
 
     return (
         <div>
-            <div className="flex items-center py-4">
+            <div className="py-4">
+                <Label htmlFor="username-filter" className="block mb-2">
+                    Search
+                </Label>
                 <Input
-                    placeholder="Filter by username"
+                    id="username-filter"
+                    placeholder="Enter username to filter"
                     value={(table.getColumn("username")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("username")?.setFilterValue(event.target.value)
