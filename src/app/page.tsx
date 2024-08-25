@@ -126,9 +126,9 @@ export default function Leaderboard() {
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             <PageHeader />
             <main className="flex-grow flex justify-center p-4">
-                <div className="container mx-auto max-w-4xl">
+                <div className="container mx-auto max-w-4xl w-full px-4 sm:px-6 lg:px-8">
                     {USE_EXAMPLE_DATA && (
-                        <TextEffect per='char' preset='slide' className="text-center text-yellow-600 mb-4">
+                        <TextEffect per='char' preset='slide' className="text-center text-yellow-600 mb-4 text-sm sm:text-base">
                             Using example data for testing
                         </TextEffect>
                     )}
