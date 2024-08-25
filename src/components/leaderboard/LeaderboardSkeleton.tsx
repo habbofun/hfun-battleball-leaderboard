@@ -3,6 +3,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function LeaderboardSkeleton() {
     return (
         <div className="space-y-4">
+            <h1 className="text-3xl font-bold text-center">
+                Loading...
+            </h1>
             <Skeleton className="h-10 w-full" />
             {[...Array(5)].map((_, i) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
