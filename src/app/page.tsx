@@ -6,6 +6,7 @@ import { LeaderboardSkeleton } from "@/components/leaderboard/LeaderboardSkeleto
 import { ErrorDisplay } from "@/components/ErrorDisplay";
 import { ModeToggle } from "@/components/ui/theme-switcher";
 import { TextEffect } from "@/components/ui/text-effect";
+import { CountdownTimer } from "@/components/leaderboard/CountdownTimer";
 import type { ColumnDef } from "@tanstack/react-table";
 
 interface LeaderboardEntry {
@@ -13,6 +14,12 @@ interface LeaderboardEntry {
     username: string;
     total_score: number;
     ranked_matches: number;
+}
+
+interface LeaderboardData {
+    leaderboard: LeaderboardEntry[];
+    next_update_in: number;
+    update_interval_seconds: number;
 }
 
 const columns: ColumnDef<LeaderboardEntry>[] = [
@@ -81,11 +88,15 @@ export default function Leaderboard() {
     const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [nextUpdateIn, setNextUpdateIn] = useState<number | null>(null);
+    const [updateInterval, setUpdateInterval] = useState<number | null>(null);
 
     useEffect(() => {
         if (USE_EXAMPLE_DATA) {
             setTimeout(() => {
                 setLeaderboard(exampleData);
+                setNextUpdateIn(300); // Example: 5 minutes
+                setUpdateInterval(3600); // Example: 1 hour
                 setIsLoading(false);
             }, 1500); // Simulate loading delay
         } else {
@@ -96,12 +107,10 @@ export default function Leaderboard() {
                     }
                     return response.json();
                 })
-                .then((data) => {
-                    if (data.leaderboard && Array.isArray(data.leaderboard)) {
-                        setLeaderboard(data.leaderboard);
-                    } else {
-                        throw new Error("Invalid leaderboard data structure");
-                    }
+                .then((data: LeaderboardData) => {
+                    setLeaderboard(data.leaderboard);
+                    setNextUpdateIn(data.next_update_in);
+                    setUpdateInterval(data.update_interval_seconds);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -129,6 +138,9 @@ export default function Leaderboard() {
                         <TextEffect per='char' preset='slide' className="text-center text-yellow-600 mb-4">
                             Using example data for testing
                         </TextEffect>
+                    )}
+                    {nextUpdateIn !== null && updateInterval !== null && (
+                        <CountdownTimer initialSeconds={nextUpdateIn} totalSeconds={updateInterval} />
                     )}
                     {isLoading ? (
                         <LeaderboardSkeleton />
