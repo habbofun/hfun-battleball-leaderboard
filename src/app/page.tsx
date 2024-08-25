@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { LeaderboardTable } from "@/components/leaderboard/LeaderboardTable";
 import { LeaderboardSkeleton } from "@/components/leaderboard/LeaderboardSkeleton";
 import { ErrorDisplay } from "@/components/ErrorDisplay";
+import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/theme-switcher";
 import { TextEffect } from "@/components/ui/text-effect";
 import { CountdownTimer } from "@/components/leaderboard/CountdownTimer";
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 
 interface LeaderboardEntry {
     position: number;
@@ -128,8 +130,13 @@ export default function Leaderboard() {
                 <TextEffect per='char' preset='blur' className="text-3xl font-bold text-center">
                     Leaderboard
                 </TextEffect>
-                <div className="flex-grow flex justify-end">
+                <div className="flex-grow flex justify-end items-center gap-2">
                     <ModeToggle />
+                    <Button variant="outline">
+                        <Link href="https://discord.gg/originses" target="_blank" rel="noopener noreferrer">
+                            Discord
+                        </Link>
+                    </Button>
                 </div>
             </header>
             <main className="flex-grow flex justify-center items-center p-4">
