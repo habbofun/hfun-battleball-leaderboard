@@ -22,6 +22,7 @@ export function PageHeader() {
                 </Link>
                 <div className="flex items-center space-x-2">
                     <Badge variant="default" className="mr-2">Beta</Badge>
+                    <ModeToggle />
                     <Drawer>
                         <DrawerTrigger asChild>
                             <Button variant="outline" size="icon">
@@ -66,7 +67,6 @@ export function PageHeader() {
                             </div>
                         </DrawerContent>
                     </Drawer>
-                    <ModeToggle />
                 </div>
             </div>
         </header>
