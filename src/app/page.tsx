@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -17,6 +16,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { ModeToggle } from "@/components/ui/theme-switcher";
+import { TextEffect } from "@/components/ui/text-effect";
 
 interface LeaderboardEntry {
     position: number;
@@ -54,25 +54,45 @@ const exampleData: LeaderboardEntry[] = [
     {
         position: 1,
         username: "xez",
-        total_score: 86677,
-        ranked_matches: 1074,
-        non_ranked_matches: 168,
+        total_score: 106453,
+        ranked_matches: 1283,
+        non_ranked_matches: 728,
     },
     {
         position: 2,
         username: ".:josefaura:.",
-        total_score: 84740,
-        ranked_matches: 930,
-        non_ranked_matches: 1655,
+        total_score: 104685,
+        ranked_matches: 1136,
+        non_ranked_matches: 7703,
     },
-    // ... Add more entries here ...
     {
-        position: 40,
-        username: "jakobo-am",
-        total_score: 39254,
-        ranked_matches: 460,
-        non_ranked_matches: 0,
+        position: 3,
+        username: "empty",
+        total_score: 103776,
+        ranked_matches: 1009,
+        non_ranked_matches: 690,
     },
+    {
+        position: 4,
+        username: "cl4s1c0",
+        total_score: 103206,
+        ranked_matches: 1236,
+        non_ranked_matches: 4218,
+    },
+    {
+        position: 5,
+        username: "majink",
+        total_score: 101090,
+        ranked_matches: 1128,
+        non_ranked_matches: 571,
+    },
+    {
+        position: 6,
+        username: "parasol",
+        total_score: 96260,
+        ranked_matches: 1026,
+        non_ranked_matches: 2178,
+    }
 ];
 
 // Use an environment variable to determine whether to use example data or fetch from API
@@ -88,7 +108,7 @@ export default function Leaderboard() {
             setLeaderboard(exampleData);
             setIsLoading(false);
         } else {
-            fetch("http://localhost:2005/leaderboard")
+            fetch("https://leaderboard.hfun.info/leaderboard")
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Failed to fetch leaderboard data");
@@ -116,7 +136,7 @@ export default function Leaderboard() {
     if (isLoading)
         return (
             <div className="flex justify-center items-center h-screen">
-                Loading...
+                Loading leaderboard data...
             </div>
         );
     if (error)
@@ -133,7 +153,9 @@ export default function Leaderboard() {
             </header>
             <main className="flex-grow flex justify-center items-center p-4">
                 <div className="container mx-auto max-w-4xl">
-                    <h1 className="text-3xl font-bold mb-6 text-center">Leaderboard</h1>
+                    <TextEffect per='char' preset='blur' className="text-3xl font-bold mb-6 text-center">
+                        Leaderboard
+                    </TextEffect>
                     {USE_EXAMPLE_DATA && (
                         <p className="text-center text-yellow-600 mb-4">
                             Using example data for testing
@@ -164,17 +186,21 @@ export default function Leaderboard() {
                                         <TableRow
                                             key={row.id}
                                             data-state={
-                                                row.getIsSelected() && "selected"
+                                                row.getIsSelected() &&
+                                                "selected"
                                             }
                                         >
-                                            {row.getVisibleCells().map((cell) => (
-                                                <TableCell key={cell.id}>
-                                                    {flexRender(
-                                                        cell.column.columnDef.cell,
-                                                        cell.getContext()
-                                                    )}
-                                                </TableCell>
-                                            ))}
+                                            {row
+                                                .getVisibleCells()
+                                                .map((cell) => (
+                                                    <TableCell key={cell.id}>
+                                                        {flexRender(
+                                                            cell.column
+                                                                .columnDef.cell,
+                                                            cell.getContext()
+                                                        )}
+                                                    </TableCell>
+                                                ))}
                                         </TableRow>
                                     ))
                                 ) : (
