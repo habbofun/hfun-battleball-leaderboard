@@ -9,6 +9,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Badge } from "@/components/ui/badge";
 
 export function PageHeader() {
     return (
@@ -20,6 +21,7 @@ export function PageHeader() {
                     </TextEffect>
                 </Link>
                 <div className="flex items-center space-x-2">
+                    <Badge variant="default" className="mr-2">Beta</Badge>
                     <Drawer>
                         <DrawerTrigger asChild>
                             <Button variant="outline" size="icon">
