@@ -128,11 +128,10 @@ export default function Leaderboard() {
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             <header className="w-full bg-background border-b">
                 <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                    <div className="w-28 flex-shrink-0" /> {/* Spacer */}
                     <TextEffect per='char' preset='blur' className="text-3xl font-bold">
-                        Leaderboard
+                        HFUN Leaderboard
                     </TextEffect>
-                    <div className="w-28 flex-shrink-0 flex justify-end items-center gap-2">
+                    <div className="flex justify-end items-center gap-2">
                         <ModeToggle />
                         <Button variant="outline">
                             <Link href="https://discord.gg/originses" target="_blank" rel="noopener noreferrer">
