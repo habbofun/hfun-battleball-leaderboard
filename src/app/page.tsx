@@ -7,7 +7,7 @@ import { ErrorDisplay } from "@/components/error-display";
 import { TextEffect } from "@/components/ui/text-effect";
 import { CountdownTimer } from "@/components/leaderboard/countdown-timer";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Header } from "@/components/Header";
+import { PageHeader } from "@/components/header";
 
 interface LeaderboardEntry {
     position: number;
@@ -124,7 +124,7 @@ export default function Leaderboard() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-            <Header />
+            <PageHeader />
             <main className="flex-grow flex justify-center p-4">
                 <div className="container mx-auto max-w-4xl">
                     {USE_EXAMPLE_DATA && (

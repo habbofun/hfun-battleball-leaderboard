@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/theme-switcher";
 import { TextEffect } from "@/components/ui/text-effect";
 
-export function Header() {
+export function PageHeader() {
     return (
         <header className="w-full bg-background border-b">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
