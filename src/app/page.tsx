@@ -111,7 +111,7 @@ export default function Leaderboard() {
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             <header className="p-4 flex justify-between items-center">
-                <div className="flex-grow"></div>
+                <div className="flex-grow" />
                 <TextEffect per='char' preset='blur' className="text-3xl font-bold text-center">
                     Leaderboard
                 </TextEffect>
