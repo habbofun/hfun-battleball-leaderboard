@@ -32,6 +32,7 @@ const columns: ColumnDef<LeaderboardEntry>[] = [
     {
         accessorKey: "username",
         header: "Username",
+        filterFn: "includesString",
     },
     {
         accessorKey: "total_score",
@@ -131,7 +132,7 @@ export default function Leaderboard() {
                     <TextEffect per='char' preset='blur' className="text-3xl font-bold">
                         Leaderboard
                     </TextEffect>
-                    <div className="flex justify-end items-center gap-2">
+                    <div className="w-28 flex-shrink-0 flex justify-end items-center gap-2">
                         <ModeToggle />
                         <Button variant="outline">
                             <Link href="https://discord.gg/originses" target="_blank" rel="noopener noreferrer">
