@@ -26,7 +26,7 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
 
   return (
     <div className="text-center mb-4">
-      <p className="text-sm text-muted-foreground">Next update in:</p>
+      <p className="text-sm text-muted-foreground">Queue update in:</p>
       <p className="text-2xl font-bold">
         {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
       </p>
