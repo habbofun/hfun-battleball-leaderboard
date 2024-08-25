@@ -37,7 +37,7 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="text-center mb-4">
-            <p className="text-s text-muted-foreground">Queue update in:</p>
+            <p className="text-s text-muted-foreground">Queue updates in:</p>
             <p className="text-2xl font-bold">
               {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
             </p>
