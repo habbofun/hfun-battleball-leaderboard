@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
-import Starfield from 'react-starfield';
-import { Toaster } from "@/components/ui/sonner";
+
+import { Providers } from "@/components/providers";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -24,21 +23,9 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={cn(fontSans.variable, "font-sans")}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
+                <Providers>
                     {children}
-                </ThemeProvider>
-                <Toaster />
-                <Starfield
-                    starCount={1000}
-                    starColor={[255, 255, 255]}
-                    speedFactor={0.05}
-                    backgroundColor="black"
-                />
+                </Providers>
             </body>
         </html>
     );
