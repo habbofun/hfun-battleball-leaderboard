@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import Starfield from 'react-starfield';
 import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
@@ -32,6 +33,12 @@ export default function RootLayout({
                     {children}
                 </ThemeProvider>
                 <Toaster />
+                <Starfield
+                    starCount={1000}
+                    starColor={[255, 255, 255]}
+                    speedFactor={0.05}
+                    backgroundColor="black"
+                />
             </body>
         </html>
     );
