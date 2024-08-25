@@ -7,10 +7,17 @@ export function PageHeader() {
     return (
         <header className="w-full bg-background border-b">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                <TextEffect per='char' preset='blur' className="text-3xl font-bold">
-                    HFUN Leaderboard
-                </TextEffect>
+                <Link href="https://hfun.info" target="_blank" rel="noopener noreferrer">
+                    <TextEffect per='char' preset='blur' className="text-3xl font-bold cursor-pointer">
+                        HFUN Leaderboard
+                    </TextEffect>
+                </Link>
                 <div className="flex justify-end items-center gap-2">
+                    <Button variant="link">
+                        <Link href="https://hfun.info" target="_blank" rel="noopener noreferrer">
+                            Home
+                        </Link>
+                    </Button>
                     <Button variant="ghost">
                         <Link href="https://habbofun.org" target="_blank" rel="noopener noreferrer">
                             Website
