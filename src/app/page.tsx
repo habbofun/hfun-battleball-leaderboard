@@ -7,7 +7,7 @@ import { ErrorDisplay } from "@/components/error-display";
 import { TextEffect } from "@/components/ui/text-effect";
 import { CountdownTimer } from "@/components/leaderboard/countdown-timer";
 import type { ColumnDef } from "@tanstack/react-table";
-import { PageHeader } from "@/components/header";
+import { PageHeader } from "@/components/page-header";
 
 interface LeaderboardEntry {
     position: number;
