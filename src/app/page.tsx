@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { LeaderboardTable } from "@/components/leaderboard/LeaderboardTable";
-import { LeaderboardSkeleton } from "@/components/leaderboard/LeaderboardSkeleton";
-import { ErrorDisplay } from "@/components/ErrorDisplay";
+import { LeaderboardTable } from "@/components/leaderboard/leaderboard-table";
+import { LeaderboardSkeleton } from "@/components/leaderboard/leaderboard-skeleton";
+import { ErrorDisplay } from "@/components/error-display";
 import { TextEffect } from "@/components/ui/text-effect";
-import { CountdownTimer } from "@/components/leaderboard/CountdownTimer";
+import { CountdownTimer } from "@/components/leaderboard/countdown-timer";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/Header";
 
