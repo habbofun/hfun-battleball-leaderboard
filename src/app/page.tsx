@@ -23,7 +23,6 @@ interface LeaderboardEntry {
     username: string;
     total_score: number;
     ranked_matches: number;
-    non_ranked_matches: number;
 }
 
 const columns: ColumnDef<LeaderboardEntry>[] = [
@@ -43,10 +42,6 @@ const columns: ColumnDef<LeaderboardEntry>[] = [
         accessorKey: "ranked_matches",
         header: "Ranked Matches",
     },
-    {
-        accessorKey: "non_ranked_matches",
-        header: "Non-Ranked Matches",
-    },
 ];
 
 // Example data for testing
@@ -56,42 +51,36 @@ const exampleData: LeaderboardEntry[] = [
         username: "xez",
         total_score: 106453,
         ranked_matches: 1283,
-        non_ranked_matches: 728,
     },
     {
         position: 2,
         username: ".:josefaura:.",
         total_score: 104685,
         ranked_matches: 1136,
-        non_ranked_matches: 7703,
     },
     {
         position: 3,
         username: "empty",
         total_score: 103776,
         ranked_matches: 1009,
-        non_ranked_matches: 690,
     },
     {
         position: 4,
         username: "cl4s1c0",
         total_score: 103206,
         ranked_matches: 1236,
-        non_ranked_matches: 4218,
     },
     {
         position: 5,
         username: "majink",
         total_score: 101090,
         ranked_matches: 1128,
-        non_ranked_matches: 571,
     },
     {
         position: 6,
         username: "parasol",
         total_score: 96260,
         ranked_matches: 1026,
-        non_ranked_matches: 2178,
     }
 ];
 
@@ -157,9 +146,9 @@ export default function Leaderboard() {
                         Leaderboard
                     </TextEffect>
                     {USE_EXAMPLE_DATA && (
-                        <p className="text-center text-yellow-600 mb-4">
+                        <TextEffect per='char' preset='slide' className="text-center text-yellow-600 mb-4">
                             Using example data for testing
-                        </p>
+                        </TextEffect>
                     )}
                     <div className="rounded-md border">
                         <Table>
