@@ -1,22 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import {
-    type ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
+import { LeaderboardTable } from "@/components/leaderboard/LeaderboardTable";
+import { LeaderboardSkeleton } from "@/components/leaderboard/LeaderboardSkeleton";
+import { ErrorDisplay } from "@/components/ErrorDisplay";
 import { ModeToggle } from "@/components/ui/theme-switcher";
 import { TextEffect } from "@/components/ui/text-effect";
+import type { ColumnDef } from "@tanstack/react-table";
 
 interface LeaderboardEntry {
     position: number;
@@ -94,8 +84,10 @@ export default function Leaderboard() {
 
     useEffect(() => {
         if (USE_EXAMPLE_DATA) {
-            setLeaderboard(exampleData);
-            setIsLoading(false);
+            setTimeout(() => {
+                setLeaderboard(exampleData);
+                setIsLoading(false);
+            }, 1500); // Simulate loading delay
         } else {
             fetch("https://leaderboard.hfun.info/leaderboard")
                 .then((response) => {
@@ -116,95 +108,31 @@ export default function Leaderboard() {
         }
     }, []);
 
-    const table = useReactTable({
-        data: leaderboard,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-    });
-
-    if (isLoading)
-        return (
-            <div className="flex justify-center items-center h-screen">
-                Loading leaderboard data...
-            </div>
-        );
-    if (error)
-        return (
-            <div className="flex justify-center items-center h-screen text-red-500">
-                {error}
-            </div>
-        );
-
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-            <header className="p-4 flex justify-end">
-                <ModeToggle />
+            <header className="p-4 flex justify-between items-center">
+                <div className="flex-grow"></div>
+                <TextEffect per='char' preset='blur' className="text-3xl font-bold text-center">
+                    Leaderboard
+                </TextEffect>
+                <div className="flex-grow flex justify-end">
+                    <ModeToggle />
+                </div>
             </header>
             <main className="flex-grow flex justify-center items-center p-4">
                 <div className="container mx-auto max-w-4xl">
-                    <TextEffect per='char' preset='blur' className="text-3xl font-bold mb-6 text-center">
-                        Leaderboard
-                    </TextEffect>
                     {USE_EXAMPLE_DATA && (
                         <TextEffect per='char' preset='slide' className="text-center text-yellow-600 mb-4">
                             Using example data for testing
                         </TextEffect>
                     )}
-                    <div className="rounded-md border">
-                        <Table>
-                            <TableHeader>
-                                {table.getHeaderGroups().map((headerGroup) => (
-                                    <TableRow key={headerGroup.id}>
-                                        {headerGroup.headers.map((header) => (
-                                            <TableHead key={header.id}>
-                                                {header.isPlaceholder
-                                                    ? null
-                                                    : flexRender(
-                                                          header.column
-                                                              .columnDef.header,
-                                                          header.getContext()
-                                                      )}
-                                            </TableHead>
-                                        ))}
-                                    </TableRow>
-                                ))}
-                            </TableHeader>
-                            <TableBody>
-                                {table.getRowModel().rows?.length ? (
-                                    table.getRowModel().rows.map((row) => (
-                                        <TableRow
-                                            key={row.id}
-                                            data-state={
-                                                row.getIsSelected() &&
-                                                "selected"
-                                            }
-                                        >
-                                            {row
-                                                .getVisibleCells()
-                                                .map((cell) => (
-                                                    <TableCell key={cell.id}>
-                                                        {flexRender(
-                                                            cell.column
-                                                                .columnDef.cell,
-                                                            cell.getContext()
-                                                        )}
-                                                    </TableCell>
-                                                ))}
-                                        </TableRow>
-                                    ))
-                                ) : (
-                                    <TableRow>
-                                        <TableCell
-                                            colSpan={columns.length}
-                                            className="h-24 text-center"
-                                        >
-                                            No results.
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-                            </TableBody>
-                        </Table>
-                    </div>
+                    {isLoading ? (
+                        <LeaderboardSkeleton />
+                    ) : error ? (
+                        <ErrorDisplay message={error} />
+                    ) : (
+                        <LeaderboardTable data={leaderboard} columns={columns} />
+                    )}
                 </div>
             </main>
         </div>
