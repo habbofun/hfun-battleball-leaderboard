@@ -1,4 +1,11 @@
+import { toast } from "sonner"
 import React, { useState, useEffect } from 'react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface CountdownTimerProps {
   initialSeconds: number;
@@ -12,6 +19,7 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
     const timer = setInterval(() => {
       setSecondsLeft((prevSeconds) => {
         if (prevSeconds <= 0) {
+          toast.info("Queue updated!");
           return totalSeconds;
         }
         return prevSeconds - 1;
@@ -25,11 +33,24 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
   const seconds = secondsLeft % 60;
 
   return (
-    <div className="text-center mb-4">
-      <p className="text-sm text-muted-foreground">Queue update in:</p>
-      <p className="text-2xl font-bold">
-        {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
-      </p>
-    </div>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="text-center mb-4">
+            <p className="text-s text-muted-foreground">Queue update in:</p>
+            <p className="text-2xl font-bold">
+              {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Hover to see more info.
+            </p>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>When this timer finishes, the top 45 users will be added to the queue to be updated.</p>
+          <p>Check the queue order and progress in our Discord server panel.</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
