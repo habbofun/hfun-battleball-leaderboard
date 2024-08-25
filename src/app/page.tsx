@@ -192,6 +192,7 @@ export default function Leaderboard() {
                                             </PaginationLink>
                                         </PaginationItem>
                                     ))}
+                                    <PaginationEllipsis />
                                     <PaginationItem>
                                         <PaginationNext 
                                             href="#" 
