@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 import { LeaderboardTable } from "@/components/leaderboard/LeaderboardTable";
 import { LeaderboardSkeleton } from "@/components/leaderboard/LeaderboardSkeleton";
 import { ErrorDisplay } from "@/components/ErrorDisplay";
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/ui/theme-switcher";
 import { TextEffect } from "@/components/ui/text-effect";
 import { CountdownTimer } from "@/components/leaderboard/CountdownTimer";
 import type { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
+import { Header } from "@/components/Header";
 
 interface LeaderboardEntry {
     position: number;
@@ -126,26 +124,7 @@ export default function Leaderboard() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-            <header className="w-full bg-background border-b">
-                <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                    <TextEffect per='char' preset='blur' className="text-3xl font-bold">
-                        HFUN Leaderboard
-                    </TextEffect>
-                    <div className="flex justify-end items-center gap-2">
-                        <Button variant="ghost">
-                            <Link href="https://habbofun.org" target="_blank" rel="noopener noreferrer">
-                                Website
-                            </Link>
-                        </Button>
-                        <Button variant="ghost">
-                            <Link href="https://discord.gg/originses" target="_blank" rel="noopener noreferrer">
-                                Discord
-                            </Link>
-                        </Button>
-                        <ModeToggle />
-                    </div>
-                </div>
-            </header>
+            <Header />
             <main className="flex-grow flex justify-center p-4">
                 <div className="container mx-auto max-w-4xl">
                     {USE_EXAMPLE_DATA && (
