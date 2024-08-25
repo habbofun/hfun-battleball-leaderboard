@@ -8,6 +8,15 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { CountdownTimer } from "@/components/leaderboard/countdown-timer";
 import type { ColumnDef } from "@tanstack/react-table";
 import { PageHeader } from "@/components/page-header";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 interface LeaderboardEntry {
     position: number;
@@ -18,7 +27,14 @@ interface LeaderboardEntry {
 
 interface LeaderboardData {
     leaderboard: LeaderboardEntry[];
+    metadata: {
+        total_users: number;
+        page: number;
+        per_page: number;
+        total_pages: number;
+    };
     next_update_in: number;
+    update_interval_minutes: number;
     update_interval_seconds: number;
 }
 
@@ -91,6 +107,9 @@ export default function Leaderboard() {
     const [error, setError] = useState<string | null>(null);
     const [nextUpdateIn, setNextUpdateIn] = useState<number | null>(null);
     const [updateInterval, setUpdateInterval] = useState<number | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [perPage, setPerPage] = useState(20); // Default to 20 items per page
 
     useEffect(() => {
         if (USE_EXAMPLE_DATA) {
@@ -101,7 +120,7 @@ export default function Leaderboard() {
                 setIsLoading(false);
             }, 1500); // Simulate loading delay
         } else {
-            fetch("https://leaderboard.hfun.info/leaderboard")
+            fetch(`https://leaderboard.hfun.info/leaderboard?page=${currentPage}&per_page=${perPage}`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Failed to fetch leaderboard data");
@@ -112,6 +131,9 @@ export default function Leaderboard() {
                     setLeaderboard(data.leaderboard);
                     setNextUpdateIn(data.next_update_in);
                     setUpdateInterval(data.update_interval_seconds);
+                    setTotalPages(data.metadata.total_pages);
+                    setPerPage(data.metadata.per_page);
+                    setCurrentPage(data.metadata.page);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -120,7 +142,7 @@ export default function Leaderboard() {
                     console.error("Error:", err);
                 });
         }
-    }, []);
+    }, [currentPage, perPage]);
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
@@ -140,7 +162,50 @@ export default function Leaderboard() {
                     ) : error ? (
                         <ErrorDisplay message={error} />
                     ) : (
-                        <LeaderboardTable data={leaderboard} columns={columns} />
+                        <>
+                            <LeaderboardTable data={leaderboard} columns={columns} />
+                            <Pagination className="mt-4">
+                                <PaginationContent>
+                                    <PaginationItem>
+                                        <PaginationPrevious 
+                                            href="#" 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                if (currentPage > 1) setCurrentPage(prev => prev - 1);
+                                            }}
+                                            aria-disabled={currentPage === 1}
+                                            className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                                        />
+                                    </PaginationItem>
+                                    {[...Array(totalPages)].map((_, index) => (
+                                        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                        <PaginationItem key={index}>
+                                            <PaginationLink 
+                                                href="#" 
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setCurrentPage(index + 1);
+                                                }}
+                                                isActive={currentPage === index + 1}
+                                            >
+                                                {index + 1}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    ))}
+                                    <PaginationItem>
+                                        <PaginationNext 
+                                            href="#" 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+                                            }}
+                                            aria-disabled={currentPage === totalPages}
+                                            className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                                        />
+                                    </PaginationItem>
+                                </PaginationContent>
+                            </Pagination>
+                        </>
                     )}
                 </div>
             </main>
