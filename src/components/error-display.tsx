@@ -1,11 +1,19 @@
+import { Badge } from "@/components/ui/badge";
+import { AlertCircle } from "lucide-react";
+
 interface ErrorDisplayProps {
     message: string;
+    title?: string;
 }
 
-export function ErrorDisplay({ message }: ErrorDisplayProps) {
+export function ErrorDisplay({ message, title = "Error" }: ErrorDisplayProps) {
     return (
-        <div className="flex justify-center items-center h-64 text-red-500 bg-red-100 rounded-md border border-red-300 p-4">
-            <p className="text-lg font-semibold">{message}</p>
+        <div className="flex flex-col items-center justify-center p-4 my-4 border border-destructive rounded-md bg-destructive/10">
+            <div className="flex items-center mb-2">
+                <AlertCircle className="h-5 w-5 text-destructive mr-2" />
+                <Badge variant="destructive">{title}</Badge>
+            </div>
+            <p className="text-center text-destructive">{message}</p>
         </div>
     );
 }
