@@ -1,10 +1,14 @@
 "use client";
 
-import type { ReactNode } from "react";
-import Starfield from 'react-starfield';
+import { ReactNode } from "react";
+import dynamic from 'next/dynamic';
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const StarfieldClient = dynamic(() => import('@/components/starfield-client'), {
+    ssr: false,
+});
 
 const queryClient = new QueryClient();
 
@@ -18,14 +22,9 @@ export function Providers({ children }: { children: ReactNode }) {
                 disableTransitionOnChange
             >
                 {children}
+                <Toaster />
+                <StarfieldClient />
             </ThemeProvider>
-            <Toaster />
-            <Starfield
-                starCount={1000}
-                starColor={[255, 255, 255]}
-                speedFactor={0.05}
-                backgroundColor="black"
-            />
         </QueryClientProvider>
     );
 }
