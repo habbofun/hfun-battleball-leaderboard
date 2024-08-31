@@ -27,7 +27,8 @@ export function LeaderboardTable<TData, TValue>({
     data,
     columns,
 }: LeaderboardTableProps<TData, TValue>) {
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [columnFilters, setColumnFilters] =
+        React.useState<ColumnFiltersState>([]);
 
     const table = useReactTable({
         data,
@@ -49,9 +50,15 @@ export function LeaderboardTable<TData, TValue>({
                 <Input
                     id="username-filter"
                     placeholder="Enter username to filter"
-                    value={(table.getColumn("username")?.getFilterValue() as string) ?? ""}
+                    value={
+                        (table
+                            .getColumn("username")
+                            ?.getFilterValue() as string) ?? ""
+                    }
                     onChange={(event) =>
-                        table.getColumn("username")?.setFilterValue(event.target.value)
+                        table
+                            .getColumn("username")
+                            ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
@@ -66,9 +73,10 @@ export function LeaderboardTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
                                     </TableHead>
                                 ))}
                             </TableRow>
@@ -79,7 +87,9 @@ export function LeaderboardTable<TData, TValue>({
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
+                                    data-state={
+                                        row.getIsSelected() && "selected"
+                                    }
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>

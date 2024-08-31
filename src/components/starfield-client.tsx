@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import Starfield from 'react-starfield';
+import { useEffect, useState } from "react";
+import Starfield from "react-starfield";
 
 export default function StarfieldClient() {
     const [isMounted, setIsMounted] = useState(false);

@@ -11,7 +11,9 @@ export function useLeaderboardData(currentPage: number, perPage: number) {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`https://leaderboard.hfun.info/leaderboard?page=${currentPage}&per_page=${perPage}`)
+        fetch(
+            `https://leaderboard.hfun.info/leaderboard?page=${currentPage}&per_page=${perPage}`
+        )
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch leaderboard data");
@@ -32,5 +34,12 @@ export function useLeaderboardData(currentPage: number, perPage: number) {
             });
     }, [currentPage, perPage]);
 
-    return { leaderboard, isLoading, error, nextUpdateIn, updateInterval, totalPages };
+    return {
+        leaderboard,
+        isLoading,
+        error,
+        nextUpdateIn,
+        updateInterval,
+        totalPages,
+    };
 }

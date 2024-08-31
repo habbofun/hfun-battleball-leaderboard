@@ -1,10 +1,13 @@
 import { PageHeader } from "@/components/page-header";
 import { LeaderboardSkeleton } from "@/components/leaderboard/leaderboard-skeleton";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const LeaderboardContent = dynamic(() => import('@/components/leaderboard/leaderboard-content'), {
-    loading: () => <LeaderboardSkeleton />
-});
+const LeaderboardContent = dynamic(
+    () => import("@/components/leaderboard/leaderboard-content"),
+    {
+        loading: () => <LeaderboardSkeleton />,
+    }
+);
 
 export default function LeaderboardPage() {
     return (

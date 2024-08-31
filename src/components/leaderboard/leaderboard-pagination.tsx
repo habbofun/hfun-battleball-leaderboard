@@ -14,25 +14,34 @@ interface LeaderboardPaginationProps {
     setCurrentPage: (page: number) => void;
 }
 
-export function LeaderboardPagination({ currentPage, totalPages, setCurrentPage }: LeaderboardPaginationProps) {
+export function LeaderboardPagination({
+    currentPage,
+    totalPages,
+    setCurrentPage,
+}: LeaderboardPaginationProps) {
     return (
         <Pagination className="mt-4">
             <PaginationContent>
                 <PaginationItem>
-                    <PaginationPrevious 
-                        href="#" 
+                    <PaginationPrevious
+                        href="#"
                         onClick={(e) => {
                             e.preventDefault();
-                            if (currentPage > 1) setCurrentPage(currentPage - 1);
+                            if (currentPage > 1)
+                                setCurrentPage(currentPage - 1);
                         }}
                         aria-disabled={currentPage === 1}
-                        className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                        className={
+                            currentPage === 1
+                                ? "pointer-events-none opacity-50"
+                                : ""
+                        }
                     />
                 </PaginationItem>
                 {[...Array(totalPages)].map((_, index) => (
                     <PaginationItem key={index}>
-                        <PaginationLink 
-                            href="#" 
+                        <PaginationLink
+                            href="#"
                             onClick={(e) => {
                                 e.preventDefault();
                                 setCurrentPage(index + 1);
@@ -45,14 +54,19 @@ export function LeaderboardPagination({ currentPage, totalPages, setCurrentPage 
                 ))}
                 <PaginationEllipsis />
                 <PaginationItem>
-                    <PaginationNext 
-                        href="#" 
+                    <PaginationNext
+                        href="#"
                         onClick={(e) => {
                             e.preventDefault();
-                            if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                            if (currentPage < totalPages)
+                                setCurrentPage(currentPage + 1);
                         }}
                         aria-disabled={currentPage === totalPages}
-                        className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                        className={
+                            currentPage === totalPages
+                                ? "pointer-events-none opacity-50"
+                                : ""
+                        }
                     />
                 </PaginationItem>
             </PaginationContent>
