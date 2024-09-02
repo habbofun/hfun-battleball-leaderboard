@@ -11,7 +11,7 @@ export default function HomePage() {
                 <Suspense fallback={<HomePageSkeleton />}>
                     <h1 className="text-6xl font-bold">HFUN.</h1>
                     <p className="text-sm text-muted-foreground text-center mt-2 mb-4">
-                        Browse the page with the menu above
+                        Browse the page with the menu below
                     </p>
                     <div className="flex flex-wrap justify-center gap-2">
                         <Link href="/catalog" rel="noopener noreferrer">
