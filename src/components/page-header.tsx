@@ -18,7 +18,7 @@ export function PageHeader() {
                         <Link href="/" rel="noopener noreferrer">
                             <TextEffect
                                 per="char"
-                                preset="blur"
+                                preset="slide"
                                 className="text-3xl font-bold cursor-pointer"
                             >
                                 HFUN
