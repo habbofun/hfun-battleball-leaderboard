@@ -5,8 +5,8 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { Menu } from "lucide-react";
 import { DrawerTrigger } from "@/components/ui/drawer";
 import { Badge } from "@/components/ui/badge";
-import { NavigationDrawer } from "@/components/navigation-drawer";
-import { PageHeaderSkeleton } from "@/components/page-header/page-header-skeleton";
+import { NavigationDrawer } from "@/components/static/navigation-drawer";
+import { PageHeaderSkeleton } from "@/components/static/page-header-skeleton";
 import { Suspense } from "react";
 
 export function PageHeader() {

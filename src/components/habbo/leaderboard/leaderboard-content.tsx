@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { LeaderboardTable } from "@/components/habbo/leaderboard/leaderboard-table";
-import { ErrorDisplay } from "@/components/error-display";
+import { ErrorDisplay } from "@/components/static/error-display";
 import { CountdownTimer } from "@/components/habbo/leaderboard/countdown-timer";
 import { LeaderboardPagination } from "@/components/habbo/leaderboard/leaderboard-pagination";
 import { useLeaderboardData } from "@/hooks/use-leaderboard-data";
