@@ -6,6 +6,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { CountdownTimerSkeleton } from "@/components/leaderboard/countdown-timer-skeleton";
 
 interface CountdownTimerProps {
     initialSeconds: number;
@@ -34,6 +35,8 @@ export function CountdownTimer({
 
     const minutes = Math.floor(secondsLeft / 60);
     const seconds = secondsLeft % 60;
+
+    if (secondsLeft === null) return <CountdownTimerSkeleton />;
 
     return (
         <TooltipProvider>
