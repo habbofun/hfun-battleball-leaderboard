@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { TextEffect } from "@/components/ui/text-effect";
+import { Separator } from "@/components/ui/separator";
 import { HomePageSkeleton } from "@/components/homepage/homepage-skeleton";
 
 export default function HomePage() {
@@ -9,15 +9,7 @@ export default function HomePage() {
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             <main className="flex-grow flex flex-col justify-center items-center p-4">
                 <Suspense fallback={<HomePageSkeleton />}>
-                    <Link href="/">
-                        <TextEffect
-                            per="char"
-                            preset="fade"
-                            className="text-6xl font-bold"
-                        >
-                            HFUN.
-                        </TextEffect>
-                    </Link>
+                    <h1 className="text-6xl font-bold">HFUN.</h1>
                     <p className="text-sm text-muted-foreground text-center mt-2 mb-4">
                         Browse the page with the menu above
                     </p>
@@ -32,6 +24,7 @@ export default function HomePage() {
                             <Button variant="ghost">Finder</Button>
                         </Link>
                     </div>
+                    <Separator className="my-8 w-full max-w-sm" />
                 </Suspense>
             </main>
         </div>
