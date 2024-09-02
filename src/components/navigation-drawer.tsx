@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Home, Globe, MessageCircle } from "lucide-react";
+import { ArrowRight, Home, Globe, MessageCircle, Github } from "lucide-react";
 import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
 
 export function NavigationDrawer({ children }: { children: React.ReactNode }) {
@@ -24,6 +24,11 @@ export function NavigationDrawer({ children }: { children: React.ReactNode }) {
                             href="https://discord.gg/originses"
                             icon={<MessageCircle className="mr-2 h-4 w-4" />}
                             text="Discord"
+                        />
+                        <NavigationLink
+                            href="https://github.com/habbofun/hfun-battleball-leaderboard"
+                            icon={<Github className="mr-2 h-4 w-4" />}
+                            text="GitHub"
                         />
                         <DrawerClose asChild>
                             <Button variant="default" className="w-full mt-4">

@@ -6,12 +6,11 @@ import { Menu } from "lucide-react";
 import { DrawerTrigger } from "@/components/ui/drawer";
 import { Badge } from "@/components/ui/badge";
 import { NavigationDrawer } from "@/components/navigation-drawer";
-import { Github } from "lucide-react";
 
 export function PageHeader() {
     return (
         <header className="w-full bg-background border-b">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
                 <div className="flex items-center space-x-4">
                     <Link href="/" rel="noopener noreferrer">
                         <TextEffect
@@ -22,24 +21,11 @@ export function PageHeader() {
                             HFUN
                         </TextEffect>
                     </Link>
-                </div>
-                <div className="flex items-center space-x-2">
                     <Badge variant="default" className="mr-2">
                         Beta
                     </Badge>
-                    <Link href="/leaderboard" rel="noopener noreferrer">
-                        <Button variant="outline">Leaderboard</Button>
-                    </Link>
-                    <Link
-                        href="https://github.com/habbofun/hfun-battleball-leaderboard"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Button variant="outline" size="icon">
-                            <Github className="h-4 w-4" />
-                            <span className="sr-only">GitHub</span>
-                        </Button>
-                    </Link>
+                </div>
+                <div className="flex items-center space-x-2">
                     <ModeToggle />
                     <NavigationDrawer>
                         <DrawerTrigger asChild>
