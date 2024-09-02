@@ -6,7 +6,7 @@ import { Menu } from "lucide-react";
 import { DrawerTrigger } from "@/components/ui/drawer";
 import { Badge } from "@/components/ui/badge";
 import { NavigationDrawer } from "@/components/navigation-drawer";
-import { GithubIcon } from "lucide-react"; // Import GitHub icon
+import { Github } from "lucide-react"; // Import GitHub icon
 
 export function PageHeader() {
     return (
@@ -37,7 +37,7 @@ export function PageHeader() {
                         rel="noopener noreferrer"
                     >
                         <Button variant="outline" size="icon">
-                            <GithubIcon className="h-4 w-4" />
+                            <Github className="h-4 w-4" />
                             <span className="sr-only">GitHub</span>
                         </Button>
                     </Link>
