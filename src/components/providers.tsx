@@ -1,30 +1,26 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import dynamic from "next/dynamic";
-import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/theme-provider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import dynamic from 'next/dynamic';
+import { ReactNode } from 'react';
 
-const StarfieldClient = dynamic(() => import("@/components/starfield-client"), {
-    ssr: false,
+import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const StarfieldClient = dynamic(() => import('@/components/starfield-client'), {
+  ssr: false,
 });
 
 const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: ReactNode }) {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-            >
-                {children}
-                <Toaster />
-                <StarfieldClient />
-            </ThemeProvider>
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        {children}
+        <Toaster />
+        <StarfieldClient />
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
 }
