@@ -26,7 +26,7 @@ export function NavigationDrawer({ children }: { children: React.ReactNode }) {
                             text="Discord"
                         />
                         <DrawerClose asChild>
-                            <Button variant="outline" className="w-full mt-4">
+                            <Button variant="default" className="w-full mt-4">
                                 Close
                             </Button>
                         </DrawerClose>
