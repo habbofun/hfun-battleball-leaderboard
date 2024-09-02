@@ -10,10 +10,12 @@ const fontSans = FontSans({
     variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-    title: "hfun.info",
-    description: "Habbo Origins: ES | Battleball Leaderboard",
-};
+export function generateMetadata(): Metadata {
+    return {
+        title: "hfun.info",
+        description: "Habbo Origins: ES | Fansite",
+    };
+}
 
 export default function RootLayout({
     children,
