@@ -1,9 +1,9 @@
-import { LeaderboardSkeleton } from "@/components/leaderboard/leaderboard-skeleton";
+import { LeaderboardSkeleton } from "@/components/habbo/leaderboard/leaderboard-skeleton";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const LeaderboardContent = dynamic(
-    () => import("@/components/leaderboard/leaderboard-content"),
+    () => import("@/components/habbo/leaderboard/leaderboard-content"),
     {
         loading: () => <LeaderboardSkeleton />,
     }

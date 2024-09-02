@@ -7,16 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HabboUserInfo as HabboUserInfoType } from "@/types/habbo";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 export function HabboUserInfo() {
     const [username, setUsername] = useState("");
     const [userInfo, setUserInfo] = useState<HabboUserInfoType | null>(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
 
     const fetchUserInfo = async () => {
         setLoading(true);
-        setError("");
         setUserInfo(null);
         try {
             const response = await fetch(
@@ -30,8 +29,9 @@ export function HabboUserInfo() {
             }
             const data: HabboUserInfoType = await response.json();
             setUserInfo(data);
+            toast.success("User info fetched successfully");
         } catch (err) {
-            setError(
+            toast.error(
                 err instanceof Error
                     ? err.message
                     : "Failed to fetch user info. Please try again."
@@ -55,11 +55,6 @@ export function HabboUserInfo() {
                     {loading ? "Loading..." : "Search"}
                 </Button>
             </div>
-            {error && (
-                <p className="text-red-500 bg-red-100 p-2 rounded-md">
-                    {error}
-                </p>
-            )}
             {userInfo && (
                 <Card className="shadow-lg">
                     <CardHeader>

@@ -1,4 +1,4 @@
-import { HabboUserInfo } from "@/components/finder/habbo-user-info";
+import { HabboUserInfo } from "@/components/habbo/finder/habbo-user-info";
 
 export default function FinderPage() {
     return (

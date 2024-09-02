@@ -6,7 +6,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { CountdownTimerSkeleton } from "@/components/leaderboard/countdown-timer-skeleton";
+import { CountdownTimerSkeleton } from "@/components/habbo/leaderboard/countdown-timer-skeleton";
 
 interface CountdownTimerProps {
     initialSeconds: number;
