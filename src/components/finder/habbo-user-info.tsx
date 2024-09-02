@@ -130,7 +130,7 @@ export function HabboUserInfo() {
                         {userInfo.selectedBadges.length > 0 && (
                             <div className="mt-6">
                                 <h4 className="font-semibold text-lg mb-2">
-                                    Selected Badges:
+                                    Badges:
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                     {userInfo.selectedBadges.map((badge) => (
