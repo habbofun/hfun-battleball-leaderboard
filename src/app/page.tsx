@@ -7,7 +7,7 @@ import { HomePageSkeleton } from "@/components/homepage/homepage-skeleton";
 export default function HomePage() {
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-            <main className="flex-grow flex flex-col justify-center items-center space-y-4 px-4">
+            <main className="flex-grow flex flex-col justify-center items-center p-4">
                 <Suspense fallback={<HomePageSkeleton />}>
                     <Link href="/">
                         <TextEffect
@@ -18,7 +18,7 @@ export default function HomePage() {
                             HFUN.
                         </TextEffect>
                     </Link>
-                    <p className="text-sm text-muted-foreground text-center">
+                    <p className="text-sm text-muted-foreground text-center mt-2 mb-4">
                         Browse the page with the menu above
                     </p>
                     <div className="flex flex-wrap justify-center gap-2">
