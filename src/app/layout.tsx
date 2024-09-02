@@ -6,25 +6,25 @@ import { Providers } from '@/components/providers';
 import { cn } from '@/lib/utils';
 
 const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
+	subsets: ['latin'],
+	variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
-  title: 'hfun.info',
-  description: 'Habbo Origins: ES | Battleball Leaderboard',
+	title: 'hfun.info',
+	description: 'Habbo Origins: ES | Battleball Leaderboard',
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, 'font-sans')} suppressHydrationWarning>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body className={cn(fontSans.variable, 'font-sans')} suppressHydrationWarning>
+				<Providers>{children}</Providers>
+			</body>
+		</html>
+	);
 }
