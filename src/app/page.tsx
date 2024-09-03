@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { HomePageSkeleton } from '@/components/homepage/homepage-skeleton';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { auth } from '@/server/auth';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await auth();
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <main className="flex-grow flex flex-col justify-center items-center p-4">
@@ -27,11 +30,15 @@ export default function HomePage() {
             </Link>
           </div>
           <Separator className="my-8 w-full max-w-sm" />
-          <div className="flex flex-wrap justify-center gap-2">
-            <Link href="/auth/sign-in">
-              <Button variant="outline">Sign In</Button>
-            </Link>
-          </div>
+          {session ? (
+            <p>Signed in as: {session?.user?.email}</p>
+          ) : (
+            <div className="flex flex-wrap justify-center gap-2">
+              <Link href="/auth/sign-in">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+            </div>
+          )}
         </Suspense>
       </main>
     </div>
