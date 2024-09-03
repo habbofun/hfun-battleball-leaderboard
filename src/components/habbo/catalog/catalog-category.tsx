@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import { CatalogItem as CatalogItemType } from '@/types/habbo';
 
 interface CatalogCategoryProps {
@@ -39,14 +40,15 @@ export function CatalogCategory({ category, items }: CatalogCategoryProps) {
           <CardDescription>
             {category === 'Rares'
               ? 'Catalogue Rares'
-              : category === 'Super Rares'
-                ? 'Super rares! omg!'
+              : category === 'Mega Rares'
+                ? 'Mega rares! OMG!'
                 : category === 'Funky Friday'
                   ? 'Funky friday catalogue items'
                   : 'Habbo Club monthly rares'}
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <Separator className="mb-4" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {items.map((item, index) => (
               <CatalogItem

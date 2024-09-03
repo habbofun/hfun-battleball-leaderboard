@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import {
   Line,
   LineChart,
@@ -49,7 +51,18 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
       <CardContent>
         {selectedItem ? (
           <>
-            <h2 className="text-2xl font-bold mb-4">{selectedItem.name}</h2>
+            <div className="flex items-center mb-4">
+              {selectedItem.itemImageUrl && (
+                <Image
+                  src={selectedItem.itemImageUrl}
+                  alt={selectedItem.name}
+                  className="mr-4 object-contain"
+                  width={64}
+                  height={64}
+                />
+              )}
+              <h2 className="text-2xl font-bold">{selectedItem.name}</h2>
+            </div>
             <p className="mb-4">{selectedItem.description}</p>
             <div className="h-[200px] w-full">
               <ResponsiveContainer width="100%" height="100%">

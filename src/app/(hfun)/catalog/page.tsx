@@ -4,11 +4,17 @@ import { CatalogData } from '@/types/habbo';
 // Update the catalogData declaration
 const catalogData: CatalogData = {
   Rares: [
-    { name: 'DRAGON EGG', description: 'The stuff of legend', price: 1.75 },
+    {
+      name: 'DRAGON EGG',
+      description: 'The stuff of legend',
+      price: 1.75,
+      currencyImageUrl: '/catalog/vip.png',
+    },
     {
       name: 'BLUE BIRD BATH',
       description: 'For our feathered friends',
       price: 1.0,
+      currencyImageUrl: '/catalog/vip.png',
     },
     { name: 'HOLO-GIRL', description: "You're her only hope...", price: 0.7 },
     {
@@ -17,8 +23,13 @@ const catalogData: CatalogData = {
       price: 0.5,
     },
   ],
-  'Super Rares': [
-    { name: 'TYPEWRITER', description: 'Write that bestseller', price: 950 },
+  'Mega Rares': [
+    {
+      name: 'TYPEWRITER',
+      description: 'Write that bestseller',
+      price: 950,
+      itemImageUrl: '/catalog/mega-rare/typewriter.png',
+    },
     {
       name: 'BRONZE HABBO TROPHY',
       description: 'Bronze Habbo Trophy',
