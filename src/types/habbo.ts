@@ -25,3 +25,14 @@ interface Badge {
 export interface HabboErrorResponse {
   error: string;
 }
+
+export interface CatalogItem {
+  name: string;
+  description: string;
+  price: number;
+  imageUrl?: string;
+}
+
+export type CatalogData = {
+  [key: string]: CatalogItem[];
+};
