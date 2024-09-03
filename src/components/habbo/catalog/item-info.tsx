@@ -78,12 +78,13 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
               </ResponsiveContainer>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              The values provided are a guideline. While the nature of a
-              shifting market means that no fansite/individual can provide
-              entirely accurate values, we aim to offer the most accurate
-              listings based on market rates. We recommend a leeway of up to
-              20%+- above and below each item to account for potential market
-              volatility at any time.
+              Los valores proporcionados son orientativos. Aunque la naturaleza
+              de un mercado cambiante hace que ninguna página de fans ni ninguna
+              persona pueda ofrecer valores totalmente exactos, nuestro objetivo
+              es ofrecer los listados más precisos basados en los precios de
+              mercado. Recomendamos un margen de hasta un 20% por encima y por
+              debajo de cada artículo para tener en cuenta la posible
+              volatilidad del mercado en cualquier momento.
             </p>
           </>
         ) : (
