@@ -1,10 +1,13 @@
 model User {
-    id            String    @id @default(cuid())
-    email         String    @unique
-    emailVerified DateTime? @map("email_verified")
-    createdAt     DateTime  @default(now()) @map("created_at")
-    updatedAt     DateTime  @updatedAt @map("updated_at")
+    id            String          @id @default(cuid())
+    name          String?
+    username      String?         @unique
+    email         String?         @unique
+    emailVerified DateTime?
+    image         String?
     sessions      Session[]
+    Authenticator Authenticator[]
 
-    @@map("users")
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
