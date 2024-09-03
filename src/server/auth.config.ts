@@ -25,7 +25,7 @@ export const config = {
       session.user = user;
       return session;
     },
-  },
+  } /* ,
   events: {
     async signIn(message) {
       console.log('Signed in!', { message });
@@ -36,5 +36,5 @@ export const config = {
     async createUser(message) {
       console.log('User created!', { message });
     },
-  },
+  }, */,
 } satisfies NextAuthConfig;
