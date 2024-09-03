@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 import {
@@ -38,11 +36,11 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
         <CardTitle>Item Info</CardTitle>
         {selectedItem && (
           <ConfirmationAlert
-            message="Are you sure you want to deselect this item?"
+            message="You are about to clear your selection.\nThis action cannot be undone."
             onConfirm={onDeselect}
             trigger={
               <Button variant="destructive" size="sm" className="mt-2">
-                Deselect Item
+                Clear selection
               </Button>
             }
           />
@@ -89,7 +87,9 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
             </p>
           </>
         ) : (
-          <p>Select an item to view details</p>
+          <p className="text-muted-foreground">
+            Select an item to view details
+          </p>
         )}
       </CardContent>
     </Card>
