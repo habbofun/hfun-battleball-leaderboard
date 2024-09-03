@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { Menu } from 'lucide-react';
 
+import { AuthStatusWrapper } from '@/components/static/auth-status-wrapper';
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
 import { PageHeaderSkeleton } from '@/components/static/page-header-skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -19,7 +20,11 @@ export function PageHeader() {
         <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
           <div className="flex items-center space-x-4">
             <Link href="/" rel="noopener noreferrer">
-              <TextEffect per="char" preset="slide" className="text-3xl font-bold cursor-pointer">
+              <TextEffect
+                per="char"
+                preset="slide"
+                className="text-3xl font-bold cursor-pointer"
+              >
                 HFUN
               </TextEffect>
             </Link>
@@ -28,7 +33,7 @@ export function PageHeader() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2">
-            <ModeToggle />
+            <AuthStatusWrapper />
             <NavigationDrawer>
               <DrawerTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -37,6 +42,7 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
+            <ModeToggle />
           </div>
         </div>
       </header>
