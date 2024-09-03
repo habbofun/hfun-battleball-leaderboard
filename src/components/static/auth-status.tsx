@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { LogOut, User } from 'lucide-react';
+import { LogIn, LogOut, User } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { signOutAction } from '@/server/actions/sign-out';
 
-export function AuthStatus({ session }: { session: any }) {
+export function AuthStatus({
+  session,
+  showSignIn = false,
+}: {
+  session: any;
+  showSignIn?: boolean;
+}) {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -30,7 +36,9 @@ export function AuthStatus({ session }: { session: any }) {
   if (!session) {
     return (
       <Link href="/auth/sign-in">
-        <Button variant="outline">Sign In</Button>
+        <Button size={showSignIn ? 'sm' : 'icon'} variant="outline">
+          {showSignIn ? 'Sign In' : <LogIn className="h-4 w-4" />}
+        </Button>
       </Link>
     );
   }

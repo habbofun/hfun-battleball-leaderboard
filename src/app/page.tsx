@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { HomePageSkeleton } from '@/components/homepage/homepage-skeleton';
+import { AuthStatus } from '@/components/static/auth-status';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { auth } from '@/server/auth';
@@ -30,15 +31,7 @@ export default async function HomePage() {
             </Link>
           </div>
           <Separator className="my-8 w-full max-w-sm" />
-          {session ? (
-            <p>Signed in as: {session?.user?.email}</p>
-          ) : (
-            <div className="flex flex-wrap justify-center gap-2">
-              <Link href="/auth/sign-in">
-                <Button variant="outline">Sign In</Button>
-              </Link>
-            </div>
-          )}
+          <AuthStatus session={session} showSignIn={true} />
         </Suspense>
       </main>
     </div>
