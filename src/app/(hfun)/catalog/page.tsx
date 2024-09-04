@@ -12,13 +12,6 @@ export default async function CatalogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <Alert className="p-4 rounded-md mb-4">
-        <Terminal className="h-4 w-4" />
-        <AlertTitle>Warning!</AlertTitle>
-        <AlertDescription className="text-muted-foreground">
-          The charts price history data is test data yet.
-        </AlertDescription>
-      </Alert>
       <div className="flex justify-end mb-4 space-x-2">
         <Link href="/catalog/compare" passHref>
           <Button>Compare Items</Button>
@@ -27,6 +20,13 @@ export default async function CatalogPage() {
           <Button>Trading Calculator</Button>
         </Link>
       </div>
+      <Alert className="p-4 rounded-md mb-4">
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>Warning!</AlertTitle>
+        <AlertDescription className="text-muted-foreground">
+          The charts price history data is test data yet.
+        </AlertDescription>
+      </Alert>
       <CatalogTabs catalogData={catalogData} />
     </div>
   );
