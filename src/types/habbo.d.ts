@@ -30,10 +30,16 @@ export interface CatalogItem {
   name: string;
   description: string;
   price: number;
+  priceHistory: PriceHistoryEntry[];
   itemImageUrl?: string;
   currencyImageUrl?: string;
 }
 
-export type CatalogData = {
-  [key: string]: CatalogItem[];
-};
+export interface PriceHistoryEntry {
+  date: string;
+  price: number;
+}
+
+export interface CatalogData {
+  [category: string]: CatalogItem[];
+}

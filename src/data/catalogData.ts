@@ -1,12 +1,22 @@
+import { ChartConfig } from '@/components/ui/chart';
 import { CatalogData, PriceHistoryEntry } from '@/types/habbo';
 
 export async function fetchCatalogData(): Promise<CatalogData> {
   // Fetch data from database here
-  // For now, we'll just return the static data
   return catalogData;
 }
 
-// Create a default fallback data for the chart and pass it to the item info component
+const priceHistoryChartConfig = {
+  desktop: {
+    label: 'Desktop',
+    color: '#2563eb',
+  },
+  mobile: {
+    label: 'Mobile',
+    color: '#60a5fa',
+  },
+} satisfies ChartConfig;
+
 const chartData: PriceHistoryEntry[] = [
   { date: 'Jan', price: 1.2 },
   { date: 'Feb', price: 1.3 },
@@ -16,7 +26,6 @@ const chartData: PriceHistoryEntry[] = [
   { date: 'June', price: 1.5 },
 ];
 
-// Keep the static data for fallback or initial loading
 export const catalogData: CatalogData = {
   Rares: [
     {

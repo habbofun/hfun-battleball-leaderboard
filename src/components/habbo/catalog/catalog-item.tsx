@@ -39,7 +39,7 @@ export function CatalogItem({ item, isSelected, onClick }: CatalogItemProps) {
             {item.price || 'N/A'}
           </span>
           <Image
-            src={item.currencyImageUrl || '/catalog/vip.png'}
+            src={'/catalog/vip.png'}
             alt="Currency"
             width={32}
             height={24}
