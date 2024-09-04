@@ -1,4 +1,7 @@
+import { Terminal } from 'lucide-react';
+
 import { CatalogTabs } from '@/components/habbo/catalog/catalog-tabs';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { fetchCatalogData } from '@/data/catalogData';
 
 export default async function CatalogPage() {
@@ -6,9 +9,13 @@ export default async function CatalogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="bg-yellow-600 text-white p-4 rounded-md mb-4">
-        <p className="text-sm font-bold">Warning: The data is yet test data.</p>
-      </div>
+      <Alert className="p-4 rounded-md mb-4">
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>Warning!</AlertTitle>
+        <AlertDescription className="text-muted-foreground">
+          The data is yet test data.
+        </AlertDescription>
+      </Alert>
       <CatalogTabs catalogData={catalogData} />
     </div>
   );
