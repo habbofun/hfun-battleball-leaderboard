@@ -1,7 +1,10 @@
+import Link from 'next/link';
+
 import { Terminal } from 'lucide-react';
 
 import { CatalogTabs } from '@/components/habbo/catalog/catalog-tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { fetchCatalogData } from '@/data/catalogData';
 
 export default async function CatalogPage() {
@@ -16,6 +19,11 @@ export default async function CatalogPage() {
           The data is yet test data.
         </AlertDescription>
       </Alert>
+      <div className="flex justify-end mb-4">
+        <Link href="/catalog/compare" passHref>
+          <Button>Compare Items</Button>
+        </Link>
+      </div>
       <CatalogTabs catalogData={catalogData} />
     </div>
   );
