@@ -19,9 +19,12 @@ export default async function CatalogPage() {
           The data is yet test data.
         </AlertDescription>
       </Alert>
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-end mb-4 space-x-2">
         <Link href="/catalog/compare" passHref>
           <Button>Compare Items</Button>
+        </Link>
+        <Link href="/catalog/calculate" passHref>
+          <Button>Trading Calculator</Button>
         </Link>
       </div>
       <CatalogTabs catalogData={catalogData} />
