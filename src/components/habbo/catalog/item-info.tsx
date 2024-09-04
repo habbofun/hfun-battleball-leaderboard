@@ -5,7 +5,11 @@ import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ConfirmationAlert } from '@/components/confirmation/confirmation-alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart';
 import { CatalogItem } from '@/types/habbo';
 
 interface ItemInfoProps {
@@ -40,7 +44,7 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
       <CardContent>
         {selectedItem ? (
           <>
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-2">
               {selectedItem.itemImageUrl && (
                 <Image
                   src={selectedItem.itemImageUrl}
@@ -50,9 +54,13 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
                   height={64}
                 />
               )}
-              <h2 className="text-2xl font-bold">{selectedItem.name}</h2>
+              <div>
+                <h2 className="text-2xl font-bold">{selectedItem.name}</h2>
+                <p className="text-sm text-muted-foreground">
+                  {selectedItem.description}
+                </p>
+              </div>
             </div>
-            <p className="mb-4">{selectedItem.description}</p>
             {selectedItem.priceHistory && (
               <ChartContainer
                 config={chartConfig}
@@ -62,7 +70,7 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
                   <LineChart data={selectedItem.priceHistory}>
                     <XAxis dataKey="date" />
                     <YAxis />
-                    <ChartTooltip />
+                    <ChartTooltip content={<ChartTooltipContent />} />
                     <Line
                       type="monotone"
                       dataKey="price"
