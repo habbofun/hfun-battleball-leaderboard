@@ -44,7 +44,7 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
       <CardContent>
         {selectedItem ? (
           <>
-            <div className="flex items-center mb-2">
+            <div className="flex items-center mb-4">
               {selectedItem.itemImageUrl && (
                 <Image
                   src={selectedItem.itemImageUrl}
@@ -64,7 +64,7 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
             {selectedItem.priceHistory && (
               <ChartContainer
                 config={chartConfig}
-                className="h-[200px] w-full mt-4 mb-4"
+                className="h-[200px] w-full mb-4"
               >
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={selectedItem.priceHistory}>
