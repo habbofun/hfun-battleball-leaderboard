@@ -14,16 +14,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CatalogItem } from '@/types/habbo';
 
-// Mock data for the chart
-const chartData = [
-  { name: 'Jan', value: 1.5 },
-  { name: 'Feb', value: 1.8 },
-  { name: 'Mar', value: 2.0 },
-  { name: 'Apr', value: 2.0 },
-  { name: 'May', value: 1.9 },
-  { name: 'Jun', value: 1.8 },
-];
-
 interface ItemInfoProps {
   selectedItem: CatalogItem | null;
   onDeselect: () => void;
@@ -64,13 +54,13 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
             <p className="mb-4">{selectedItem.description}</p>
             <div className="h-[200px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <XAxis dataKey="name" />
+                <LineChart data={selectedItem.priceHistory}>
+                  <XAxis dataKey="date" />
                   <YAxis />
                   <Tooltip />
                   <Line
                     type="monotone"
-                    dataKey="value"
+                    dataKey="price"
                     stroke="hsl(var(--primary))"
                     strokeWidth={2}
                   />
