@@ -83,7 +83,7 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
             )}
             <p className="mt-4 text-sm text-muted-foreground">
               Los valores proporcionados son orientativos. Aunque la naturaleza
-              de un mercado cambiante hace que ninguna página de fans ni ninguna
+              de un mercado cambiante hace que ninguna fansite ni ninguna
               persona pueda ofrecer valores totalmente exactos, nuestro objetivo
               es ofrecer los listados más precisos basados en los precios de
               mercado. Recomendamos un margen de hasta un 20% por encima y por
