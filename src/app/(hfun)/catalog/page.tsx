@@ -16,7 +16,7 @@ export default async function CatalogPage() {
         <Terminal className="h-4 w-4" />
         <AlertTitle>Warning!</AlertTitle>
         <AlertDescription className="text-muted-foreground">
-          The data is yet test data.
+          The charts price history data is test data yet.
         </AlertDescription>
       </Alert>
       <div className="flex justify-end mb-4 space-x-2">
