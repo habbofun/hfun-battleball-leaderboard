@@ -9,7 +9,7 @@ function generateMockPriceHistory(basePrice: number): PriceHistoryEntry[] {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
   return months.map((month) => ({
     date: month,
-    price: basePrice * (0.8 + Math.random() * 0.4), // Random fluctuation between 80% and 120% of base price
+    price: Number((basePrice * (0.8 + Math.random() * 0.4)).toFixed(2)), // Random fluctuation between 80% and 120% of base price, rounded to 2 decimal places
   }));
 }
 
