@@ -1,9 +1,8 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { Button } from '@/components/ui/button';
+import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/data/catalogData';
 import { CatalogItem } from '@/types/habbo';
@@ -36,11 +35,7 @@ export default async function ItemPage({
 
   return (
     <div className="container mx-auto p-4">
-      <div className="mb-4">
-        <Link href="/catalog" passHref>
-          <Button variant="outline">← Back</Button>
-        </Link>
-      </div>
+      <BackToCatalogButton />
       <Card>
         <CardHeader>
           <CardTitle>{item.name}</CardTitle>
