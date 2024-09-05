@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import HttpStatusCode from '@/enums/http-error-codes';
 import { HabboErrorResponse, HabboUserInfo } from '@/types/habbo';
-
-enum HttpStatus {
-  BAD_REQUEST = 400,
-  NOT_FOUND = 404,
-  INTERNAL_SERVER_ERROR = 500,
-}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -15,7 +10,7 @@ export async function GET(req: NextRequest) {
   if (!username) {
     return NextResponse.json(
       { error: 'Username is required' },
-      { status: HttpStatus.BAD_REQUEST },
+      { status: HttpStatusCode.BAD_REQUEST_400 },
     );
   }
 
@@ -28,16 +23,16 @@ export async function GET(req: NextRequest) {
     if ('error' in data) {
       return NextResponse.json(
         { error: 'User not found' },
-        { status: HttpStatus.NOT_FOUND },
+        { status: HttpStatusCode.NOT_FOUND_404 },
       );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(data, { status: HttpStatusCode.OK_200 });
   } catch (error) {
     console.error('Error fetching user info:', error);
     return NextResponse.json(
       { error: 'Failed to fetch user info' },
-      { status: HttpStatus.INTERNAL_SERVER_ERROR },
+      { status: HttpStatusCode.INTERNAL_SERVER_ERROR_500 },
     );
   }
 }
