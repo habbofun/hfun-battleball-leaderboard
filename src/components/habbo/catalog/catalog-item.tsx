@@ -6,17 +6,14 @@ import { CatalogItem as CatalogItemType } from '@/types/habbo';
 
 interface CatalogItemProps {
   item: CatalogItemType;
-  isSelected: boolean;
-  onClick: () => void;
 }
 
-export function CatalogItem({ item, isSelected, onClick }: CatalogItemProps) {
+export function CatalogItem({ item }: CatalogItemProps) {
   return (
     <Link href={`/catalog/item/${encodeURIComponent(item.name)}`} passHref>
       <Button
-        variant={isSelected ? 'secondary' : 'ghost'}
+        variant="ghost"
         className="w-full justify-between h-auto p-4 cursor-pointer"
-        onClick={onClick}
       >
         <div className="flex items-center w-full">
           <div className="flex items-center flex-grow overflow-hidden">
