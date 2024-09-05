@@ -34,6 +34,7 @@ export function PageHeader() {
           </div>
           <div className="flex items-center space-x-2">
             <AuthStatusWrapper />
+            <ModeToggle />
             <NavigationDrawer>
               <DrawerTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -42,7 +43,6 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
-            <ModeToggle />
           </div>
         </div>
       </header>
