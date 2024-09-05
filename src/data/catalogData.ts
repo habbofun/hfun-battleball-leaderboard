@@ -60,6 +60,20 @@ export const catalogData: CatalogData = {
       priceHistory: generateMockPriceHistory(1.7),
     },
     {
+      name: 'Hamaca zZz',
+      description: 'Tus párpados pesan',
+      price: 1,
+      itemImageUrl: '/catalog/rares/hammock.png',
+      priceHistory: generateMockPriceHistory(1.7),
+    },
+    {
+      name: 'La Heladera Dorada',
+      description: '¡La vainilla virtual mola!',
+      price: 0.5,
+      itemImageUrl: '/catalog/rares/heladeradorada.png',
+      priceHistory: generateMockPriceHistory(1.7),
+    },
+    {
       name: 'Holoboy',
       description: 'Tantas vueltas',
       price: 1,
