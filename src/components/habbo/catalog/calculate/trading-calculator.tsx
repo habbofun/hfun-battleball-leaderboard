@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -29,7 +27,7 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
 
   const allItems = Object.values(catalogData).flat();
 
-  const calculateTrade = () => {
+  const calculateTrade = useCallback(() => {
     const parsedQuantity = parseInt(quantity1);
     if (item1 && item2 && parsedQuantity > 0) {
       const totalVips = item1.price * parsedQuantity;
@@ -38,7 +36,7 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
     } else {
       setResult(null);
     }
-  };
+  }, [item1, item2, quantity1]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -47,15 +45,28 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
     }
   };
 
+  useEffect(() => {
+    calculateTrade();
+  }, [item1, item2, quantity1, calculateTrade]);
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Trading Calculator</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="item1">Item 1</Label>
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <Input
+              id="quantity1"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={quantity1}
+              onChange={handleQuantityChange}
+              className="w-16 text-center"
+            />
+            <span className="font-medium">x</span>
             <Select
               onValueChange={(value) =>
                 setItem1(allItems.find((item) => item.name === value) || null)
@@ -73,40 +84,24 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
               </SelectContent>
             </Select>
           </div>
-          <div>
-            <Label htmlFor="quantity1">Quantity</Label>
-            <Input
-              id="quantity1"
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              value={quantity1}
-              onChange={handleQuantityChange}
-            />
-          </div>
-          <div>
-            <Label htmlFor="item2">Item 2</Label>
-            <Select
-              onValueChange={(value) =>
-                setItem2(allItems.find((item) => item.name === value) || null)
-              }
-            >
-              <SelectTrigger id="item2">
-                <SelectValue placeholder="Select item 2" />
-              </SelectTrigger>
-              <SelectContent>
-                {allItems.map((item) => (
-                  <SelectItem key={item.name} value={item.name}>
-                    {item.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <span className="text-2xl font-bold mx-4">=</span>
+          <Select
+            onValueChange={(value) =>
+              setItem2(allItems.find((item) => item.name === value) || null)
+            }
+          >
+            <SelectTrigger id="item2">
+              <SelectValue placeholder="Select item 2" />
+            </SelectTrigger>
+            <SelectContent>
+              {allItems.map((item) => (
+                <SelectItem key={item.name} value={item.name}>
+                  {item.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <Button className="mt-4" onClick={calculateTrade}>
-          Calculate
-        </Button>
         {result !== null && item1 && item2 && (
           <div className="mt-6 p-4 bg-secondary rounded-lg">
             <p className="text-lg font-semibold mb-2">Trade Result:</p>
