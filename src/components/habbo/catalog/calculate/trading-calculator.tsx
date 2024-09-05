@@ -24,16 +24,26 @@ interface TradingCalculatorProps {
 export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
   const [item1, setItem1] = useState<CatalogItem | null>(null);
   const [item2, setItem2] = useState<CatalogItem | null>(null);
-  const [quantity1, setQuantity1] = useState<number>(1);
+  const [quantity1, setQuantity1] = useState<string>('1');
   const [result, setResult] = useState<number | null>(null);
 
   const allItems = Object.values(catalogData).flat();
 
   const calculateTrade = () => {
-    if (item1 && item2 && quantity1 > 0) {
-      const totalVips = item1.price * quantity1;
+    const parsedQuantity = parseInt(quantity1);
+    if (item1 && item2 && parsedQuantity > 0) {
+      const totalVips = item1.price * parsedQuantity;
       const resultQuantity = totalVips / item2.price;
       setResult(Number(resultQuantity.toFixed(2)));
+    } else {
+      setResult(null);
+    }
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '' || /^\d+$/.test(value)) {
+      setQuantity1(value);
     }
   };
 
@@ -67,10 +77,11 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
             <Label htmlFor="quantity1">Quantity</Label>
             <Input
               id="quantity1"
-              type="number"
-              min="1"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               value={quantity1}
-              onChange={(e) => setQuantity1(parseInt(e.target.value) || 1)}
+              onChange={handleQuantityChange}
             />
           </div>
           <div>
@@ -127,7 +138,7 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
               </span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Total VIP value: {item1.price * quantity1}
+              Total VIP value: {item1.price * parseInt(quantity1)}
             </p>
           </div>
         )}
