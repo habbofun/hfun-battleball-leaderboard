@@ -31,7 +31,6 @@ export default async function HomePage() {
             </Link>
           </div>
           <Separator className="my-8 w-full max-w-sm" />
-          <AuthStatus session={session} showSignIn={true} />
         </Suspense>
       </main>
     </div>
