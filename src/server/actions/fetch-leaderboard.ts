@@ -1,5 +1,6 @@
 'use server';
 
+import { apiClient } from '@/lib/api-client';
 import type { LeaderboardData } from '@/types/leaderboard';
 
 export async function fetchLeaderboardData(
@@ -7,13 +8,13 @@ export async function fetchLeaderboardData(
   perPage: number,
 ) {
   try {
-    const response = await fetch(
-      `https://leaderboard.hfun.info/leaderboard?page=${currentPage}&per_page=${perPage}`,
-    );
-    if (!response.ok) {
-      throw new Error('Failed to fetch leaderboard data');
-    }
-    const data: LeaderboardData = await response.json();
+    const { data } = await apiClient.get<LeaderboardData>('/leaderboard', {
+      params: {
+        page: currentPage,
+        per_page: perPage,
+      },
+    });
+
     return {
       leaderboard: data.leaderboard,
       nextUpdateIn: data.next_update_in,
