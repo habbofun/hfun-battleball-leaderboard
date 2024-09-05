@@ -13,6 +13,11 @@ import {
   YAxis,
 } from 'recharts';
 
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart';
 import { CatalogItem } from '@/types/habbo';
 
 interface ComparisonChartProps {
@@ -26,16 +31,24 @@ export function ComparisonChart({ items }: ComparisonChartProps) {
     [items[1].name]: items[1].priceHistory[index].price,
   }));
 
+  const chartConfig = {
+    price: {
+      label: 'Price',
+    },
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <LineChart data={combinedData}>
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey={items[0].name} stroke="#8884d8" />
-        <Line type="monotone" dataKey={items[1].name} stroke="#82ca9d" />
-      </LineChart>
-    </ResponsiveContainer>
+    <ChartContainer config={chartConfig} className="h-[200px] w-full mb-4">
+      <ResponsiveContainer width="100%" height={400}>
+        <LineChart data={combinedData}>
+          <XAxis dataKey="date" />
+          <YAxis />
+          <ChartTooltip content={<ChartTooltipContent />} />
+          <Legend />
+          <Line type="monotone" dataKey={items[0].name} stroke="#8884d8" />
+          <Line type="monotone" dataKey={items[1].name} stroke="#82ca9d" />
+        </LineChart>
+      </ResponsiveContainer>
+    </ChartContainer>
   );
 }
