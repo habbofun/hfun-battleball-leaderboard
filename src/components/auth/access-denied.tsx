@@ -8,7 +8,7 @@ export default function AccessDenied() {
           Access denied
         </h2>
         <p className="text-sm sm:text-base text-center">
-          <Link href="/auth/signin" className="text-gray-400 hover:underline">
+          <Link href="/auth/sign-in" className="text-gray-400 hover:underline">
             You must be signed in to view this page
           </Link>
         </p>

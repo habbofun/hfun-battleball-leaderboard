@@ -14,7 +14,7 @@ export const config = {
   ],
   trustHost: true,
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/auth/sign-in',
     signOut: '/auth/signout',
     error: '/auth/error',
     verifyRequest: '/auth/verify-request',
