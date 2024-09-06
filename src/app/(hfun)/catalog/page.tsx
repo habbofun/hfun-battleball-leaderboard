@@ -12,14 +12,6 @@ export default async function CatalogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-end mb-4 space-x-2">
-        <Link href="/catalog/compare" passHref>
-          <Button variant="ghost">Compare Items</Button>
-        </Link>
-        <Link href="/catalog/calculate" passHref>
-          <Button>Trading Calculator</Button>
-        </Link>
-      </div>
       <Alert className="p-4 rounded-md mb-4">
         <Terminal className="h-4 w-4" />
         <AlertTitle>Warning!</AlertTitle>
