@@ -17,15 +17,16 @@ export function CatalogItem({ item }: CatalogItemProps) {
       >
         <div className="flex items-center w-full">
           <div className="flex items-center flex-grow overflow-hidden">
-            {item.imageUrl && (
-              <Image
-                src={item.imageUrl || '/catalog/missing.png'}
-                alt={item.name}
-                width={42}
-                height={42}
-                className="mr-4 flex-shrink-0"
-              />
-            )}
+            <div className="w-[64px] h-[64px] mr-4 flex-shrink-0 relative">
+              {item.imageUrl && (
+                <Image
+                  src={item.imageUrl || '/catalog/missing.png'}
+                  alt={item.name}
+                  fill
+                  className="object-contain"
+                />
+              )}
+            </div>
             <div className="text-left min-w-0">
               <h3 className="font-bold truncate">{item.name}</h3>
               <p className="text-sm text-muted-foreground truncate">
@@ -35,15 +36,8 @@ export function CatalogItem({ item }: CatalogItemProps) {
           </div>
           <div className="flex items-center flex-shrink-0 ml-2">
             <span className="font-bold mr-2 whitespace-nowrap">
-              {item.price || 'N/A'}
+              {item.price} VIP
             </span>
-            <Image
-              src={'/catalog/vip.png'}
-              alt="Currency"
-              width={32}
-              height={24}
-              className="flex-shrink-0"
-            />
           </div>
         </div>
       </Button>
