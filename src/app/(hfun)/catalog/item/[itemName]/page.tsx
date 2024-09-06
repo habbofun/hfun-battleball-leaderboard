@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/data/catalog-data';
 import { CatalogItem } from '@/types/habbo.d';
@@ -25,10 +26,19 @@ export default async function ItemPage({
   const { itemName } = params;
   const catalogData = await fetchCatalogData();
 
-  // Find the item in the catalog data
-  const item = Object.values(catalogData)
-    .flat()
-    .find((item: CatalogItem) => item.name === decodeURIComponent(itemName));
+  // Find the item and its category in the catalog data
+  let item: CatalogItem | undefined;
+  let itemCategory: string | undefined;
+
+  for (const [category, items] of Object.entries(catalogData)) {
+    item = items.find(
+      (i: CatalogItem) => i.name === decodeURIComponent(itemName),
+    );
+    if (item) {
+      itemCategory = category;
+      break;
+    }
+  }
 
   if (!item) {
     notFound();
@@ -39,7 +49,14 @@ export default async function ItemPage({
       <BackToCatalogButton />
       <Card>
         <CardHeader>
-          <CardTitle>{item.name}</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>{item.name}</CardTitle>
+            {itemCategory && (
+              <Badge variant="secondary" className="ml-2">
+                {itemCategory}
+              </Badge>
+            )}
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-center mb-4">
@@ -57,7 +74,7 @@ export default async function ItemPage({
                 {item.description}
               </p>
               <div className="font-bold mt-2 flex items-center">
-                Price: <PriceDisplay price={item.price} />
+                <PriceDisplay price={item.price} />
               </div>
             </div>
           </div>

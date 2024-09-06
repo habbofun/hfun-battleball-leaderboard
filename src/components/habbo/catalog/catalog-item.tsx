@@ -2,14 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CatalogItem as CatalogItemType } from '@/types/habbo';
 
 interface CatalogItemProps {
   item: CatalogItemType;
+  category: string;
 }
 
-export function CatalogItem({ item }: CatalogItemProps) {
+export function CatalogItem({ item, category }: CatalogItemProps) {
   return (
     <Link href={`/catalog/item/${encodeURIComponent(item.name)}`} passHref>
       <Button
@@ -33,6 +35,9 @@ export function CatalogItem({ item }: CatalogItemProps) {
               <p className="text-sm text-muted-foreground truncate">
                 {item.description}
               </p>
+              <Badge variant="secondary" className="mt-1">
+                {category}
+              </Badge>
             </div>
           </div>
           <div className="flex items-center flex-shrink-0 ml-2">
