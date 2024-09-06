@@ -28,7 +28,7 @@ export function CatalogCategory({ category, items }: CatalogCategoryProps) {
               ? 'Mega rares! OMG!'
               : category === 'Funky Friday'
                 ? 'Funky friday catalogue items'
-                : 'Habbo Club monthly rares'}
+                : 'Habbo Club monthly items'}
         </CardDescription>
       </CardHeader>
       <CardContent>

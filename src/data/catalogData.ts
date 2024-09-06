@@ -218,7 +218,7 @@ export const catalogData: CatalogData = {
       priceHistory: generateMockPriceHistory(1.8),
     },
   ],
-  'HC Rares': [
+  HC: [
     {
       name: 'La Cafetera',
       description: '¿Solo o con leche?',
