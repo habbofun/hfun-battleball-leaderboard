@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import { ConfirmationAlert } from '@/components/confirmation/confirmation-alert';
+import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -59,6 +60,9 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
                 <p className="text-sm text-muted-foreground">
                   {selectedItem.description}
                 </p>
+                <div className="font-bold mt-2 flex items-center">
+                  Price: <PriceDisplay price={selectedItem.price} />
+                </div>
               </div>
             </div>
             {selectedItem.priceHistory && (

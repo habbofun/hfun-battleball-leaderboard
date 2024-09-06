@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
+import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/data/catalogData';
 import { CatalogItem } from '@/types/habbo.d';
@@ -55,7 +56,9 @@ export default async function ItemPage({
               <p className="text-sm text-muted-foreground">
                 {item.description}
               </p>
-              <p className="font-bold mt-2">Price: {item.price} VIP</p>
+              <div className="font-bold mt-2 flex items-center">
+                Price: <PriceDisplay price={item.price} />
+              </div>
             </div>
           </div>
           {item.priceHistory && (

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Button } from '@/components/ui/button';
 import { CatalogItem as CatalogItemType } from '@/types/habbo';
 
@@ -35,9 +36,7 @@ export function CatalogItem({ item }: CatalogItemProps) {
             </div>
           </div>
           <div className="flex items-center flex-shrink-0 ml-2">
-            <span className="font-bold mr-2 whitespace-nowrap">
-              {item.price} VIP
-            </span>
+            <PriceDisplay price={item.price} />
           </div>
         </div>
       </Button>
