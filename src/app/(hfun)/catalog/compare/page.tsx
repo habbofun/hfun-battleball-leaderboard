@@ -1,6 +1,6 @@
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
 import { CompareCatalogItems } from '@/components/habbo/catalog/compare/compare-items';
-import { fetchCatalogData } from '@/data/catalogData';
+import { fetchCatalogData } from '@/data/catalog-data';
 
 export default async function ComparePageWrapper() {
   const catalogData = await fetchCatalogData();
