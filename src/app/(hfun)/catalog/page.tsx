@@ -14,7 +14,7 @@ export default async function CatalogPage() {
     <div className="container mx-auto p-4">
       <div className="flex justify-end mb-4 space-x-2">
         <Link href="/catalog/compare" passHref>
-          <Button>Compare Items</Button>
+          <Button variant="ghost">Compare Items</Button>
         </Link>
         <Link href="/catalog/calculate" passHref>
           <Button>Trading Calculator</Button>
