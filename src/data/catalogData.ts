@@ -1,4 +1,4 @@
-import { CatalogData, PriceHistoryEntry } from '@/types/habbo';
+import { CatalogData, PriceHistoryEntry } from '@/types/habbo.d';
 
 export async function fetchCatalogData(): Promise<CatalogData> {
   // Fetch data from database here

@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/data/catalogData';
-import { CatalogItem } from '@/types/habbo';
+import { CatalogItem } from '@/types/habbo.d';
 
 // Dynamically import the chart component with SSR disabled
 const DynamicItemChart = dynamic(
