@@ -7,7 +7,7 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    DATABASE_URL: z.string().url(),
+    AUTH_DATABASE_URL: z.string().url(),
     AUTH_SECRET: z.string().min(1),
     AUTH_RESEND_KEY: z.string().min(1),
     AUTH_URL: z.string().url(),
@@ -19,7 +19,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL: process.env.AUTH_DATABASE_URL,
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_RESEND_KEY: process.env.AUTH_RESEND_KEY,
     AUTH_URL: process.env.AUTH_URL,
