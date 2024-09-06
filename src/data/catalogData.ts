@@ -217,6 +217,13 @@ export const catalogData: CatalogData = {
       imageUrl: '/catalog/funky/portsfunky.png',
       priceHistory: generateMockPriceHistory(1.8),
     },
+    {
+      name: 'FF: Set Mini TV',
+      description: '¿Por qué perderte tus programas favoritos?',
+      price: 0,
+      imageUrl: '/catalog/funky/fftvazul.png',
+      priceHistory: generateMockPriceHistory(1.8),
+    },
   ],
   HC: [
     {
