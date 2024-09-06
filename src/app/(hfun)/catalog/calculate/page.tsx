@@ -1,5 +1,5 @@
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
-import { TradingCalculator } from '@/components/habbo/catalog/calculate/trading-calculator';
+import TradingCalculator from '@/components/habbo/catalog/calculate/trading-calculator';
 import { fetchCatalogData } from '@/data/catalogData';
 
 export default async function TradePage() {
