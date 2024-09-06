@@ -48,7 +48,7 @@ export function CompareCatalogItems({ catalogData }: CompareCatalogItemsProps) {
             {selectedItems.map((item, index) => (
               <div key={index} className="flex items-center">
                 <Image
-                  src={item.itemImageUrl || '/catalog/missing.png'}
+                  src={item.imageUrl || '/catalog/missing.png'}
                   alt={item.name}
                   width={32}
                   height={32}

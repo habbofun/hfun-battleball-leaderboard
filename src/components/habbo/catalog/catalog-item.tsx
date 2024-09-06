@@ -17,9 +17,9 @@ export function CatalogItem({ item }: CatalogItemProps) {
       >
         <div className="flex items-center w-full">
           <div className="flex items-center flex-grow overflow-hidden">
-            {item.itemImageUrl && (
+            {item.imageUrl && (
               <Image
-                src={item.itemImageUrl || '/catalog/missing.png'}
+                src={item.imageUrl || '/catalog/missing.png'}
                 alt={item.name}
                 width={42}
                 height={42}

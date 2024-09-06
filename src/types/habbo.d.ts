@@ -31,7 +31,7 @@ export interface CatalogItem {
   description: string;
   price: number;
   priceHistory: PriceHistoryEntry[];
-  itemImageUrl?: string;
+  imageUrl?: string;
   currencyImageUrl?: string;
 }
 

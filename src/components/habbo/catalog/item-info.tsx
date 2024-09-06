@@ -45,9 +45,9 @@ export function ItemInfo({ selectedItem, onDeselect }: ItemInfoProps) {
         {selectedItem ? (
           <>
             <div className="flex items-center mb-4">
-              {selectedItem.itemImageUrl && (
+              {selectedItem.imageUrl && (
                 <Image
-                  src={selectedItem.itemImageUrl}
+                  src={selectedItem.imageUrl}
                   alt={selectedItem.name}
                   className="mr-4 object-contain"
                   width={64}

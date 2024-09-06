@@ -107,7 +107,7 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
             <p className="text-lg font-semibold mb-2">Trade Result:</p>
             <div className="flex items-center space-x-2">
               <Image
-                src={item1.itemImageUrl || '/catalog/missing.png'}
+                src={item1.imageUrl || '/catalog/missing.png'}
                 alt={item1.name}
                 width={32}
                 height={32}
@@ -122,7 +122,7 @@ export function TradingCalculator({ catalogData }: TradingCalculatorProps) {
             </div>
             <div className="flex items-center space-x-2">
               <Image
-                src={item2.itemImageUrl || '/catalog/missing.png'}
+                src={item2.imageUrl || '/catalog/missing.png'}
                 alt={item2.name}
                 width={32}
                 height={32}

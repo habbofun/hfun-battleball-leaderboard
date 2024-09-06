@@ -42,9 +42,9 @@ export default async function ItemPage({
         </CardHeader>
         <CardContent>
           <div className="flex items-center mb-4">
-            {item.itemImageUrl && (
+            {item.imageUrl && (
               <Image
-                src={item.itemImageUrl}
+                src={item.imageUrl}
                 alt={item.name}
                 className="mr-4 object-contain"
                 width={64}
