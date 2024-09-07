@@ -29,7 +29,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(data, { status: HttpStatusCode.OK_200 });
   } catch (error) {
-    console.error('Error fetching user info:', error);
     return NextResponse.json(
       { error: 'Failed to fetch user info' },
       { status: HttpStatusCode.INTERNAL_SERVER_ERROR_500 },

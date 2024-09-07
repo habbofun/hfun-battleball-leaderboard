@@ -22,7 +22,6 @@ export async function fetchLeaderboardData(
       totalPages: data.metadata.total_pages,
     };
   } catch (err) {
-    console.error('Error:', err);
     throw new Error('Error fetching leaderboard data');
   }
 }

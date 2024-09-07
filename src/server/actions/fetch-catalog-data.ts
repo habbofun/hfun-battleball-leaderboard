@@ -63,7 +63,6 @@ export const fetchCatalogData = cache(
 
       return catalogData;
     } catch (error) {
-      console.error('Error fetching catalog data:', error);
       throw new Error('Failed to fetch catalog data');
     }
   },

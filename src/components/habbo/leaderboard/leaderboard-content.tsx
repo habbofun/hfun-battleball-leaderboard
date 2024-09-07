@@ -38,7 +38,6 @@ export default function LeaderboardContent() {
         setTotalPages(data.totalPages);
       } catch (err) {
         setError('Error fetching leaderboard data');
-        console.error('Error:', err);
       } finally {
         setIsLoading(false);
       }
