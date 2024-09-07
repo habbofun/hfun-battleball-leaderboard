@@ -30,10 +30,9 @@ export interface CatalogItem {
   name: string;
   description: string;
   price: number;
-  priceHistory: PriceHistoryEntry[];
-  imageUrl?: string;
-  currencyImageUrl?: string;
-  releaseDate?: string | Date;
+  imageUrl: string;
+  priceHistory: { date: string; price: number }[];
+  releaseDate?: Date;
 }
 
 export interface PriceHistoryEntry {

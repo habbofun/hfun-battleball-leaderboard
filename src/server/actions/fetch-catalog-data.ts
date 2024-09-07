@@ -5,7 +5,7 @@ import { cache } from 'react';
 import { prisma } from '@/lib/db';
 import { CatalogData, CatalogItem } from '@/types/habbo';
 
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+const CACHE_DURATION = 60 * 60 * 1000;
 
 let cachedData: CatalogData | null = null;
 let lastFetchTime = 0;
@@ -50,7 +50,9 @@ export const fetchCatalogData = cache(
                   price: history.price,
                 }))
               : [],
-          releaseDate: item.releaseDate,
+          releaseDate: item.releaseDate
+            ? new Date(item.releaseDate)
+            : undefined,
         };
 
         catalogData[item.category].push(catalogItem);
