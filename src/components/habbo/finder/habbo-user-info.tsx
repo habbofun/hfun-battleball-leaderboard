@@ -9,35 +9,26 @@ import { LoadingSkeleton } from '@/components/habbo/finder/loading-skeleton';
 import { SearchBar } from '@/components/habbo/finder/search-bar';
 import { UserProfile } from '@/components/habbo/finder/user-profile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { fetchHabboUserInfo } from '@/server/actions/fetch-habbo-user-info';
 import { HabboUserInfo as HabboUserInfoType } from '@/types/habbo';
 
 export function HabboUserInfo() {
   const [userInfo, setUserInfo] = useState<HabboUserInfoType | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchUserInfo = async (username: string) => {
+  const handleSearch = async (username: string) => {
     setLoading(true);
     setUserInfo(null);
-    try {
-      const response = await fetch(`/api/habbo/user-info?username=${username}`);
-      if (!response.ok) {
-        throw new Error(
-          response.status === 404
-            ? 'User not found'
-            : 'Failed to fetch user info',
-        );
-      }
-      const data: HabboUserInfoType = await response.json();
-      setUserInfo(data);
+
+    const result = await fetchHabboUserInfo(username);
+
+    setLoading(false);
+
+    if (result.error) {
+      toast.error(result.error);
+    } else if (result.data) {
+      setUserInfo(result.data);
       toast.success('User info fetched successfully');
-    } catch (err) {
-      toast.error(
-        err instanceof Error
-          ? err.message
-          : 'Failed to fetch user info. Please try again.',
-      );
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -47,7 +38,7 @@ export function HabboUserInfo() {
         <CardTitle>Habbo Finder</CardTitle>
       </CardHeader>
       <CardContent>
-        <SearchBar onSearch={fetchUserInfo} loading={loading} />
+        <SearchBar onSearch={handleSearch} loading={loading} />
         {loading && <LoadingSkeleton />}
         {userInfo && (
           <div className="mt-8 space-y-8">
