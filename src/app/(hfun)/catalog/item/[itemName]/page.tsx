@@ -76,6 +76,11 @@ export default async function ItemPage({
               <div className="font-bold mt-2 flex items-center">
                 <PriceDisplay price={item.price} />
               </div>
+              {item.releaseDate && (
+                <p className="text-sm text-muted-foreground mt-1">
+                  Released: {new Date(item.releaseDate).toLocaleDateString()}
+                </p>
+              )}
             </div>
           </div>
           {item.priceHistory && (
