@@ -33,7 +33,7 @@ export interface CatalogItem {
   priceHistory: PriceHistoryEntry[];
   imageUrl?: string;
   currencyImageUrl?: string;
-  releaseDate: Date;
+  releaseDate?: string | Date;
 }
 
 export interface PriceHistoryEntry {
