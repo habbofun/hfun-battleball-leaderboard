@@ -50,6 +50,7 @@ export const fetchCatalogData = cache(
                   price: history.price,
                 }))
               : [],
+          releaseDate: item.releaseDate,
         };
 
         catalogData[item.category].push(catalogItem);
