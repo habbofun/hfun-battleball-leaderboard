@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import { Menu } from 'lucide-react';
 
-import { AuthStatusWrapper } from '@/components/static/auth-status-wrapper';
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
 import { PageHeaderSkeleton } from '@/components/static/page-header-skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -33,7 +32,6 @@ export function PageHeader() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2">
-            <AuthStatusWrapper />
             <ModeToggle />
             <NavigationDrawer>
               <DrawerTrigger asChild>

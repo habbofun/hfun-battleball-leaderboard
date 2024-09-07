@@ -7,10 +7,8 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    AUTH_DATABASE_URL: z.string().url(),
-    AUTH_SECRET: z.string().min(1),
-    AUTH_RESEND_KEY: z.string().min(1),
-    AUTH_URL: z.string().url(),
+    UPSTASH_REDIS_REST_URL: z.string().url(),
+    UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -19,9 +17,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.AUTH_DATABASE_URL,
-    AUTH_SECRET: process.env.AUTH_SECRET,
-    AUTH_RESEND_KEY: process.env.AUTH_RESEND_KEY,
-    AUTH_URL: process.env.AUTH_URL,
+    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   },
 });

@@ -3,14 +3,10 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { HomePageSkeleton } from '@/components/homepage/homepage-skeleton';
-import { AuthStatus } from '@/components/static/auth-status';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { auth } from '@/server/auth';
 
 export default async function HomePage() {
-  const session = await auth();
-
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <main className="flex-grow flex flex-col justify-center items-center p-4">

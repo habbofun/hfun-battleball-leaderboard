@@ -25,7 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, 'font-sans', 'flex flex-col min-h-screen')} suppressHydrationWarning>
+      <body
+        className={cn(
+          fontSans.variable,
+          'font-sans',
+          'flex flex-col min-h-screen overscroll-none',
+        )}
+        suppressHydrationWarning
+      >
         <Providers>
           <PageHeader />
           <main className="flex-grow">{children}</main>
