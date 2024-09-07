@@ -25,6 +25,14 @@ interface ComparisonChartProps {
 }
 
 export function ComparisonChart({ items }: ComparisonChartProps) {
+  if (items.some((item) => item.priceHistory.length === 0)) {
+    return (
+      <div className="h-[200px] w-full mb-4 flex items-center justify-center text-muted-foreground">
+        Price history is not available for one or more items
+      </div>
+    );
+  }
+
   const combinedData = items[0].priceHistory.map((entry, index) => ({
     date: entry.date,
     [items[0].name]: entry.price,

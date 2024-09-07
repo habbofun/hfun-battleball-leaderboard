@@ -26,6 +26,7 @@ export function CatalogItem({ item, category }: CatalogItemProps) {
                   src={item.imageUrl || '/catalog/missing.png'}
                   alt={item.name}
                   fill
+                  sizes="64px"
                   className="object-contain"
                 />
               )}

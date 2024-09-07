@@ -6,7 +6,7 @@ import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchCatalogData } from '@/data/catalog-data';
+import { fetchCatalogData } from '@/server/actions/fetch-catalog-data';
 import { CatalogItem } from '@/types/habbo.d';
 
 // Dynamically import the chart component with SSR disabled

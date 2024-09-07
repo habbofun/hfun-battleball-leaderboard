@@ -1,6 +1,6 @@
 import { BackToCatalogButton } from '@/components/habbo/catalog/back-to-catalog-button';
 import TradingCalculator from '@/components/habbo/catalog/calculate/trading-calculator';
-import { fetchCatalogData } from '@/data/catalog-data';
+import { fetchCatalogData } from '@/server/actions/fetch-catalog-data';
 
 export default async function TradePage() {
   const catalogData = await fetchCatalogData();

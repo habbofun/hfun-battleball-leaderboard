@@ -15,6 +15,8 @@ model CatalogItem {
   imageUrl     String
   category     String
   priceHistory PriceHistory[]
+
+  @@index([category])
 }
 
 model PriceHistory {
@@ -23,4 +25,6 @@ model PriceHistory {
   price  Float
   itemId Int
   item   CatalogItem @relation(fields: [itemId], references: [id])
+
+  @@index([itemId, date])
 }
