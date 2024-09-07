@@ -1,10 +1,7 @@
-import Link from 'next/link';
-
 import { Terminal } from 'lucide-react';
 
 import { CatalogTabs } from '@/components/habbo/catalog/catalog-tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
 import { fetchCatalogData } from '@/data/catalog-data';
 
 export default async function CatalogPage() {
