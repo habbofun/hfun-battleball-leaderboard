@@ -14,6 +14,7 @@ model CatalogItem {
   price        Float
   imageUrl     String
   category     String
+  releaseDate  DateTime
   priceHistory PriceHistory[]
 
   @@index([category])
