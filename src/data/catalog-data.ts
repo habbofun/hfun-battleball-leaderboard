@@ -1,27 +1,5 @@
 import { CatalogData, PriceHistoryEntry } from '@/types/habbo.d';
 
-export async function fetchCatalogData(): Promise<CatalogData> {
-  // Fetch data from database here
-  return catalogData;
-}
-
-function generateMockPriceHistory(basePrice: number): PriceHistoryEntry[] {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-  return months.map((month) => ({
-    date: month,
-    price: Number((basePrice * (0.8 + Math.random() * 0.4)).toFixed(2)), // Random fluctuation between 80% and 120% of base price, rounded to 2 decimal places
-  }));
-}
-
-/* const chartData: PriceHistoryEntry[] = [
-  { date: 'Jan', price: 1.2 },
-  { date: 'Feb', price: 1.3 },
-  { date: 'March', price: 1.5 },
-  { date: 'April', price: 1.4 },
-  { date: 'May', price: 1.6 },
-  { date: 'June', price: 1.5 },
-]; */
-
 export const catalogData: CatalogData = {
   Rares: [
     {
@@ -305,3 +283,15 @@ export const catalogData: CatalogData = {
     },
   ],
 };
+
+export async function fetchCatalogData(): Promise<CatalogData> {
+  return catalogData;
+}
+
+function generateMockPriceHistory(basePrice: number): PriceHistoryEntry[] {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+  return months.map((month) => ({
+    date: month,
+    price: Number((basePrice * (0.8 + Math.random() * 0.4)).toFixed(2)),
+  }));
+}
