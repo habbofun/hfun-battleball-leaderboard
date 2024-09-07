@@ -15,7 +15,7 @@ export default async function CatalogPage() {
         <Terminal className="h-4 w-4" />
         <AlertTitle>Warning!</AlertTitle>
         <AlertDescription className="text-muted-foreground">
-          The charts price history data is test data yet.
+          Some data might be test data yet.
         </AlertDescription>
       </Alert>
       <CatalogTabs catalogData={catalogData} />
