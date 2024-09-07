@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate --schema ./prisma/auth-schema.prisma",
+    "postinstall": "prisma generate --schema ./prisma/schema",
     "prettier": "prettier --write .",
-    "db:gen": "prisma generate --schema ./prisma/auth-schema.prisma",
-    "db:push": "prisma db push --schema ./prisma/auth-schema.prisma"
+    "db:gen": "prisma generate --schema ./prisma/schema",
+    "db:push": "prisma db push --schema ./prisma/schema"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
