@@ -2,7 +2,7 @@ import { Terminal } from 'lucide-react';
 
 import { CatalogTabs } from '@/components/habbo/catalog/catalog-tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { fetchCatalogData } from '@/server/actions/fetch-catalog-data';
+import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
 
 export const revalidate = 3600; // Revalidate every hour
 

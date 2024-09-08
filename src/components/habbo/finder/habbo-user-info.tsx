@@ -9,7 +9,7 @@ import { LoadingSkeleton } from '@/components/habbo/finder/loading-skeleton';
 import { SearchBar } from '@/components/habbo/finder/search-bar';
 import { UserProfile } from '@/components/habbo/finder/user-profile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchHabboUserInfo } from '@/server/actions/fetch-habbo-user-info';
+import { fetchHabboUserInfo } from '@/server/actions/catalog/fetch-habbo-user-info';
 import { HabboUserInfo as HabboUserInfoType } from '@/types/habbo';
 
 export function HabboUserInfo() {
