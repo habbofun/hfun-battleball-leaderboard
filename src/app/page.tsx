@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { HomePageSkeleton } from '@/components/homepage/homepage-skeleton';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { fetchCatalogData } from '@/server/actions/fetch-catalog-data';
 
 export default async function HomePage() {
   return (
