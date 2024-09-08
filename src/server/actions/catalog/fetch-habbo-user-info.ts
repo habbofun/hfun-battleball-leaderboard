@@ -17,13 +17,30 @@ export async function fetchHabboUserInfo(
     const response = await fetch(
       `https://origins.habbo.es/api/public/users?name=${username}`,
     );
-    const data: HabboUserInfo | HabboErrorResponse = await response.json();
+    const rawData: unknown = await response.json();
 
-    if ('error' in data) {
+    const isHabboUserInfo = (data: unknown): data is HabboUserInfo => {
+      return (data as HabboUserInfo).uniqueId !== undefined;
+    };
+
+    const isHabboErrorResponse = (
+      data: unknown,
+    ): data is HabboErrorResponse => {
+      return (data as HabboErrorResponse).error !== undefined;
+    };
+
+    if (isHabboErrorResponse(rawData)) {
       return { error: 'User not found', status: HttpStatusCode.NOT_FOUND_404 };
     }
 
-    return { data, status: HttpStatusCode.OK_200 };
+    if (isHabboUserInfo(rawData)) {
+      return { data: rawData, status: HttpStatusCode.OK_200 };
+    }
+
+    return {
+      error: 'Invalid response format',
+      status: HttpStatusCode.INTERNAL_SERVER_ERROR_500,
+    };
   } catch (error) {
     return {
       error: 'Failed to fetch user info',
