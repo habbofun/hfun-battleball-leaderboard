@@ -1,13 +1,22 @@
+enum Role {
+    user
+    admin
+}
+
 model User {
-    id            String          @id @default(cuid())
+    id            String    @id @default(cuid())
     name          String?
-    username      String?         @unique
-    email         String?         @unique
+    username      String?   @unique
+    email         String?   @unique
+    password      String?
     emailVerified DateTime?
     image         String?
-    accounts      Account[]
-    sessions      Session[]
-    Authenticator Authenticator[]
+    role          Role      @default(user)
+    habboId       String?   @unique
+
+    accounts          Account[]
+    Authenticator     Authenticator[]
+    habboVerification HabboUserVerification?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -36,25 +45,12 @@ model Account {
     @@index([userId])
 }
 
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id])
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([userId])
-}
-
 model VerificationToken {
-    identifier String
+    identifier String   @unique
     token      String
     expires    DateTime
 
-    @@unique([identifier, token])
+    @@id([identifier])
 }
 
 model Authenticator {
@@ -70,4 +66,16 @@ model Authenticator {
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@id([userId, credentialID])
+}
+
+model HabboUserVerification {
+    id               String    @id @default(cuid())
+    userId           String    @unique
+    isVerified       Boolean   @default(false)
+    verifiedName     String?
+    verificationDate DateTime?
+    user             User      @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

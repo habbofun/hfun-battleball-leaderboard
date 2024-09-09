@@ -13,9 +13,6 @@ export const {
   unstable_update: update,
 } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  session: {
-    strategy: 'database',
-    maxAge: 24 * 60 * 60, // 1 day
-  },
+  session: { strategy: 'jwt' },
   ...config,
 });

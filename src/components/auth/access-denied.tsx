@@ -1,17 +1,14 @@
-import Link from 'next/link';
-
 import { AlertCircle } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-export default function AccessDenied() {
+interface AccessDeniedProps {
+  message?: string;
+}
+
+export default function AccessDenied({ message }: AccessDeniedProps) {
+  const defaultMessage = "You don't have permission to access this page.";
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
       <Card className="max-w-md w-full">
@@ -21,15 +18,9 @@ export default function AccessDenied() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-center">
-            You don&apos;t have permission to access this page. Please sign in
-            to continue.
+            {message || defaultMessage}
           </p>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <Link href="/sign-in" passHref>
-            <Button>Sign In</Button>
-          </Link>
-        </CardFooter>
       </Card>
     </div>
   );

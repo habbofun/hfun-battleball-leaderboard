@@ -19,7 +19,7 @@ const JsonView: React.FC<JsonViewProps> = ({ data, className = '' }) => {
   const jsonString = JSON.stringify(data, null, 2);
 
   return (
-    <pre className={`overflow-auto bg-gray-800 p-4 ${className}`}>
+    <pre className={`overflow-auto bg-gray-800 p-4 language-json ${className}`}>
       <code className="language-json">{jsonString}</code>
     </pre>
   );
