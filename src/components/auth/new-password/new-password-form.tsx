@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -25,10 +25,9 @@ import { Input } from '@/components/ui/input';
 import { newPasswordSchema } from '@/lib/zod';
 import { newPasswordAction } from '@/server/actions/auth/new-password/new-password';
 
-export default function NewPasswordForm() {
+function NewPasswordFormContent() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -54,40 +53,48 @@ export default function NewPasswordForm() {
   };
 
   return (
+    <Card className="w-full max-w-md">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold text-center">
+          Enter a new password
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>New password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your new password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? 'Sending...' : 'Change password'}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function NewPasswordForm() {
+  return (
     <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">
-            Enter a new password
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>New password</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your new password"
-                        type="password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? 'Sending...' : 'Change password'}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+      <Suspense fallback={<div>Loading...</div>}>
+        <NewPasswordFormContent />
+      </Suspense>
     </div>
   );
 }
