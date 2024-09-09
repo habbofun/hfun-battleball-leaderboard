@@ -5,6 +5,8 @@ import { auth } from '@/server/auth';
 const AdminPage = async () => {
   const session = await auth();
 
+  if (session?.user?.role !== 'admin') return <AccessDenied />;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <h1 className="text-2xl font-bold mb-4">Admin Page</h1>

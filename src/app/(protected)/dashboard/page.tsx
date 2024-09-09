@@ -6,6 +6,14 @@ export default async function ProfilePage() {
   const session = await auth();
   const email = session?.user?.email || '';
 
+  if (!session) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <p>You are not logged in</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <h1 className="text-2xl font-bold mb-4">Profile Page</h1>
