@@ -58,3 +58,25 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     return { success: false, error: 'An unexpected error occurred' };
   }
 };
+
+export const sendTwoFactorEmail = async (email: string, token: string) => {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'HFUN.INFO <no-reply@kwayservices.top>',
+      to: email,
+      subject: 'Two-Factor Authentication - HFUN.INFO',
+      html: `
+        <h1>Two-Factor Authentication</h1>
+        <p>Your two-factor authentication code is: ${token}</p>
+      `,
+    });
+
+    if (error) {
+      return { success: false, error: 'Failed to send email' };
+    }
+
+    return { success: true, messageId: data?.id };
+  } catch (error) {
+    return { success: false, error: 'An unexpected error occurred' };
+  }
+};

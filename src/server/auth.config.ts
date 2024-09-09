@@ -1,7 +1,9 @@
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
-import { findUser } from '@/data/find-user';
+import { findUser, findUserById } from '@/data/find-user';
+import { getTwoFactorConfirmation } from '@/data/two-factor-confirmation';
+import db from '@/lib/db';
 import { handleEmailVerification } from '@/server/actions/auth/handle-email-verification';
 import { validateCredentials } from '@/server/actions/auth/validate-credentials';
 import { verifyPassword } from '@/server/actions/auth/verify-password';
@@ -48,6 +50,27 @@ export const config = {
         session.user.role = token.role;
       }
       return session;
+    },
+    async signIn({ user, account }) {
+      if (account?.provider !== 'credentials') return true;
+
+      if (!user || !user.id) return false;
+
+      const existingUser = await findUserById(user.id);
+
+      if (existingUser?.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmation(
+          existingUser.id,
+        );
+
+        if (!twoFactorConfirmation) return false;
+
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id },
+        });
+      }
+
+      return true;
     },
   },
   trustHost: true,

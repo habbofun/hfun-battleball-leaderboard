@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { object, string } from 'zod';
 
 export const loginSchema = object({
@@ -8,6 +9,7 @@ export const loginSchema = object({
     .min(1, 'Password is required')
     .min(6, 'Password must be more than 6 characters')
     .max(32, 'Password must be less than 32 characters'),
+  code: z.optional(string()),
 });
 
 export const registerSchema = object({

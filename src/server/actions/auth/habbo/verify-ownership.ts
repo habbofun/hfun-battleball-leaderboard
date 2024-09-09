@@ -90,7 +90,6 @@ export async function verifyHabboOwnership(
       status: HttpStatusCode.INTERNAL_SERVER_ERROR_500,
     };
   } catch (error) {
-    console.error('Error verifying Habbo ownership:', error);
     return {
       verified: false,
       error: 'Failed to verify Habbo ownership',
