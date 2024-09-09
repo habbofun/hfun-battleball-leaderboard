@@ -14,7 +14,7 @@ const publicRoutes = [
   '/finder',
   '/finder/*',
 ];
-const authRoutes = ['/login', '/register'];
+const authRoutes = ['/login', '/register', '/reset-password', '/new-password'];
 const apiAuthPrefix = '/api/auth';
 
 function matchWildcard(path: string, pattern: string): boolean {

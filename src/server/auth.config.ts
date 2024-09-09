@@ -1,12 +1,10 @@
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
-import bcrypt from 'bcryptjs';
-import { nanoid } from 'nanoid';
-
-import db from '@/lib/db';
-import { sendEmailVerification } from '@/lib/mail';
-import { loginSchema } from '@/lib/zod';
+import { findUser } from '@/data/find-user';
+import { handleEmailVerification } from '@/server/actions/auth/handle-email-verification';
+import { validateCredentials } from '@/server/actions/auth/validate-credentials';
+import { verifyPassword } from '@/server/actions/auth/verify-password';
 
 export const config = {
   providers: [
@@ -16,67 +14,25 @@ export const config = {
         password: {},
       },
       authorize: async (credentials) => {
-        const { data, success } = loginSchema.safeParse(credentials);
-
-        if (!success) {
-          throw new Error('Invalid credentials');
-        }
-
-        const user = await db.user.findUnique({
-          where: {
-            email: data.email,
-          },
-        });
-
-        if (!user || !user.password) {
-          throw new Error('User not found');
-        }
-
-        const isValidPassword = await bcrypt.compare(
-          data.password,
-          user.password,
-        );
-
-        if (!isValidPassword) {
-          throw new Error('Invalid password');
-        }
-
-        if (!user.emailVerified) {
-          if (!user.email) {
-            throw new Error('User email not found');
+        try {
+          const { email, password } = await validateCredentials(credentials);
+          const user = await findUser(email);
+          if (!user) {
+            throw new Error('User not found');
           }
-
-          const verifyTokenExists = await db.verificationToken.findFirst({
-            where: {
-              identifier: user.email,
-            },
-          });
-
-          if (verifyTokenExists?.identifier) {
-            await db.verificationToken.delete({
-              where: {
-                identifier: user.email,
-              },
-            });
+          if (user.password) {
+            await verifyPassword(password, user.password);
+          } else {
+            throw new Error('User password not found');
           }
-
-          const token = nanoid();
-
-          await db.verificationToken.create({
-            data: {
-              identifier: user.email,
-              token,
-              expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-            },
-          });
-
-          // enviar email de verificación
-          await sendEmailVerification(user.email, token);
-
-          throw new Error('Please check your email for verification');
+          await handleEmailVerification(user);
+          return user;
+        } catch (error) {
+          if (error instanceof Error) {
+            throw new Error(error.message);
+          }
+          throw new Error('An unexpected error occurred');
         }
-
-        return user;
       },
     }),
   ],

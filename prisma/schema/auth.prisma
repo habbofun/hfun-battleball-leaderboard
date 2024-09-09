@@ -18,8 +18,10 @@ model User {
     Authenticator     Authenticator[]
     habboVerification HabboUserVerification?
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt            DateTime            @default(now())
+    updatedAt            DateTime            @updatedAt
+    PasswordResetToken   PasswordResetToken? @relation(fields: [passwordResetTokenId], references: [id])
+    passwordResetTokenId String?
 }
 
 model Account {
@@ -51,6 +53,16 @@ model VerificationToken {
     expires    DateTime
 
     @@id([identifier])
+}
+
+model PasswordResetToken {
+    id      String   @id @default(cuid())
+    email   String
+    token   String   @unique
+    expires DateTime
+    User    User[]
+
+    @@unique([email, token])
 }
 
 model Authenticator {

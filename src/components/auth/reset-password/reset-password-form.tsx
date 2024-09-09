@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,32 +21,31 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { loginSchema } from '@/lib/zod';
-import { loginAction } from '@/server/actions/auth/login/login-action';
+import { resetPasswordSchema } from '@/lib/zod';
+import { resetPasswordAction } from '@/server/actions/auth/reset-password/reset-password-action';
 
-export default function LoginForm() {
-  const [error, setError] = useState<string | null>(null);
+export default function ResetPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof resetPasswordSchema>) => {
     startTransition(async () => {
-      const response = await loginAction(data);
+      const response = await resetPasswordAction(data);
 
       if (response.error) {
         toast.error(response.error);
         return;
       }
 
-      router.push('/dashboard');
+      toast.success('Password reset email sent. Please check your inbox.');
+      router.push('/login');
     });
   };
 
@@ -56,7 +54,7 @@ export default function LoginForm() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            Login
+            Reset Password
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -79,33 +77,8 @@ export default function LoginForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <Button
-                      size="sm"
-                      variant="link"
-                      asChild
-                      className="p-0 text-sm font-normal"
-                    >
-                      <Link href="/reset-password">Forgot password?</Link>
-                    </Button>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? 'Loading...' : 'Login'}
+                {isPending ? 'Sending...' : 'Send me a reset password link'}
               </Button>
             </form>
           </Form>

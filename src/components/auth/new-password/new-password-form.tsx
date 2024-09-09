@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -22,32 +22,34 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { loginSchema } from '@/lib/zod';
-import { loginAction } from '@/server/actions/auth/login/login-action';
+import { newPasswordSchema } from '@/lib/zod';
+import { newPasswordAction } from '@/server/actions/auth/new-password/new-password';
 
-export default function LoginForm() {
-  const [error, setError] = useState<string | null>(null);
+export default function NewPasswordForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+
+  const form = useForm<z.infer<typeof newPasswordSchema>>({
+    resolver: zodResolver(newPasswordSchema),
     defaultValues: {
-      email: '',
       password: '',
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof newPasswordSchema>) => {
     startTransition(async () => {
-      const response = await loginAction(data);
+      const response = await newPasswordAction(data, token);
 
       if (response.error) {
         toast.error(response.error);
         return;
       }
 
-      router.push('/dashboard');
+      toast.success('Your password has been updated. Please login.');
+      router.push('/login');
     });
   };
 
@@ -56,7 +58,7 @@ export default function LoginForm() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            Login
+            Enter a new password
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -64,48 +66,23 @@ export default function LoginForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your email"
-                        type="email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>New password</FormLabel>
                     <FormControl>
                       <Input
+                        placeholder="Enter your new password"
                         type="password"
-                        placeholder="Enter your password"
                         {...field}
                       />
                     </FormControl>
-                    <Button
-                      size="sm"
-                      variant="link"
-                      asChild
-                      className="p-0 text-sm font-normal"
-                    >
-                      <Link href="/reset-password">Forgot password?</Link>
-                    </Button>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? 'Loading...' : 'Login'}
+                {isPending ? 'Sending...' : 'Change password'}
               </Button>
             </form>
           </Form>

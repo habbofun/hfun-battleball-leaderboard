@@ -30,3 +30,31 @@ export const sendEmailVerification = async (email: string, token: string) => {
     return { success: false, error: 'An unexpected error occurred' };
   }
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const resetLink = `${process.env.AUTH_URL}/new-password?token=${token}`;
+
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'HFUN.INFO <no-reply@kwayservices.top>',
+      to: email,
+      subject: 'Reset Your Password - HFUN.INFO',
+      html: `
+        <h1>Reset Your Password</h1>
+        <p>You have requested to reset your password. Click the link below to set a new password:</p>
+        <p><a href="${resetLink}">Reset Password</a></p>
+        <p>If you didn't request this, please ignore this email.</p>
+        <p>This link will expire in 1 hour.</p>
+        <p>Best regards,<br>The HFUN.INFO Team</p>
+      `,
+    });
+
+    if (error) {
+      return { success: false, error: 'Failed to send email' };
+    }
+
+    return { success: true, messageId: data?.id };
+  } catch (error) {
+    return { success: false, error: 'An unexpected error occurred' };
+  }
+};

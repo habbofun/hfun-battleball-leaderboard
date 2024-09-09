@@ -2,42 +2,27 @@
 
 import { AuthError } from 'next-auth';
 
-import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 
-import db from '@/lib/db';
+import { checkExistingUser } from '@/data/check-existing-user';
 import { registerSchema } from '@/lib/zod';
+import { createUser } from '@/server/actions/auth/register/create-user';
+import { validateRegistrationData } from '@/server/actions/auth/register/validate-registration-data';
 import { signIn } from '@/server/auth';
 
 export const registerAction = async (
   formData: z.infer<typeof registerSchema>,
 ) => {
   try {
-    const { data, success } = registerSchema.safeParse(formData);
+    const validationResult = await validateRegistrationData(formData);
+    if ('error' in validationResult) return validationResult;
 
-    if (!success) {
-      return { error: 'Invalid data' };
-    }
+    const { data } = validationResult;
 
-    const user = await db.user.findUnique({
-      where: {
-        email: data.email,
-      },
-    });
+    const existingUserCheck = await checkExistingUser(data.email);
+    if ('error' in existingUserCheck) return existingUserCheck;
 
-    if (user) {
-      return { error: 'User already exists' };
-    }
-
-    const passwordHash = await bcrypt.hash(data.password, 10);
-
-    await db.user.create({
-      data: {
-        email: data.email,
-        password: passwordHash,
-        name: data.name,
-      },
-    });
+    await createUser(data.email, data.password, data.name);
 
     await signIn('credentials', {
       email: data.email,
