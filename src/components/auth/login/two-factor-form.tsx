@@ -23,7 +23,7 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 import { loginSchema } from '@/schemas';
-import { loginAction } from '@/server/actions/auth/login/login-action';
+import { loginAction } from '@/server/actions/auth/login/login';
 
 interface TwoFactorFormProps {
   email: string;

@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { registerSchema } from '@/schemas';
-import { registerAction } from '@/server/actions/auth/register/register-action';
+import { registerAction } from '@/server/actions/auth/register/register';
 
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();

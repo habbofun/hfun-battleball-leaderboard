@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { loginSchema } from '@/schemas';
-import { loginAction } from '@/server/actions/auth/login/login-action';
+import { loginAction } from '@/server/actions/auth/login/login';
 
 interface InitialLoginFormProps {
   onTwoFactorRequired: (email: string, password: string) => void;

@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { resetPasswordSchema } from '@/schemas';
-import { resetPasswordAction } from '@/server/actions/auth/reset-password/reset-password-action';
+import { resetPasswordAction } from '@/server/actions/auth/reset-password/reset-password';
 
 export default function ResetPasswordForm() {
   const [isPending, startTransition] = useTransition();
