@@ -1,12 +1,15 @@
+'use client';
+
+import { useSession } from 'next-auth/react';
+
 import HabboOnboarding from '@/components/auth/habbo/link-account';
 import { LogoutButton } from '@/components/auth/logout/logout-button';
 import { Button } from '@/components/ui/button';
 import JsonView from '@/components/view/json-view';
-import { auth } from '@/server/auth';
 
-export default async function ProfilePage() {
-  const session = await auth();
-  const email = session?.user?.email || '';
+export default function ProfilePage() {
+  const session = useSession();
+  const email = session?.data?.user?.email || '';
 
   if (!session) {
     return (
