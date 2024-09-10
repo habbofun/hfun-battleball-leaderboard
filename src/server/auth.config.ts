@@ -1,6 +1,9 @@
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
+import { Role } from '@prisma/client';
+
+import { getAccountByUserId } from '@/data/find-account';
 import { findUser, findUserById } from '@/data/find-user';
 import { getTwoFactorConfirmation } from '@/data/two-factor-confirmation';
 import db from '@/lib/db';
@@ -38,45 +41,6 @@ export const config = {
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-        token.isTwoFactorEnabled = user.isTwoFactorEnabled;
-      }
-
-      return token;
-    },
-    session({ session, token }) {
-      if (session.user) {
-        session.user.role = token.role;
-        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
-      }
-
-      return session;
-    },
-    async signIn({ user, account }) {
-      if (account?.provider !== 'credentials') return true;
-
-      if (!user || !user.id) return false;
-
-      const existingUser = await findUserById(user.id);
-
-      if (existingUser?.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmation(
-          existingUser.id,
-        );
-
-        if (!twoFactorConfirmation) return false;
-
-        await db.twoFactorConfirmation.delete({
-          where: { id: twoFactorConfirmation.id },
-        });
-      }
-
-      return true;
-    },
-  },
   trustHost: true,
   pages: {
     signIn: '/login',
