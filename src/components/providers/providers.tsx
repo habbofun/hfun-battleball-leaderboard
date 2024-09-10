@@ -1,28 +1,16 @@
-'use client';
-
 import { ReactNode } from 'react';
 
 import { SessionProvider } from 'next-auth/react';
-import dynamic from 'next/dynamic';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
+import { QueryProvider } from '@/components/providers/query-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
-
-const StarfieldClient = dynamic(
-  () => import('@/components/providers/starfield-client'),
-  {
-    ssr: false,
-  },
-);
-
-const queryClient = new QueryClient();
+import { StarfieldWrapper } from '@/components/ui/starfield-wrapper';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <SessionProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryProvider>
+      <SessionProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -31,9 +19,9 @@ export function Providers({ children }: { children: ReactNode }) {
         >
           {children}
           <Toaster />
-          <StarfieldClient />
         </ThemeProvider>
-      </QueryClientProvider>
-    </SessionProvider>
+        <StarfieldWrapper />
+      </SessionProvider>
+    </QueryProvider>
   );
 }
