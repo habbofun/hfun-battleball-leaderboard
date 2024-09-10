@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Link from 'next/link';
@@ -36,32 +37,35 @@ export default function InitialLoginForm({
       password: '',
     },
   });
+  const [isPending, startTransition] = useTransition();
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    try {
-      const response = await loginAction(data);
+    startTransition(async () => {
+      try {
+        const response = await loginAction(data);
 
-      if (response.error) {
-        toast.error(response.error);
-        return;
+        if (response.error) {
+          toast.error(response.error);
+          return;
+        }
+
+        if (response.twoFactor) {
+          onTwoFactorRequired(data.email, data.password);
+          toast.info('Please enter the 2FA code sent to your email');
+          return;
+        }
+
+        if (response.success) {
+          toast.success('Login successful');
+          router.push('/settings');
+          return;
+        }
+
+        toast.error('An unexpected error occurred');
+      } catch (error) {
+        toast.error('Something went wrong');
       }
-
-      if (response.twoFactor) {
-        onTwoFactorRequired(data.email, data.password);
-        toast.info('Please enter the 2FA code sent to your email');
-        return;
-      }
-
-      if (response.success) {
-        toast.success('Login successful');
-        router.push('/settings');
-        return;
-      }
-
-      toast.error('An unexpected error occurred');
-    } catch (error) {
-      toast.error('Something went wrong');
-    }
+    });
   };
 
   return (
@@ -105,8 +109,8 @@ export default function InitialLoginForm({
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Login
+        <Button type="submit" className="w-full" disabled={isPending}>
+          {isPending ? 'Sending...' : 'Login'}
         </Button>
       </form>
     </Form>
