@@ -33,7 +33,6 @@ export const {
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
       token.role = existingUser.role;
 
-      console.log('token', token);
       return token;
     },
     async session({ session, token }) {
@@ -49,7 +48,6 @@ export const {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
       }
 
-      console.log('session', session);
       return session;
     },
     async signIn({ user, account }) {
