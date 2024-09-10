@@ -1,17 +1,20 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-
 import HabboOnboarding from '@/components/auth/habbo/link-account';
-import { LogoutButton } from '@/components/auth/logout/logout-button';
 import { Button } from '@/components/ui/button';
 import JsonView from '@/components/view/json-view';
+import { useCurrentUser } from '@/hooks/use-current-user';
+import { logoutAction } from '@/server/actions/auth/logout/logout-action';
 
-export default function ProfilePage() {
-  const session = useSession();
-  const email = session?.data?.user?.email || '';
+export default function SettingsPage() {
+  const user = useCurrentUser();
+  const email = user?.email || '';
 
-  if (!session) {
+  const handleLogout = async () => {
+    await logoutAction();
+  };
+
+  if (!user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <p>You are not logged in</p>
@@ -25,12 +28,10 @@ export default function ProfilePage() {
       <HabboOnboarding email={email} />
       <p className="text-2xm text-muted-foreground mt-8">Session details:</p>
       <JsonView
-        data={session}
+        data={user}
         className="max-w-2xl w-full text-sm rounded-lg shadow-lg"
       />
-      <LogoutButton>
-        <Button>Logout</Button>
-      </LogoutButton>
+      <Button onClick={handleLogout}>Logout</Button>
     </div>
   );
 }
