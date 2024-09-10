@@ -33,6 +33,12 @@ export function PageHeader() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2">
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
             <ModeToggle />
             <NavigationDrawer>
               <DrawerTrigger asChild>
@@ -42,12 +48,6 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
           </div>
         </div>
       </header>
