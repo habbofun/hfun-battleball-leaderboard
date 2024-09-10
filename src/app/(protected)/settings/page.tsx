@@ -16,7 +16,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import JsonView from '@/components/view/json-view';
 import { useCurrentUser } from '@/hooks/use-current-user';
 
 export default function SettingsPage() {
@@ -130,15 +129,6 @@ export default function SettingsPage() {
                 </Button>
               </div>
             </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Session Details</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <JsonView data={user} className="text-sm rounded-lg shadow-lg" />
-            </CardContent>
           </Card>
         </div>
 
