@@ -22,7 +22,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { newPasswordSchema } from '@/lib/zod';
+import { newPasswordSchema } from '@/schemas';
 import { newPasswordAction } from '@/server/actions/auth/new-password/new-password';
 
 function NewPasswordFormContent() {
@@ -35,6 +35,7 @@ function NewPasswordFormContent() {
     resolver: zodResolver(newPasswordSchema),
     defaultValues: {
       password: '',
+      confirmPassword: '',
     },
   });
 
@@ -71,6 +72,23 @@ function NewPasswordFormContent() {
                   <FormControl>
                     <Input
                       placeholder="Enter your new password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm new password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Confirm your new password"
                       type="password"
                       {...field}
                     />

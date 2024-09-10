@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { findUser } from '@/data/find-user';
 import { sendPasswordResetEmail } from '@/lib/mail';
 import { generatePasswordResetToken } from '@/lib/tokens';
-import { resetPasswordSchema } from '@/lib/zod';
+import { resetPasswordSchema } from '@/schemas';
 
 export const resetPasswordAction = async (
   formData: z.infer<typeof resetPasswordSchema>,

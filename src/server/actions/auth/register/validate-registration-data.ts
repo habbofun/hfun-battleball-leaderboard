@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 
-import { registerSchema } from '@/lib/zod';
+import { registerSchema } from '@/schemas';
 
 export async function validateRegistrationData(
   formData: z.infer<typeof registerSchema>,

@@ -10,7 +10,7 @@ import { getTwoFactorTokenByEmail } from '@/data/two-factor-token';
 import db from '@/lib/db';
 import { sendTwoFactorEmail } from '@/lib/mail';
 import { generateTwoFactorTokenByEmail } from '@/lib/tokens';
-import { loginSchema } from '@/lib/zod';
+import { loginSchema } from '@/schemas';
 import { signIn } from '@/server/auth';
 
 export const loginAction = async (data: z.infer<typeof loginSchema>) => {

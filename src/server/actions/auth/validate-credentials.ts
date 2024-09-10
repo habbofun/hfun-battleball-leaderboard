@@ -1,6 +1,6 @@
 'use server';
 
-import { loginSchema } from '@/lib/zod';
+import { loginSchema } from '@/schemas';
 
 export async function validateCredentials(credentials: any) {
   const { data, success } = loginSchema.safeParse(credentials);

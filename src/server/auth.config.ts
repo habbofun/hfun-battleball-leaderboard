@@ -44,6 +44,7 @@ export const config = {
         token.role = user.role;
         token.isTwoFactorEnabled = user.isTwoFactorEnabled;
       }
+
       return token;
     },
     session({ session, token }) {
@@ -51,6 +52,7 @@ export const config = {
         session.user.role = token.role;
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
       }
+
       return session;
     },
     async signIn({ user, account }) {

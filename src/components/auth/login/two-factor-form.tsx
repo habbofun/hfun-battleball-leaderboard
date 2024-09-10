@@ -22,7 +22,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from '@/components/ui/input-otp';
-import { loginSchema } from '@/lib/zod';
+import { loginSchema } from '@/schemas';
 import { loginAction } from '@/server/actions/auth/login/login-action';
 
 interface TwoFactorFormProps {

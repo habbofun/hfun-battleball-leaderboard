@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { loginSchema } from '@/lib/zod';
+import { loginSchema } from '@/schemas';
 import { loginAction } from '@/server/actions/auth/login/login-action';
 
 interface InitialLoginFormProps {

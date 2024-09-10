@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { resetPasswordSchema } from '@/lib/zod';
+import { resetPasswordSchema } from '@/schemas';
 import { resetPasswordAction } from '@/server/actions/auth/reset-password/reset-password-action';
 
 export default function ResetPasswordForm() {

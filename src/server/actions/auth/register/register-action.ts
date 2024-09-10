@@ -5,7 +5,7 @@ import { AuthError } from 'next-auth';
 import { z } from 'zod';
 
 import { checkExistingUser } from '@/data/check-existing-user';
-import { registerSchema } from '@/lib/zod';
+import { registerSchema } from '@/schemas';
 import { createUser } from '@/server/actions/auth/register/create-user';
 import { validateRegistrationData } from '@/server/actions/auth/register/validate-registration-data';
 import { signIn } from '@/server/auth';

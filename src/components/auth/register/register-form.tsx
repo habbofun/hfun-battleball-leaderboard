@@ -21,11 +21,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { registerSchema } from '@/lib/zod';
+import { registerSchema } from '@/schemas';
 import { registerAction } from '@/server/actions/auth/register/register-action';
 
 export default function RegisterForm() {
-  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -34,6 +33,7 @@ export default function RegisterForm() {
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
       name: '',
     },
   });
@@ -102,6 +102,23 @@ export default function RegisterForm() {
                       <Input
                         type="password"
                         placeholder="Enter your password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Confirm your password"
                         {...field}
                       />
                     </FormControl>
