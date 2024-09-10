@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
 import { Inter as FontSans } from 'next/font/google';
+
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 
 import { Providers } from '@/components/providers/providers';
 import { PageFooter } from '@/components/static/page-footer';
 import { PageHeader } from '@/components/static/page-header';
 import { cn } from '@/lib/utils';
-import { auth } from '@/server/auth';
 
 import './globals.css';
 
@@ -25,10 +26,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
   return (
-    <SessionProvider session={session}>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
@@ -45,6 +48,6 @@ export default async function RootLayout({
           </Providers>
         </body>
       </html>
-    </SessionProvider>
+    </ClerkProvider>
   );
 }

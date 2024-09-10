@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.AUTH_RESEND_KEY);
+const resend = new Resend(process.env.RESEND_KEY);
 
 export const sendEmailVerification = async (email: string, token: string) => {
   const verificationLink = `${process.env.AUTH_URL}/api/auth/verify-email?token=${token}`;

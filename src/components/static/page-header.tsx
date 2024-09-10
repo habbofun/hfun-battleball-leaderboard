@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 
 import Link from 'next/link';
 
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Menu } from 'lucide-react';
 
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
@@ -11,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import { DrawerTrigger } from '@/components/ui/drawer';
 import { TextEffect } from '@/components/ui/text-effect';
 import { ModeToggle } from '@/components/ui/theme-switcher';
-import { UserButton } from '@/components/user/user-button';
 
 export function PageHeader() {
   return (
@@ -42,7 +42,12 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
-            <UserButton />
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
           </div>
         </div>
       </header>
