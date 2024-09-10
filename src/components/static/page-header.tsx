@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import { Menu } from 'lucide-react';
 
-import { AuthWrapperButton } from '@/components/auth/auth-wrapper-button';
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
 import { PageHeaderSkeleton } from '@/components/static/page-header-skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { DrawerTrigger } from '@/components/ui/drawer';
 import { TextEffect } from '@/components/ui/text-effect';
 import { ModeToggle } from '@/components/ui/theme-switcher';
+import { UserButton } from '@/components/user/user-button';
 
 export function PageHeader() {
   return (
@@ -33,7 +33,7 @@ export function PageHeader() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2">
-            <AuthWrapperButton />
+            <UserButton />
             <ModeToggle />
             <NavigationDrawer>
               <DrawerTrigger asChild>

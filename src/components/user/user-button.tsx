@@ -4,7 +4,7 @@ import { LogIn, UserPlus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-export function AuthWrapperButton() {
+export function UserButton() {
   return (
     <div className="flex items-center space-x-2">
       <Link href="/login" passHref>
