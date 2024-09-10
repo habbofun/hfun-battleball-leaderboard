@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { withRateLimit } from '@/server/ratelimit-middleware';
+import { withRateLimit } from '@/server/middleware/ratelimit-middleware';
 
 async function healthcheckHandler(req: NextRequest) {
   return NextResponse.json(
