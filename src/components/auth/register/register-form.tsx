@@ -47,7 +47,7 @@ export default function RegisterForm() {
         return;
       }
 
-      router.push('/dashboard');
+      router.push('/settings');
     });
   };
 

@@ -53,7 +53,7 @@ export default function TwoFactorForm({ email, password }: TwoFactorFormProps) {
 
       if (response.success) {
         toast.success('Login successful');
-        router.push('/dashboard');
+        router.push('/settings');
         return;
       }
 

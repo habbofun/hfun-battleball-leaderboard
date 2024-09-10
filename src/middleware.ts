@@ -38,7 +38,7 @@ export default middleware((req) => {
   }
 
   if (isLoggedIn && authRoutes.includes(nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/dashboard', nextUrl));
+    return NextResponse.redirect(new URL('/settings', nextUrl));
   }
 
   if (

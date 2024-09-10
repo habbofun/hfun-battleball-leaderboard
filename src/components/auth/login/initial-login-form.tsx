@@ -54,7 +54,7 @@ export default function InitialLoginForm({
 
       if (response.success) {
         toast.success('Login successful');
-        router.push('/dashboard');
+        router.push('/settings');
         return;
       }
 

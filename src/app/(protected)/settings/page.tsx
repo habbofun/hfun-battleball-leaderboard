@@ -1,4 +1,6 @@
 import HabboOnboarding from '@/components/auth/habbo/link-account';
+import { LogoutButton } from '@/components/auth/logout/logout-button';
+import { Button } from '@/components/ui/button';
 import JsonView from '@/components/view/json-view';
 import { auth } from '@/server/auth';
 
@@ -23,6 +25,9 @@ export default async function ProfilePage() {
         data={session}
         className="max-w-2xl w-full text-sm rounded-lg shadow-lg"
       />
+      <LogoutButton>
+        <Button>Logout</Button>
+      </LogoutButton>
     </div>
   );
 }
