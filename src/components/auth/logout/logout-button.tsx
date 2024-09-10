@@ -1,30 +1,19 @@
 'use client';
 
-import { useTransition } from 'react';
+import { signOut } from 'next-auth/react';
 
-import { LogOut } from 'lucide-react';
+interface LogoutButtonProps {
+  children?: React.ReactNode;
+}
 
-import { Button } from '@/components/ui/button';
-import { logoutAction } from '@/server/actions/auth/logout/logout-action';
-
-export function LogoutButton() {
-  const [isPending, startTransition] = useTransition();
-
-  const handleLogout = () => {
-    startTransition(async () => {
-      await logoutAction();
-    });
+export const LogoutButton = ({ children }: LogoutButtonProps) => {
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' });
   };
 
   return (
-    <Button
-      onClick={handleLogout}
-      disabled={isPending}
-      variant="ghost"
-      size="sm"
-    >
-      <LogOut className="h-4 w-4 mr-2" />
-      {isPending ? 'Logging out...' : 'Logout'}
-    </Button>
+    <span onClick={handleLogout} className="cursor-pointer">
+      {children}
+    </span>
   );
-}
+};
