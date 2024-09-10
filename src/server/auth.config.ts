@@ -15,7 +15,7 @@ export const config = {
         email: {},
         password: {},
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials): Promise<any> => {
         try {
           const { email, password } = await validateCredentials(credentials);
           const user = await findUser(email);
@@ -42,12 +42,14 @@ export const config = {
     jwt({ token, user }) {
       if (user) {
         token.role = user.role;
+        token.isTwoFactorEnabled = user.isTwoFactorEnabled;
       }
       return token;
     },
     session({ session, token }) {
       if (session.user) {
         session.user.role = token.role;
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
       }
       return session;
     },
