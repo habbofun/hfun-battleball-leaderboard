@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { type Variants, motion } from 'framer-motion';
+import { HTMLMotionProps } from 'framer-motion';
 
 type PresetType = 'blur' | 'shake' | 'scale' | 'fade' | 'slide';
 
@@ -35,7 +36,10 @@ const defaultItemVariants: Variants = {
   },
 };
 
-const presetVariants: Record<PresetType, { container: Variants; item: Variants }> = {
+const presetVariants: Record<
+  PresetType,
+  { container: Variants; item: Variants }
+> = {
   blur: {
     container: defaultContainerVariants,
     item: {
@@ -80,7 +84,11 @@ const AnimationComponent: React.FC<{
 }> = React.memo(({ word, variants, per }) => {
   if (per === 'word') {
     return (
-      <motion.span aria-hidden="true" variants={variants} className="inline-block whitespace-pre">
+      <motion.span
+        aria-hidden="true"
+        variants={variants}
+        className="inline-block whitespace-pre"
+      >
         {word}
       </motion.span>
     );
@@ -105,9 +113,18 @@ const AnimationComponent: React.FC<{
 
 AnimationComponent.displayName = 'AnimationComponent';
 
-export function TextEffect({ children, per = 'word', as = 'p', variants, className, preset }: TextEffectProps) {
+export function TextEffect({
+  children,
+  per = 'word',
+  as = 'p',
+  variants,
+  className,
+  preset,
+}: TextEffectProps) {
   const words = children.split(/(\S+)/);
-  const MotionTag = motion[as as keyof typeof motion];
+  const MotionTag = motion[as as keyof typeof motion] as React.ComponentType<
+    HTMLMotionProps<any>
+  >;
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };
