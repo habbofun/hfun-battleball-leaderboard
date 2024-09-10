@@ -1,18 +1,12 @@
 'use client';
 
 import HabboOnboarding from '@/components/auth/habbo/link-account';
-import { Button } from '@/components/ui/button';
 import JsonView from '@/components/view/json-view';
 import { useCurrentUser } from '@/hooks/use-current-user';
-import { logoutAction } from '@/server/actions/auth/logout/logout-action';
 
 export default function SettingsPage() {
   const user = useCurrentUser();
   const email = user?.email || '';
-
-  const handleLogout = async () => {
-    await logoutAction();
-  };
 
   if (!user) {
     return (
@@ -31,7 +25,6 @@ export default function SettingsPage() {
         data={user}
         className="max-w-2xl w-full text-sm rounded-lg shadow-lg"
       />
-      <Button onClick={handleLogout}>Logout</Button>
     </div>
   );
 }
