@@ -1,21 +1,41 @@
-import AccessDenied from '@/components/auth/access-denied';
-import JsonView from '@/components/view/json-view';
-import { auth } from '@/server/auth';
+'use client';
 
-const AdminPage = async () => {
-  const session = await auth();
+import { Role } from '@prisma/client';
+import { Shield } from 'lucide-react';
 
-  if (session?.user?.role !== 'admin') return <AccessDenied />;
+import { RoleGate } from '@/components/auth/role-gate/role-gate';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+const AdminPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Page</h1>
-      <p className="text-2xm text-muted-foreground">Session details:</p>
-      <JsonView
-        data={session}
-        className="max-w-2xl w-full text-sm rounded-lg shadow-lg"
-      />
+    <div className="container mx-auto p-6 min-h-screen flex items-center justify-center bg-background">
+      <RoleGate allowedRoles={Role.admin}>
+        <Card className="w-full max-w-2xl">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold flex items-center">
+              <Shield className="mr-2 h-6 w-6" />
+              Admin Page
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-6">
+              Welcome to the admin page. This area is restricted to
+              administrators only.
+            </p>
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Quick Actions</h2>
+              <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                <li>Manage user accounts</li>
+                <li>View system logs</li>
+                <li>Update site settings</li>
+                <li>Generate reports</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+      </RoleGate>
     </div>
   );
 };
+
 export default AdminPage;
