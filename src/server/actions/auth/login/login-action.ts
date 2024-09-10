@@ -55,10 +55,7 @@ export const loginAction = async (data: z.infer<typeof loginSchema>) => {
           },
         });
 
-        console.log('Two-factor confirmation:', twoFactorConfirmation);
-
         if (!twoFactorConfirmation) {
-          console.error('Failed to create two-factor confirmation');
           return { error: 'Error during two-factor authentication' };
         }
       } else {
@@ -78,19 +75,15 @@ export const loginAction = async (data: z.infer<typeof loginSchema>) => {
         redirect: false,
       });
 
-      console.log('Sign-in result:', signInResult);
-
       if (signInResult?.error) {
         return { error: signInResult.error };
       }
 
       return { success: true };
     } catch (signInError) {
-      console.error('Sign-in error:', signInError);
       return { error: 'Failed to sign in' };
     }
   } catch (error) {
-    console.error('Login error:', error);
     if (error instanceof AuthError) {
       return { error: error.cause?.err?.message || 'Authentication error' };
     }

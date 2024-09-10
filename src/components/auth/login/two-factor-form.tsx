@@ -43,7 +43,6 @@ export default function TwoFactorForm({ email, password }: TwoFactorFormProps) {
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     try {
-      console.log('data', data);
       const response = await loginAction(data);
 
       if (response.error) {
