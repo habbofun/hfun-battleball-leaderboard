@@ -1,4 +1,8 @@
+import jwt from 'jsonwebtoken';
 import { Resend } from 'resend';
+
+import db from './db';
+import { TOKEN_TTL, generateNumericToken } from './hash';
 
 const resend = new Resend(process.env.RESEND_KEY);
 
@@ -14,13 +18,16 @@ export const sendEmail = async (
       subject: subject,
       html: content,
     });
+
+    console.log('Email sent:', data);
+    return { success: true, data };
   } catch (error) {
     return { success: false, error: 'An unexpected error occurred' };
   }
 };
 
 export const sendEmailVerification = async (email: string, token: string) => {
-  const verificationLink = `${process.env.AUTH_URL}/api/auth/verify-email?token=${token}`;
+  const verificationLink = `${process.env.AUTH_URL}/api/verify-email?token=${token}`;
   const subject = 'Verify Your Email - HFUN.INFO';
   const content = `
     <h1>Verify Your Email</h1>
@@ -65,3 +72,46 @@ export const sendTwoFactorEmail = async (email: string, token: string) => {
 
   return sendEmail(email, subject, content);
 };
+
+export async function generateAndSendVerificationEmail(
+  userId: string,
+  email: string,
+) {
+  try {
+    await db.emailVerificationToken.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    const verificationToken = await generateNumericToken(6);
+
+    await db.emailVerificationToken.create({
+      data: {
+        userId,
+        code: verificationToken,
+        email,
+        expiresAt: new Date(Date.now() + TOKEN_TTL),
+      },
+    });
+
+    const token = jwt.sign(
+      { email, code: verificationToken, userId },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: '5m',
+      },
+    );
+
+    const verificationLink = `${process.env.AUTH_URL}/api/verify-email?token=${token}`;
+    console.log('Email verification link:', verificationLink);
+
+    return await sendEmailVerification(email, token);
+  } catch (error) {
+    console.error('Error generating and sending verification email:', error);
+    return {
+      success: false,
+      error: 'Failed to generate and send verification email',
+    };
+  }
+}
