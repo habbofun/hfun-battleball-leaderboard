@@ -13,7 +13,8 @@ model User {
 
     role Role @default(user)
 
-    sessions Session[]
+    sessions               Session[]
+    EmailVerificationToken EmailVerificationToken[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -33,9 +34,12 @@ model Session {
 model EmailVerificationToken {
     id     String @id @default(cuid())
     code   String
+    email  String
     userId String
 
     createdAt DateTime @default(now())
     expiresAt DateTime
     updatedAt DateTime @updatedAt
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
