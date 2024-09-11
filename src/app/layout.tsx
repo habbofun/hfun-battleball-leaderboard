@@ -35,7 +35,7 @@ export default async function RootLayout({
       >
         <Providers>
           <PageHeader />
-          <main className="flex-grow">{children}</main>
+          <main className="flex justify-center flex-grow">{children}</main>
           <PageFooter />
         </Providers>
       </body>

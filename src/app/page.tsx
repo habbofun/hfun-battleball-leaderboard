@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default async function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col flex-1 bg-background text-foreground">
       <main className="flex-grow flex flex-col justify-center items-center p-4">
         <Suspense fallback={<HomePageSkeleton />}>
           <h1 className="text-6xl font-bold">HFUN.</h1>
