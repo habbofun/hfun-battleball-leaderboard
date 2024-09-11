@@ -1,6 +1,6 @@
-import { Control } from 'react-hook-form';
+import { Control } from 'react-hook-form'
 
-import { Mail, User } from 'lucide-react';
+import { Mail, User } from 'lucide-react'
 
 import {
   FormControl,
@@ -9,13 +9,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/ui/password-input';
-import { RegisterSchema } from '@/schemas/auth';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
+import { RegisterSchema } from '@/schemas/auth'
 
 interface RegisterFormFieldsProps {
-  control: Control<RegisterSchema>;
+  control: Control<RegisterSchema>
 }
 
 export function RegisterFormFields({ control }: RegisterFormFieldsProps) {
@@ -81,5 +81,5 @@ export function RegisterFormFields({ control }: RegisterFormFieldsProps) {
         description="Please re-enter your password to confirm."
       />
     </>
-  );
+  )
 }

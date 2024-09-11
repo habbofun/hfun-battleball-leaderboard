@@ -1,0 +1,29 @@
+import { RegisterFormModal } from '@/components/auth/register/register-form-modal'
+
+import { FormFooter } from '@/components/auth/register/register-form-footer'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+
+
+export default function DialogDemo() {
+  return (
+    <Dialog open={true} isRouterBack >
+      <DialogContent className="sm:max-w-[425px]" >
+        <DialogHeader className="space-y-1 text-center w-full flex justify-center">
+          <DialogTitle className="text-2xl ">Create an account</DialogTitle>
+          <DialogDescription>Enter your details to register</DialogDescription>
+        </DialogHeader>
+        <RegisterFormModal />
+        <DialogFooter>
+          <FormFooter />
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
