@@ -10,6 +10,8 @@ import { Mail } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { ForgotFormFields } from '@/components/auth/forgot/forgot-form-fields';
+import { FormFooter } from '@/components/auth/forgot/forgot-form-footer';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -89,39 +91,7 @@ export function ForgotPasswordForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Mail className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="pl-8"
-                        {...field}
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <PasswordInput
-              control={form.control}
-              name="newPassword"
-              label="New Password"
-              description="Enter your new password"
-            />
-            <PasswordInput
-              control={form.control}
-              name="confirmPassword"
-              label="Confirm New Password"
-              description="Confirm your new password"
-            />
+            <ForgotFormFields control={form.control} />
             <Button type="submit" className="w-full" disabled={isEmailSent}>
               Reset Password
             </Button>
@@ -151,15 +121,7 @@ export function ForgotPasswordForm() {
         )}
       </CardContent>
       <CardFooter>
-        <div className="text-sm text-muted-foreground text-center w-full">
-          Remember your password?{' '}
-          <Link
-            href="/sign-in"
-            className="font-medium text-primary hover:underline"
-          >
-            Sign in
-          </Link>
-        </div>
+        <FormFooter />
       </CardFooter>
     </Card>
   );
