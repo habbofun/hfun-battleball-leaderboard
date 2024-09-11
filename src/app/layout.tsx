@@ -1,9 +1,6 @@
 import { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-
 import { Providers } from '@/components/providers/providers';
 import { PageFooter } from '@/components/static/page-footer';
 import { PageHeader } from '@/components/static/page-header';
@@ -27,27 +24,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            fontSans.variable,
-            'font-sans',
-            'flex flex-col min-h-screen overscroll-none',
-          )}
-          suppressHydrationWarning
-        >
-          <Providers>
-            <PageHeader />
-            <main className="flex-grow">{children}</main>
-            <PageFooter />
-          </Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          fontSans.variable,
+          'font-sans',
+          'flex flex-col min-h-screen overscroll-none',
+        )}
+        suppressHydrationWarning
+      >
+        <Providers>
+          <PageHeader />
+          <main className="flex-grow">{children}</main>
+          <PageFooter />
+        </Providers>
+      </body>
+    </html>
   );
 }
