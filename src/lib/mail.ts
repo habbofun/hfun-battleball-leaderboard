@@ -42,7 +42,7 @@ export const sendEmailVerification = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const resetLink = `${process.env.AUTH_URL}/new-password?token=${token}`;
+  const resetLink = `${process.env.AUTH_URL}/api/reset-password?token=${token}`;
   const subject = 'Reset Your Password - HFUN.INFO';
   const content = `
     <h1>Reset Your Password</h1>
@@ -125,6 +125,64 @@ export async function generateAndSendVerificationEmail(
     return {
       success: false,
       error: 'Failed to generate and send verification email',
+    };
+  }
+}
+
+export async function generateAndSendPasswordResetEmail(
+  userId: string,
+  email: string,
+  hashedPassword: string,
+) {
+  try {
+    const existingToken = await db.passwordResetToken.findFirst({
+      where: {
+        userId: userId,
+      },
+    });
+
+    const hasOneMinutePassed =
+      existingToken && existingToken.updatedAt > new Date(Date.now() - 60000);
+
+    if (existingToken && hasOneMinutePassed) {
+      return {
+        success: false,
+        error: `Please wait ${Math.floor((existingToken.updatedAt.getTime() + 60000 - Date.now()) / 1000)} seconds before resending`,
+      };
+    }
+
+    if (existingToken) {
+      await db.passwordResetToken.delete({
+        where: {
+          userId: userId,
+          token: existingToken.token,
+        },
+      });
+    }
+
+    const passwordResetToken = await generateNumericToken(6);
+
+    await db.passwordResetToken.create({
+      data: {
+        userId,
+        token: passwordResetToken,
+        expiresAt: new Date(Date.now() + TOKEN_TTL),
+      },
+    });
+
+    const token = jwt.sign(
+      { email, code: passwordResetToken, userId, hashedPassword },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: '5m',
+      },
+    );
+
+    return await sendPasswordResetEmail(email, token);
+  } catch (error) {
+    return {
+      success: false,
+      error: 'Failed to generate and send password reset email',
     };
   }
 }

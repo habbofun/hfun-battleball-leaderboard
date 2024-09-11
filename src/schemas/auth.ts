@@ -30,3 +30,11 @@ export const loginSchema = object({
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;
+
+export const forgotPasswordSchema = object({
+  email: string({ required_error: 'Email is required' })
+    .min(1, 'Email is required')
+    .email('Invalid email'),
+});
+
+export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
