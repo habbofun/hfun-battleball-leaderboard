@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import { Menu } from 'lucide-react';
 
-import { UserAuthButton } from '@/components/auth/user-auth-button';
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
 import { PageHeaderSkeleton } from '@/components/static/page-header-skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -42,7 +41,6 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
-            <UserAuthButton />
           </div>
         </div>
       </header>
