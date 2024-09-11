@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
@@ -20,10 +21,13 @@ import {
 } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
 import { type LoginSchema, loginSchema } from '@/schemas/auth';
+import { sendVerificationEmail } from '@/server/actions/auth/send-verification-email/send-verification-email';
 import { signIn } from '@/server/actions/auth/sign-in/sign-in';
 
 export function LoginForm() {
   const router = useRouter();
+  const [isEmailNotVerified, setIsEmailNotVerified] = useState(false);
+  const [email, setEmail] = useState('');
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -33,12 +37,25 @@ export function LoginForm() {
     const response = await signIn(values);
 
     if (!response.success && response.error) {
+      if (response.error === 'Email not verified') {
+        setIsEmailNotVerified(true);
+        setEmail(values.email);
+      }
       toast.error(response.error);
       return;
     }
 
     toast.success('Logged in successfully');
     router.push('/');
+  };
+
+  const handleSendVerificationEmail = async () => {
+    const response = await sendVerificationEmail(email);
+    if (response.success) {
+      toast.success('Verification email sent successfully');
+    } else {
+      toast.error(response.error);
+    }
   };
 
   return (
@@ -56,6 +73,16 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
+        {isEmailNotVerified && (
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full mt-4"
+            onClick={handleSendVerificationEmail}
+          >
+            Send Verification Email
+          </Button>
+        )}
       </CardContent>
       <CardFooter>
         <FormFooter />
