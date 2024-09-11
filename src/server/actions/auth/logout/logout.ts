@@ -37,13 +37,13 @@ export async function logout() {
       sessionCookie.value,
       sessionCookie.attributes,
     );
-
-    return redirect('/');
   } catch (error) {
     console.log('Error: ', error);
     return {
       success: false,
       error: 'Failed to logout',
     };
+  } finally {
+    return redirect('/');
   }
 }
