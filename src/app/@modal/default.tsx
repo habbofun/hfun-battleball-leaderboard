@@ -1,4 +1,3 @@
+const Default = () => null;
 
-const Default=()=> null
-
-export default Default
+export default Default;

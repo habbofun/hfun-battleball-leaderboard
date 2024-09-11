@@ -1,6 +1,5 @@
-import { RegisterFormModal } from '@/components/auth/register/register-form-modal'
-
-import { FormFooter } from '@/components/auth/register/register-form-footer'
+import { FormFooter } from '@/components/auth/register/register-form-footer';
+import { RegisterFormModal } from '@/components/auth/register/register-form-modal';
 import {
   Dialog,
   DialogContent,
@@ -8,13 +7,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-
+} from '@/components/ui/dialog';
 
 export default function DialogDemo() {
   return (
-    <Dialog open={true} isRouterBack >
-      <DialogContent className="sm:max-w-[425px]" >
+    <Dialog open={true} isRouterBack>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="space-y-1 text-center w-full flex justify-center">
           <DialogTitle className="text-2xl ">Create an account</DialogTitle>
           <DialogDescription>Enter your details to register</DialogDescription>
@@ -25,5 +23,5 @@ export default function DialogDemo() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
