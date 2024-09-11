@@ -17,39 +17,41 @@ export function PageHeader() {
   return (
     <Suspense fallback={<PageHeaderSkeleton />}>
       <header className="sticky top-0 z-50 w-full">
-        <div className="container mx-auto px-4 py-3 flex flex-col items-center">
-          <div className="w-full flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-2">
-                <TextEffect
-                  per="char"
-                  preset="slide"
-                  className="text-2xl font-bold"
-                >
-                  HFUN
-                </TextEffect>
-                <Badge variant="default">Beta</Badge>
-              </Link>
+        <div className="bg-background/70 backdrop-blur-sm">
+          <div className="container mx-auto px-4 py-3 flex flex-col items-center">
+            <div className="w-full flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Link href="/" className="flex items-center space-x-2">
+                  <TextEffect
+                    per="char"
+                    preset="slide"
+                    className="text-2xl font-bold"
+                  >
+                    HFUN
+                  </TextEffect>
+                  <Badge variant="default">Beta</Badge>
+                </Link>
+              </div>
+              <div className="flex items-center space-x-4">
+                <UserButton />
+                <ModeToggle />
+                <NavigationDrawer>
+                  <DrawerTrigger asChild>
+                    <Button variant="outline" size="icon" className="md:hidden">
+                      <Menu className="h-4 w-4" />
+                      <span className="sr-only">Open menu</span>
+                    </Button>
+                  </DrawerTrigger>
+                </NavigationDrawer>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <UserButton />
-              <ModeToggle />
-              <NavigationDrawer>
-                <DrawerTrigger asChild>
-                  <Button variant="outline" size="icon" className="md:hidden">
-                    <Menu className="h-4 w-4" />
-                    <span className="sr-only">Open menu</span>
-                  </Button>
-                </DrawerTrigger>
-              </NavigationDrawer>
-            </div>
+            <div
+              className="w-11/12 mt-3 border-b rounded-full"
+              style={{
+                borderColor: 'hsl(var(--border))',
+              }}
+            />
           </div>
-          <div
-            className="w-11/12 mt-3 border-b rounded-full"
-            style={{
-              borderColor: 'hsl(var(--border))',
-            }}
-          />
         </div>
       </header>
     </Suspense>
