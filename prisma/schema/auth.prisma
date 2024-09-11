@@ -9,7 +9,7 @@ model User {
     password String
     email    String @unique
 
-    emailVerifiedAt DateTime?
+    emailVerified Boolean @default(false)
 
     role Role @default(user)
 
