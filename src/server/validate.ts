@@ -38,6 +38,7 @@ export const validateRequest = cache(
         );
       }
     } catch {}
+
     return result;
   },
 );
