@@ -77,11 +77,29 @@ export async function generateAndSendVerificationEmail(
   email: string,
 ) {
   try {
-    await db.emailVerificationToken.deleteMany({
+    const existingCode = await db.emailVerificationToken.findFirst({
       where: {
         userId: userId,
       },
     });
+
+    const hasOneMinutePassed =
+      existingCode && existingCode.updatedAt > new Date(Date.now() - 60000);
+
+    if (existingCode && hasOneMinutePassed) {
+      return {
+        success: false,
+        error: `Please wait ${Math.floor((existingCode.updatedAt.getTime() + 60000 - Date.now()) / 1000)} seconds before resending`,
+      };
+    }
+
+    if (existingCode) {
+      await db.emailVerificationToken.delete({
+        where: {
+          id: existingCode.id,
+        },
+      });
+    }
 
     const verificationToken = await generateNumericToken(6);
 
@@ -101,8 +119,6 @@ export async function generateAndSendVerificationEmail(
         expiresIn: '5m',
       },
     );
-
-    const verificationLink = `${process.env.AUTH_URL}/api/verify-email?token=${token}`;
 
     return await sendEmailVerification(email, token);
   } catch (error) {
