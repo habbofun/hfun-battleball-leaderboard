@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
 import { type LoginSchema, loginSchema } from '@/schemas/auth';
-import { signIn } from '@/server/actions/auth/sign-in';
+import { signIn } from '@/server/actions/auth/sign-in/sign-in';
 
 export function LoginForm() {
   const router = useRouter();

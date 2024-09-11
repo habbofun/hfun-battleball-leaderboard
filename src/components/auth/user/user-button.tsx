@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { logout } from '@/server/actions/auth/logout';
+import { logout } from '@/server/actions/auth/logout/logout';
 import { validateRequest } from '@/server/validate';
 
 export default async function UserButton() {
