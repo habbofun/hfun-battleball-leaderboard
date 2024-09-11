@@ -13,3 +13,7 @@ export const TOKEN_TTL = 1000 * 60 * 5; // 5 min
 export const generateRandomToken = async (length: number) => {
   return generateRandomString(length, alphabet('0-9', 'a-z', 'A-Z'));
 };
+
+export const generateNumericToken = async (length: number) => {
+  return generateRandomString(length, alphabet('0-9'));
+};
