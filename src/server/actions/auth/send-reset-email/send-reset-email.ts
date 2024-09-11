@@ -6,7 +6,7 @@ import db from '@/lib/db';
 import { hashSettings } from '@/lib/hash';
 import { generateAndSendPasswordResetEmail } from '@/lib/mail';
 
-export async function sendResetEmail(email: string) {
+export async function sendResetEmail(email: string, newPassword: string) {
   try {
     const user = await db.user.findUnique({
       where: { email },
@@ -16,8 +16,7 @@ export async function sendResetEmail(email: string) {
       return { success: false, error: 'User not found' };
     }
 
-    const tempPassword = Math.random().toString(36).slice(-8);
-    const hashedPassword = await hash(tempPassword, hashSettings);
+    const hashedPassword = await hash(newPassword, hashSettings);
 
     return await generateAndSendPasswordResetEmail(
       user.id,

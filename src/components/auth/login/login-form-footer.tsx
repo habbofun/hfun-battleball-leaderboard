@@ -1,9 +1,9 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export function FormFooter() {
   return (
     <div className="flex flex-col items-center space-y-2 text-sm text-muted-foreground w-full">
-      <Link href="/forgot-password" className="hover:underline">
+      <Link href="/forgot" className="hover:underline">
         Forgot password?
       </Link>
       <div>
@@ -17,5 +17,5 @@ export function FormFooter() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

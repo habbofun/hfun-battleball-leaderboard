@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { useCountdown } from 'usehooks-ts';
 
 import { LoginFormFields } from '@/components/auth/login/login-form-fields';
 import { FormFooter } from '@/components/auth/login/login-form-footer';

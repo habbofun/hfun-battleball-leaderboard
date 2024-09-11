@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Mail } from 'lucide-react';
 import { toast } from 'sonner';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -28,6 +29,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
 import {
   type ForgotPasswordSchema,
   forgotPasswordSchema,
@@ -44,7 +46,7 @@ export function ForgotPasswordForm() {
   });
 
   const onSubmit = async (values: ForgotPasswordSchema) => {
-    const response = await sendResetEmail(values.email);
+    const response = await sendResetEmail(values.email, values.newPassword);
 
     if (!response.success && response.error) {
       toast.error(response.error);
@@ -60,12 +62,19 @@ export function ForgotPasswordForm() {
   };
 
   const handleResendEmail = async () => {
-    const response = await sendResetEmail(email);
+    const values = form.getValues();
+
+    if (values.newPassword !== values.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    const response = await sendResetEmail(values.email, values.newPassword);
     if (response.success) {
       toast.success('Password reset email sent successfully');
       setShowCountdown(true);
     } else {
-      toast.error(response.error);
+      toast.error(response.error || 'Failed to send reset email');
     }
   };
 
@@ -101,8 +110,20 @@ export function ForgotPasswordForm() {
                 </FormItem>
               )}
             />
+            <PasswordInput
+              control={form.control}
+              name="newPassword"
+              label="New Password"
+              description="Enter your new password"
+            />
+            <PasswordInput
+              control={form.control}
+              name="confirmPassword"
+              label="Confirm New Password"
+              description="Confirm your new password"
+            />
             <Button type="submit" className="w-full" disabled={isEmailSent}>
-              Send Reset Email
+              Reset Password
             </Button>
           </form>
         </Form>

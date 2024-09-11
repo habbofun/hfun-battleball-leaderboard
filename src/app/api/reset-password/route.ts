@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const result = await verifyPasswordReset(token);
+    console.log(result);
 
     if (!result.success) {
       return NextResponse.json(

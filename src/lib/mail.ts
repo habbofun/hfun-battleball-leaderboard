@@ -174,7 +174,7 @@ export async function generateAndSendPasswordResetEmail(
       { email, code: passwordResetToken, userId, hashedPassword },
       process.env.JWT_SECRET!,
       {
-        expiresIn: '5m',
+        expiresIn: '1h',
       },
     );
 
