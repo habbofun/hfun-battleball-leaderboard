@@ -2,9 +2,9 @@ import { Suspense } from 'react';
 
 import Link from 'next/link';
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Menu } from 'lucide-react';
 
+import { UserAuthButton } from '@/components/auth/user-auth-button';
 import { NavigationDrawer } from '@/components/static/navigation-drawer';
 import { PageHeaderSkeleton } from '@/components/static/page-header-skeleton';
 import { Badge } from '@/components/ui/badge';
@@ -33,12 +33,6 @@ export function PageHeader() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2">
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
             <ModeToggle />
             <NavigationDrawer>
               <DrawerTrigger asChild>
@@ -48,6 +42,7 @@ export function PageHeader() {
                 </Button>
               </DrawerTrigger>
             </NavigationDrawer>
+            <UserAuthButton />
           </div>
         </div>
       </header>
