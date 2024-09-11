@@ -46,6 +46,13 @@ export async function signIn(values: LoginSchema) {
       };
     }
 
+    if (!user.emailVerified) {
+      return {
+        success: false,
+        error: 'Email not verified',
+      };
+    }
+
     const session = await lucia.createSession(user.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
 

@@ -1,13 +1,11 @@
 'use server';
 
-import { cookies } from 'next/headers';
-
 import { hash } from '@node-rs/argon2';
 
 import db from '@/lib/db';
 import { hashSettings } from '@/lib/hash';
+import { generateAndSendVerificationEmail } from '@/lib/mail';
 import { type RegisterSchema, registerSchema } from '@/schemas/auth';
-import { lucia } from '@/server/lucia';
 
 export async function createAccount(values: RegisterSchema) {
   try {
@@ -49,14 +47,7 @@ export async function createAccount(values: RegisterSchema) {
       },
     });
 
-    const session = await lucia.createSession(user.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes,
-    );
+    await generateAndSendVerificationEmail(user.id, data.email);
 
     return { success: true };
   } catch (error) {
