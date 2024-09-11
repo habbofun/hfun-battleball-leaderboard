@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 export function FormFooter() {
   return (
@@ -8,10 +8,11 @@ export function FormFooter() {
         <Link
           href="/sign-in"
           className="font-medium text-primary hover:underline"
+          replace
         >
           Sign in
         </Link>
       </div>
     </div>
-  );
+  )
 }
