@@ -38,7 +38,6 @@ export async function logout() {
       sessionCookie.attributes,
     );
   } catch (error) {
-    console.log('Error: ', error);
     return {
       success: false,
       error: 'Failed to logout',

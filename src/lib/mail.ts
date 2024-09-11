@@ -19,7 +19,6 @@ export const sendEmail = async (
       html: content,
     });
 
-    console.log('Email sent:', data);
     return { success: true, data };
   } catch (error) {
     return { success: false, error: 'An unexpected error occurred' };
@@ -104,11 +103,9 @@ export async function generateAndSendVerificationEmail(
     );
 
     const verificationLink = `${process.env.AUTH_URL}/api/verify-email?token=${token}`;
-    console.log('Email verification link:', verificationLink);
 
     return await sendEmailVerification(email, token);
   } catch (error) {
-    console.error('Error generating and sending verification email:', error);
     return {
       success: false,
       error: 'Failed to generate and send verification email',

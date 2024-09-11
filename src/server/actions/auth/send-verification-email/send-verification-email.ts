@@ -19,7 +19,6 @@ export async function sendVerificationEmail(email: string) {
 
     return await generateAndSendVerificationEmail(user.id, email);
   } catch (error) {
-    console.error('Error sending verification email:', error);
     return { success: false, error: 'Failed to send verification email' };
   }
 }

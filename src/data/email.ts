@@ -13,8 +13,6 @@ export async function verifyEmail(token: string) {
       userId: string;
     };
 
-    console.log('Decoded token:', decoded);
-
     const emailVerificationToken = await db.emailVerificationToken.findFirst({
       where: {
         code: decoded.code,
@@ -52,7 +50,6 @@ export async function verifyEmail(token: string) {
 
     return { success: true, message: 'Email verified successfully' };
   } catch (error) {
-    console.log('Error verifying email:', error);
     return { success: false, message: 'expired or invalid' };
   }
 }
