@@ -5,7 +5,7 @@ import { logout } from '@/server/actions/auth/logout/logout';
 import { validateRequest } from '@/server/validate';
 
 export default async function UserButton() {
-  const user = await validateRequest();
+  const { user } = await validateRequest();
 
   return (
     <div className="flex items-center space-x-4">
