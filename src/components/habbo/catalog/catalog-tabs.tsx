@@ -22,6 +22,12 @@ export function CatalogTabs({ catalogData }: CatalogTabsProps) {
 
   useEffect(() => {
     const items = catalogData[selectedCategory];
+
+    if (!items) {
+      setFilteredItems([]);
+      return;
+    }
+
     const filtered = items.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
