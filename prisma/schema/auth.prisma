@@ -1,0 +1,45 @@
+enum Role {
+    admin
+    user
+}
+
+model User {
+    id       String @id @default(cuid())
+    username String @unique
+    password String
+    email    String @unique
+
+    emailVerified Boolean @default(false)
+
+    role Role @default(user)
+
+    sessions               Session[]
+    emailVerificationToken EmailVerificationToken[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Session {
+    id     String @id
+    userId String
+
+    createdAt DateTime @default(now())
+    expiresAt DateTime
+    updatedAt DateTime @updatedAt
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model EmailVerificationToken {
+    id     String @id @default(cuid())
+    code   String
+    userId String
+    email  String
+
+    createdAt DateTime @default(now())
+    expiresAt DateTime
+    updatedAt DateTime @updatedAt
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
