@@ -16,24 +16,25 @@ import { ModeToggle } from '@/components/ui/theme-switcher';
 export function PageHeader() {
   return (
     <Suspense fallback={<PageHeaderSkeleton />}>
-      <header className="sticky top-0 z-50 w-full p-4">
+      <header className="sticky top-0 z-50 w-full p-2 sm:p-4">
         <div className="container mx-auto">
           <div className="bg-background/70 backdrop-blur-sm rounded-lg shadow-lg">
-            <div className="px-4 py-3 flex flex-col items-center">
-              <div className="w-full flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Link href="/" className="flex items-center space-x-2">
-                    <TextEffect
-                      per="char"
-                      preset="slide"
-                      className="text-2xl font-bold"
-                    >
-                      HFUN
-                    </TextEffect>
-                    <Badge variant="default">Beta</Badge>
-                  </Link>
-                </div>
-                <div className="flex items-center space-x-4">
+            <div className="px-2 sm:px-4 py-3">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+                <Link
+                  href="/"
+                  className="flex items-center space-x-2 mb-2 sm:mb-0"
+                >
+                  <TextEffect
+                    per="char"
+                    preset="slide"
+                    className="text-xl sm:text-2xl font-bold"
+                  >
+                    HFUN
+                  </TextEffect>
+                  <Badge variant="default">Beta</Badge>
+                </Link>
+                <div className="flex items-center space-x-2">
                   <UserButton />
                   <ModeToggle />
                   <NavigationDrawer>
@@ -41,21 +42,15 @@ export function PageHeader() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="md:hidden"
+                        className="sm:hidden"
+                        aria-label="Open navigation menu"
                       >
                         <Menu className="h-4 w-4" />
-                        <span className="sr-only">Open menu</span>
                       </Button>
                     </DrawerTrigger>
                   </NavigationDrawer>
                 </div>
               </div>
-              <div
-                className="w-11/12 mt-3 border-b rounded-full"
-                style={{
-                  borderColor: 'hsl(var(--border))',
-                }}
-              />
             </div>
           </div>
         </div>
