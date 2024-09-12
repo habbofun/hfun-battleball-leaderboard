@@ -186,3 +186,59 @@ export async function generateAndSendPasswordResetEmail(
     };
   }
 }
+
+export async function generateAndSendTwoFactorEmail(
+  userId: string,
+  email: string,
+) {
+  try {
+    const existingToken = await db.twoFactorToken.findFirst({
+      where: {
+        userId: userId,
+      },
+    });
+
+    const hasOneMinutePassed =
+      existingToken && existingToken.updatedAt > new Date(Date.now() - 60000);
+
+    if (existingToken && hasOneMinutePassed) {
+      return {
+        success: false,
+        error: `Please wait ${Math.floor((existingToken.updatedAt.getTime() + 60000 - Date.now()) / 1000)} seconds before resending`,
+      };
+    }
+
+    if (existingToken) {
+      await db.twoFactorToken.delete({
+        where: {
+          id: existingToken.id,
+        },
+      });
+    }
+
+    const twoFactorToken = await generateNumericToken(6);
+
+    await db.twoFactorToken.create({
+      data: {
+        userId,
+        token: twoFactorToken,
+        expiresAt: new Date(Date.now() + TOKEN_TTL),
+      },
+    });
+
+    const token = jwt.sign(
+      { email, code: twoFactorToken, userId },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: '5m',
+      },
+    );
+
+    return await sendTwoFactorEmail(email, token);
+  } catch (error) {
+    return {
+      success: false,
+      error: 'Failed to generate and send two factor email',
+    };
+  }
+}
