@@ -4,7 +4,7 @@ import { hash } from '@node-rs/argon2';
 
 import db from '@/lib/db';
 import { hashSettings } from '@/lib/hash';
-import { generateAndSendVerificationEmail } from '@/lib/mail';
+import { generateAndSendVerificationEmail } from '@/lib/tokens';
 import { type RegisterSchema, registerSchema } from '@/schemas/auth';
 
 export async function createAccount(values: RegisterSchema) {

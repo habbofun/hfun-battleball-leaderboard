@@ -1,7 +1,7 @@
 'use server';
 
 import db from '@/lib/db';
-import { generateAndSendVerificationEmail } from '@/lib/mail';
+import { generateAndSendVerificationEmail } from '@/lib/tokens';
 
 export async function sendVerificationEmail(email: string) {
   try {

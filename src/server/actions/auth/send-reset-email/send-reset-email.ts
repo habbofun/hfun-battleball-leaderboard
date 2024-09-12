@@ -4,7 +4,7 @@ import { hash } from '@node-rs/argon2';
 
 import db from '@/lib/db';
 import { hashSettings } from '@/lib/hash';
-import { generateAndSendPasswordResetEmail } from '@/lib/mail';
+import { generateAndSendPasswordResetEmail } from '@/lib/tokens';
 
 export async function sendResetEmail(email: string, newPassword: string) {
   try {
