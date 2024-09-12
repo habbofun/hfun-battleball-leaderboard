@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 import { Menu } from 'lucide-react';
 
