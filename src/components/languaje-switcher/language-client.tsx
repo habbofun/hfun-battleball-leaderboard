@@ -1,17 +1,14 @@
 'use client'
-import * as React from 'react'
+import { Children, cloneElement } from 'react'
 import { ChevronDownIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-export function LanguageClient({ children, locale }: { children: React.ReactNode, locale: string }) {
-
-
+import type { ReactNode, ReactElement } from 'react'
+export function LanguageClient({ children, locale }: { children: Iterable<ReactElement>, locale: string }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
