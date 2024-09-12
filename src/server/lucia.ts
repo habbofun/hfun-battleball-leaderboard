@@ -8,7 +8,7 @@ const adapter = new PrismaAdapter(db.session, db.user);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
-    name: 'hfun-battleball-leaderboard-session',
+    name: 'hfun-info-session',
     expires: true,
     attributes: {
       // set to `true` when using HTTPS
