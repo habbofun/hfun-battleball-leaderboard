@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 
 export default function HomePage() {
   const t = useTranslations('navigation')
+
   return (
     <div className="flex flex-col flex-1 bg-background text-foreground">
       <main className="flex-grow flex flex-col justify-center items-center p-4">

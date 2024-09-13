@@ -4,8 +4,7 @@ import { defineRouting } from 'next-intl/routing'
 export const routing = defineRouting({
     locales: ['en', 'es'],
     defaultLocale: 'en',
-    localePrefix: 'as-needed'
-    ,
+    localePrefix: 'as-needed',
     pathnames: {
         '/': '/',
         "/sign-in": "/sign-in",
