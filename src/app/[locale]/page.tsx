@@ -2,6 +2,7 @@ import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { useTranslations } from 'next-intl'
+
 export default function HomePage() {
   const t = useTranslations('navigation')
   return (
