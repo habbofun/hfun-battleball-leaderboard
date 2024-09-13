@@ -29,9 +29,7 @@ type Props = {
     params: { locale: string }
 }
 
-export function generateStaticParams() {
-    return routing.locales.map((locale) => ({ locale }))
-}
+
 
 export async function generateMetadata({
     params: { locale }
@@ -44,13 +42,14 @@ export async function generateMetadata({
     }
 }
 
+
 export default async function LocaleLayout({
     children,
     modal,
     params: { locale }
 }: Props) {
     // Enable static rendering
-    unstable_setRequestLocale(locale)
+
     // Providing all messages to the client
     // side is the easiest way to get started
     const messages = await getMessages()
