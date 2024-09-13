@@ -1,3 +1,5 @@
+'use server';
+
 import { encodeHex } from 'oslo/encoding';
 import { createTOTPKeyURI } from 'oslo/otp';
 import QRCode from 'qrcode';
