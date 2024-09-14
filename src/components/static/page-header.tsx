@@ -32,8 +32,8 @@ export function PageHeader() {
               </Link>
               <div className="flex items-center space-x-2">
                 <UserButton />
-                <ModeToggle />
                 <LanguageToggle />
+                <ModeToggle />
                 <NavigationDrawer>
                   <DrawerTrigger asChild>
                     <Button

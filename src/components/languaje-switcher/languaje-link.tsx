@@ -6,7 +6,7 @@ import { usePathname } from '@/i18n/routing'
 import { useLocale } from 'next-intl'
 
 
-export default function LanguajeLink({ locale, lng, newLocale }: { locale: Locale, lng: string, newLocale: Locale }) {
+export default function LanguajeLink({ locale, lng }: { locale: Locale, lng: string, newLocale: Locale }) {
     const pathName = usePathname()
     const actlocale = useLocale()
 
