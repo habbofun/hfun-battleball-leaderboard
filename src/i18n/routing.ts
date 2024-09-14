@@ -22,6 +22,10 @@ export const routing = defineRouting({
       en: '/finder',
       es: '/buscador',
     },
+    '/staff': {
+      en: '/staff',
+      es: '/staff',
+    },
     '/redirect': '/redirect',
   },
 });
