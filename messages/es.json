@@ -8,10 +8,10 @@
     "catalog": "Catálogo",
     "leaderboard": "Clasificación",
     "finder": "Buscador",
-    "message": "Navega entre páginas con el menú de inferior"
+    "message": "Navega entre páginas con el menú"
   },
   "NotFoundPage": {
-    "description": " por favor, verifique la barra de direcciones del navegador o utilice la navegación para ir a una página conocida.",
+    "description": " por favor, verifique la barra de dirección del navegador o utilice la navegación para ir a una página conocida.",
     "title": "Página no encontrada"
   }
 }

@@ -8,7 +8,7 @@
     "catalog": "Catalog",
     "leaderboard": "Leaderboard",
     "finder": "Finder",
-    "message": "Browse the page with the menu below"
+    "message": "Browse the page with the menu"
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
