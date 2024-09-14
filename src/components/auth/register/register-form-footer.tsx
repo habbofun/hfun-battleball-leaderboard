@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export function FormFooter() {
   return (
@@ -14,5 +14,5 @@ export function FormFooter() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

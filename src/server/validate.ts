@@ -3,6 +3,7 @@ import { cache } from 'react';
 import { cookies } from 'next/headers';
 
 import type { Session, User } from 'lucia';
+
 import { lucia } from '@/server/lucia';
 
 export const validateRequest = cache(
@@ -36,7 +37,7 @@ export const validateRequest = cache(
           sessionCookie.attributes,
         );
       }
-    } catch { }
+    } catch {}
 
     return result;
   },

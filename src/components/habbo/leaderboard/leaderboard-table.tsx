@@ -11,15 +11,27 @@ import {
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 interface LeaderboardTableProps<TData, TValue> {
   data: TData[];
   columns: ColumnDef<TData, TValue>[];
 }
 
-export function LeaderboardTable<TData, TValue>({ data, columns }: LeaderboardTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+export function LeaderboardTable<TData, TValue>({
+  data,
+  columns,
+}: LeaderboardTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  );
 
   const table = useReactTable({
     data,
@@ -41,8 +53,12 @@ export function LeaderboardTable<TData, TValue>({ data, columns }: LeaderboardTa
         <Input
           id="username-filter"
           placeholder="Enter username to filter"
-          value={(table.getColumn('username')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('username')?.setFilterValue(event.target.value)}
+          value={
+            (table.getColumn('username')?.getFilterValue() as string) ?? ''
+          }
+          onChange={(event) =>
+            table.getColumn('username')?.setFilterValue(event.target.value)
+          }
           className="max-w-sm"
         />
       </div>
@@ -53,7 +69,12 @@ export function LeaderboardTable<TData, TValue>({ data, columns }: LeaderboardTa
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                   </TableHead>
                 ))}
               </TableRow>
@@ -62,15 +83,26 @@ export function LeaderboardTable<TData, TValue>({ data, columns }: LeaderboardTa
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>

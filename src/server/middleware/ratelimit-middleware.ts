@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { ratelimit } from '@/lib/ratelimiter';
 
-export async function withRateLimit(req: NextRequest, handler: (req: NextRequest) => Promise<NextResponse>) {
+export async function withRateLimit(
+  req: NextRequest,
+  handler: (req: NextRequest) => Promise<NextResponse>,
+) {
   const ip = req.ip ?? '127.0.0.1';
   const { success } = await ratelimit.limit(ip);
 

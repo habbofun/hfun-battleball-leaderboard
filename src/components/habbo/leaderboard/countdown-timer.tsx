@@ -3,14 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { CountdownTimerSkeleton } from '@/components/habbo/leaderboard/countdown-timer-skeleton';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface CountdownTimerProps {
   initialSeconds: number;
   totalSeconds: number;
 }
 
-export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerProps) {
+export function CountdownTimer({
+  initialSeconds,
+  totalSeconds,
+}: CountdownTimerProps) {
   const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
 
   useEffect(() => {
@@ -39,13 +47,19 @@ export function CountdownTimer({ initialSeconds, totalSeconds }: CountdownTimerP
           <div className="text-center mb-4">
             <p className="text-s text-muted-foreground">Queue updates in:</p>
             <p className="text-2xl font-bold">
-              {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+              {minutes.toString().padStart(2, '0')}:
+              {seconds.toString().padStart(2, '0')}
             </p>
-            <p className="text-xs text-muted-foreground">Hover to see more info.</p>
+            <p className="text-xs text-muted-foreground">
+              Hover to see more info.
+            </p>
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          <p>When this timer finishes, the top 45 users will be added to the queue to be updated.</p>
+          <p>
+            When this timer finishes, the top 45 users will be added to the
+            queue to be updated.
+          </p>
           <p>
             Check the queue order and progress in our{' '}
             <a

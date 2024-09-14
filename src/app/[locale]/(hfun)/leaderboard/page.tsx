@@ -4,9 +4,12 @@ import dynamic from 'next/dynamic';
 
 import { LeaderboardSkeleton } from '@/components/habbo/leaderboard/leaderboard-skeleton';
 
-const LeaderboardContent = dynamic(() => import('@/components/habbo/leaderboard/leaderboard-content'), {
-  loading: () => <LeaderboardSkeleton />,
-});
+const LeaderboardContent = dynamic(
+  () => import('@/components/habbo/leaderboard/leaderboard-content'),
+  {
+    loading: () => <LeaderboardSkeleton />,
+  },
+);
 
 export default function LeaderboardPage() {
   return (
