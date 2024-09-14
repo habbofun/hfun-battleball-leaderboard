@@ -78,12 +78,12 @@ export function StaffList() {
                 )}
                 {group}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {groupedStaff[group].map((member) => (
                   <Card key={member.id} className="overflow-hidden">
                     <CardContent className="p-3">
                       <div className="flex items-center space-x-3">
-                        <div className="relative w-16 h-20 flex-shrink-0">
+                        <div className="relative w-20 h-24 flex-shrink-0">
                           <Image
                             src={member.imageUrl}
                             alt={member.name}
@@ -94,7 +94,7 @@ export function StaffList() {
                         </div>
                         <div className="flex-grow min-w-0">
                           <div className="flex items-center justify-between mb-1">
-                            <h3 className="font-bold text-sm truncate">
+                            <h3 className="font-semibold text-base truncate">
                               {member.name}
                             </h3>
                             <Badge
@@ -110,7 +110,7 @@ export function StaffList() {
                                 : 'Offline'}
                             </Badge>
                           </div>
-                          <div className="flex flex-col space-y-1">
+                          <div className="flex flex-col space-y-2">
                             <div className="flex items-center text-xs text-muted-foreground">
                               <ClockIcon className="w-3 h-3 mr-1 flex-shrink-0" />
                               <span className="truncate">
