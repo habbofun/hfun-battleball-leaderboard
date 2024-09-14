@@ -34,8 +34,8 @@ export const generatetwoFactorTokenAndUri = async (sessionId: string) => {
 
     return {
       success: true,
-      uri,
-      qrCode,
+      uri: uri,
+      qrCode: qrCode,
     };
   } catch (error) {
     return {
