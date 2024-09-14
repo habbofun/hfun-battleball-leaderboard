@@ -84,91 +84,93 @@ export function StaffManagement() {
   };
 
   return (
-    <div className="mt-8 flex flex-col items-center">
-      <div className="w-full max-w-4xl">
-        <h2 className="text-xl font-bold mb-4">Staff Management</h2>
-        <div className="flex space-x-4">
-          <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
-            <DialogTrigger asChild>
-              <Button>Add Staff Member</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add New Staff Member</DialogTitle>
-              </DialogHeader>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Habbo Username</FormLabel>
-                        <FormControl>
-                          <Input {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="hobbaGroup"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Hobba Group</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a group" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value={HobbaGroup.GOLD}>
-                              Gold
-                            </SelectItem>
-                            <SelectItem value={HobbaGroup.SILVER}>
-                              Silver
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit">Add Staff Member</Button>
-                </form>
-              </Form>
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={isRemoveModalOpen} onOpenChange={setIsRemoveModalOpen}>
-            <DialogTrigger asChild>
-              <Button variant="destructive">Remove Staff Member</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Remove Staff Member</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4">
-                <Input
-                  placeholder="Enter staff member ID"
-                  value={staffIdToRemove}
-                  onChange={(e) => setStaffIdToRemove(e.target.value)}
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">Staff Management</h2>
+      <div className="flex space-x-4">
+        <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+          <DialogTrigger asChild>
+            <Button>Add Staff Member</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add New Staff Member</DialogTitle>
+            </DialogHeader>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Habbo Username</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                <Button onClick={handleRemoveStaff} variant="destructive">
-                  Remove Staff Member
+                <FormField
+                  control={form.control}
+                  name="hobbaGroup"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Hobba Group</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a group" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value={HobbaGroup.GOLD}>Gold</SelectItem>
+                          <SelectItem value={HobbaGroup.SILVER}>
+                            Silver
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full">
+                  Add Staff Member
                 </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
-        </div>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={isRemoveModalOpen} onOpenChange={setIsRemoveModalOpen}>
+          <DialogTrigger asChild>
+            <Button variant="destructive">Remove Staff Member</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Remove Staff Member</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <Input
+                placeholder="Enter staff member ID"
+                value={staffIdToRemove}
+                onChange={(e) => setStaffIdToRemove(e.target.value)}
+              />
+              <Button
+                onClick={handleRemoveStaff}
+                variant="destructive"
+                className="w-full"
+              >
+                Remove Staff Member
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
