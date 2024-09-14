@@ -11,9 +11,6 @@ export default async function UserButton() {
     <div className="flex items-center space-x-4">
       {user && (
         <>
-          <Link href="/profile/settings">
-            <Button variant="ghost">Settings</Button>
-          </Link>
           <form action={logout}>
             <Button type="submit" variant="ghost">
               Logout
