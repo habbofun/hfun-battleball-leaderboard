@@ -13,11 +13,19 @@ import {
 interface CountdownTimerProps {
   initialSeconds: number;
   totalSeconds: number;
+  onComplete?: () => void;
+  label: string;
+  tooltipContent: React.ReactNode;
+  toastMessage?: string;
 }
 
 export function CountdownTimer({
   initialSeconds,
   totalSeconds,
+  onComplete,
+  label,
+  tooltipContent,
+  toastMessage = 'Timer completed!',
 }: CountdownTimerProps) {
   const [secondsLeft, setSecondsLeft] = useState(initialSeconds);
 
@@ -25,7 +33,8 @@ export function CountdownTimer({
     const timer = setInterval(() => {
       setSecondsLeft((prevSeconds) => {
         if (prevSeconds <= 0) {
-          toast.info('Queue updated!');
+          toast.info(toastMessage);
+          onComplete?.();
           return totalSeconds;
         }
         return prevSeconds - 1;
@@ -33,7 +42,7 @@ export function CountdownTimer({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [totalSeconds]);
+  }, [totalSeconds, onComplete, toastMessage]);
 
   const minutes = Math.floor(secondsLeft / 60);
   const seconds = secondsLeft % 60;
@@ -45,7 +54,7 @@ export function CountdownTimer({
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="text-center mb-4">
-            <p className="text-s text-muted-foreground">Queue updates in:</p>
+            <p className="text-s text-muted-foreground">{label}</p>
             <p className="text-2xl font-bold">
               {minutes.toString().padStart(2, '0')}:
               {seconds.toString().padStart(2, '0')}
@@ -55,24 +64,7 @@ export function CountdownTimer({
             </p>
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p>
-            When this timer finishes, the top 45 users will be added to the
-            queue to be updated.
-          </p>
-          <p>
-            Check the queue order and progress in our{' '}
-            <a
-              href="https://discord.gg/originses"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              Discord
-            </a>{' '}
-            server panel.
-          </p>
-        </TooltipContent>
+        <TooltipContent>{tooltipContent}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
