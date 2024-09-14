@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
@@ -26,25 +26,25 @@ export default function LeaderboardContent() {
   const [updateInterval, setUpdateInterval] = useState<number | null>(null);
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    const loadLeaderboardData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const data = await fetchLeaderboardData(currentPage, perPage);
-        setLeaderboard(data.leaderboard);
-        setNextUpdateIn(data.nextUpdateIn);
-        setUpdateInterval(data.updateInterval);
-        setTotalPages(data.totalPages);
-      } catch (err) {
-        setError('Error fetching leaderboard data');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadLeaderboardData();
+  const loadLeaderboardData = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await fetchLeaderboardData(currentPage, perPage);
+      setLeaderboard(data.leaderboard);
+      setNextUpdateIn(data.nextUpdateIn);
+      setUpdateInterval(data.updateInterval);
+      setTotalPages(data.totalPages);
+    } catch (err) {
+      setError('Error fetching leaderboard data');
+    } finally {
+      setIsLoading(false);
+    }
   }, [currentPage, perPage]);
+
+  useEffect(() => {
+    loadLeaderboardData();
+  }, [loadLeaderboardData]);
 
   if (isLoading) return <LeaderboardSkeleton />;
   if (error) return <ErrorDisplay message={error} />;
@@ -55,6 +55,29 @@ export default function LeaderboardContent() {
         <CountdownTimer
           initialSeconds={nextUpdateIn}
           totalSeconds={updateInterval}
+          onComplete={loadLeaderboardData}
+          label="Queue updates in:"
+          tooltipContent={
+            <>
+              <p>
+                When this timer finishes, the top 45 users will be added to the
+                queue to be updated.
+              </p>
+              <p>
+                Check the queue order and progress in our{' '}
+                <a
+                  href="https://discord.gg/originses"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  Discord
+                </a>{' '}
+                server panel.
+              </p>
+            </>
+          }
+          toastMessage="Queue updated!"
         />
       )}
       <LeaderboardTable data={leaderboard} columns={columns} />
