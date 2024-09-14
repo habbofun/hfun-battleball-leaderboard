@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useRouter } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HobbaGroup } from '@prisma/client';
 import { toast } from 'sonner';
@@ -43,6 +45,7 @@ const addStaffSchema = z.object({
 });
 
 export function StaffManagement() {
+  const router = useRouter();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
   const [staffIdToRemove, setStaffIdToRemove] = useState('');
@@ -61,6 +64,7 @@ export function StaffManagement() {
       toast.success('Staff member added successfully');
       setIsAddModalOpen(false);
       form.reset();
+      router.refresh();
     } else {
       toast.error(result.error || 'Failed to add staff member');
     }
@@ -73,6 +77,7 @@ export function StaffManagement() {
       toast.success('Staff member removed successfully');
       setIsRemoveModalOpen(false);
       setStaffIdToRemove('');
+      router.refresh();
     } else {
       toast.error(result.error || 'Failed to remove staff member');
     }
