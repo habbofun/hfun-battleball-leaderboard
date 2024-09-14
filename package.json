@@ -11,7 +11,8 @@
     "gen": "prisma generate --schema=./prisma/schema",
     "push": "prisma db push --schema=./prisma/schema",
     "stu": "prisma studio --schema=./prisma/schema",
-    "postinstall": "prisma generate --schema=./prisma/schema"
+    "postinstall": "prisma generate --schema=./prisma/schema",
+    "seed": "ts-node --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\"}\" prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
