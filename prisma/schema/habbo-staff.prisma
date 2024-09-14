@@ -1,0 +1,19 @@
+enum HobbaGroup {
+    GOLD
+    SILVER
+}
+
+model HabboStaff {
+    id String @id @default(cuid())
+
+    name             String
+    imageUrl         String
+    lastOnline       DateTime
+    accountCreatedAt DateTime
+
+    hobbaGroup HobbaGroup
+
+    updatedAt DateTime @updatedAt
+
+    @@map("habbo_staff")
+}
