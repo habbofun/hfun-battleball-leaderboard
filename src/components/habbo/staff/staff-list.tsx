@@ -9,7 +9,7 @@ import { ClockIcon, GemIcon, StarIcon, UserIcon } from 'lucide-react';
 
 import { CountdownTimer } from '@/components/habbo/leaderboard/countdown-timer';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { fetchStaffData } from '@/server/actions/habbo/fetch-staff-data';
 
 export function StaffList() {
@@ -78,51 +78,56 @@ export function StaffList() {
                 )}
                 {group}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {groupedStaff[group].map((member) => (
-                  <Card key={member.id}>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="flex justify-between items-center">
-                        <span>{member.name}</span>
-                        <Badge
-                          variant={
-                            isOnline(member.lastOnline)
-                              ? 'success'
-                              : 'secondary'
-                          }
-                        >
-                          {isOnline(member.lastOnline) ? 'Online' : 'Offline'}
-                        </Badge>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center space-x-4">
-                        <div className="relative w-24 h-32 flex-shrink-0">
+                  <Card key={member.id} className="overflow-hidden">
+                    <CardContent className="p-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="relative w-16 h-20 flex-shrink-0">
                           <Image
                             src={member.imageUrl}
                             alt={member.name}
                             fill
                             style={{ objectFit: 'contain' }}
-                            className="rounded-lg"
+                            className="rounded"
                           />
                         </div>
-                        <div className="flex-grow space-y-2">
-                          <div className="flex items-center text-sm text-muted-foreground">
-                            <ClockIcon className="w-4 h-4 mr-2 flex-shrink-0" />
-                            <span className="truncate">
+                        <div className="flex-grow min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <h3 className="font-bold text-sm truncate">
+                              {member.name}
+                            </h3>
+                            <Badge
+                              variant={
+                                isOnline(member.lastOnline)
+                                  ? 'success'
+                                  : 'secondary'
+                              }
+                              className="text-xs"
+                            >
                               {isOnline(member.lastOnline)
-                                ? 'Online Now'
-                                : `Last Online: ${new Date(member.lastOnline).toLocaleString()}`}
-                            </span>
+                                ? 'Online'
+                                : 'Offline'}
+                            </Badge>
                           </div>
-                          <div className="flex items-center text-sm text-muted-foreground">
-                            <UserIcon className="w-4 h-4 mr-2 flex-shrink-0" />
-                            <span className="truncate">
-                              Member Since:{' '}
-                              {new Date(
-                                member.accountCreatedAt,
-                              ).toLocaleDateString()}
-                            </span>
+                          <div className="flex flex-col space-y-1">
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <ClockIcon className="w-3 h-3 mr-1 flex-shrink-0" />
+                              <span className="truncate">
+                                {isOnline(member.lastOnline)
+                                  ? 'Online Now'
+                                  : `Last: ${new Date(member.lastOnline).toLocaleDateString()}`}
+                              </span>
+                            </div>
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <UserIcon className="w-3 h-3 mr-1 flex-shrink-0" />
+                              <span className="truncate">
+                                Since:{' '}
+                                {new Date(
+                                  member.accountCreatedAt,
+                                ).toLocaleDateString()}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
