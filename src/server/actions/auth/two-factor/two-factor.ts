@@ -7,7 +7,7 @@ import QRCode from 'qrcode';
 import db from '@/lib/db';
 import { lucia } from '@/server/lucia';
 
-export const generateTwoFactorSecretAndUri = async (sessionId: string) => {
+export const generatetwoFactorTokenAndUri = async (sessionId: string) => {
   try {
     const { user } = await lucia.validateSession(sessionId);
 
@@ -18,18 +18,18 @@ export const generateTwoFactorSecretAndUri = async (sessionId: string) => {
       };
     }
 
-    const twoFactorSecret = crypto.getRandomValues(new Uint8Array(20));
+    const twoFactorToken = crypto.getRandomValues(new Uint8Array(20));
 
     await db.user.update({
       where: {
         id: user.id,
       },
       data: {
-        twoFactorToken: encodeHex(twoFactorSecret),
+        twoFactorToken: encodeHex(twoFactorToken),
       },
     });
 
-    const uri = createTOTPKeyURI('hfun.info', user.email, twoFactorSecret);
+    const uri = createTOTPKeyURI('hfun.info', user.email, twoFactorToken);
     const qrCode = await QRCode.toDataURL(uri);
 
     return {
