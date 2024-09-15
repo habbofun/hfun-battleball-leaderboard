@@ -1,10 +1,12 @@
+'use server';
+
 import { decodeHex } from 'oslo/encoding';
 import { TOTPController } from 'oslo/otp';
 
 import db from '@/lib/db';
 import { lucia } from '@/server/lucia';
 
-export const validateTwoFactor = async (sessionId: string, otp: string) => {
+export async function validateTwoFactor(sessionId: string, otp: string) {
   const { user } = await lucia.validateSession(sessionId);
 
   if (!user) {
@@ -42,4 +44,4 @@ export const validateTwoFactor = async (sessionId: string, otp: string) => {
   return {
     success: true,
   };
-};
+}
