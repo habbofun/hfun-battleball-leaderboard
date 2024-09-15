@@ -2,10 +2,10 @@ import { Suspense } from 'react';
 
 import { StaffList } from '@/components/habbo/staff/staff-list';
 import { StaffManagement } from '@/components/habbo/staff/staff-management';
-import { validateRequest } from '@/server/validate';
+import { getCurrentUser } from '@/data/session';
 
 export default async function StaffPage() {
-  const { user } = await validateRequest();
+  const user = await getCurrentUser();
   const isAdmin = user?.role === 'admin';
 
   return (

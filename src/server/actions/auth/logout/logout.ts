@@ -3,13 +3,13 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { getCurrentSession } from '@/data/session';
 import db from '@/lib/db';
 import { lucia } from '@/server/lucia';
-import { validateRequest } from '@/server/validate';
 
 export async function logout() {
   try {
-    const { session } = await validateRequest();
+    const session = await getCurrentSession();
 
     if (!session) {
       return {

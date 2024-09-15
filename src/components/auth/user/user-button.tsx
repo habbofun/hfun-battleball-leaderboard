@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
+import { getCurrentUser } from '@/data/session';
 import { logout } from '@/server/actions/auth/logout/logout';
-import { validateRequest } from '@/server/validate';
 
 export default async function UserButton() {
-  const { user } = await validateRequest();
+  const user = await getCurrentUser();
 
   return (
     <div className="flex items-center space-x-4">
