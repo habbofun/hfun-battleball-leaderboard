@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react';
 
 import { getMessages } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter as FontSans } from 'next/font/google';
 
 import { Providers } from '@/components/providers/providers';
 import { PageFooter } from '@/components/static/page-footer';
 import { PageHeader } from '@/components/static/page-header';
+import { routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 const fontSans = FontSans({
@@ -27,12 +29,16 @@ export async function generateMetadata({
     description: 'Habbo Origins: ES | Fansite',
   };
 }
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({
   children,
   modal,
   params: { locale },
 }: Props) {
+  unstable_setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
