@@ -10,7 +10,7 @@ import { columns } from '@/components/habbo/leaderboard/leaderboard-columns';
 import { LeaderboardPagination } from '@/components/habbo/leaderboard/leaderboard-pagination';
 import { LeaderboardSkeleton } from '@/components/habbo/leaderboard/leaderboard-skeleton';
 import { LeaderboardTable } from '@/components/habbo/leaderboard/leaderboard-table';
-import { fetchLeaderboardData } from '@/server/actions/catalog/fetch-leaderboard';
+import { fetchLeaderboardData } from '@/server/actions/leaderboard/fetch-leaderboard';
 import type { LeaderboardEntry } from '@/types/leaderboard';
 
 export default function LeaderboardContent() {
