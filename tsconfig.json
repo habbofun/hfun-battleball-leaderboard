@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "reset.d.ts"
+    "reset.d.ts",
+    "src/env.mjs"
   ],
   "exclude": ["node_modules"]
 }
