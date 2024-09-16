@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { Button } from '@/components/ui/button';
 import { generateTwoFactor } from '@/server/actions/auth/two-factor/two-factor';
 
 import { TwoFactorSetup } from './two-factor-setup';
@@ -41,14 +42,16 @@ export function EnableTwoFactor({
   };
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-center text-red-600">Error: {error}</div>;
   }
 
   if (!hasTwoFactorToken && !twoFactorData) {
     return (
-      <button onClick={handleGenerateTwoFactor}>
-        Set up Two-Factor Authentication
-      </button>
+      <div className="flex justify-center">
+        <Button onClick={handleGenerateTwoFactor}>
+          Set up Two-Factor Authentication
+        </Button>
+      </div>
     );
   }
 

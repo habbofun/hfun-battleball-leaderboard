@@ -5,5 +5,9 @@ interface DisableTwoFactorProps {
 }
 
 export function DisableTwoFactor({ sessionId }: DisableTwoFactorProps) {
-  return <TwoFactorVerify sessionId={sessionId} action="disable" />;
+  return (
+    <div className="flex justify-center">
+      <TwoFactorVerify sessionId={sessionId} action="disable" />
+    </div>
+  );
 }
