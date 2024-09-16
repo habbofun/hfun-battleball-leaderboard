@@ -17,6 +17,40 @@ async function validateUser(sessionId: string) {
   return { success: true, user };
 }
 
+async function manageTwoFactor(
+  sessionId: string,
+  action: 'enable' | 'disable',
+) {
+  try {
+    const { success, user, error } = await validateUser(sessionId);
+    if (!success) return { success, error };
+
+    if (!user) {
+      return { success: false, error: 'User not found' };
+    }
+
+    await db.user.update({
+      where: { id: user.id },
+      data: {
+        twoFactorToken: action === 'disable' ? null : undefined,
+        twoFactorEnabled: action === 'enable',
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: `Failed to ${action} two factor` };
+  }
+}
+
+export const enableTwoFactor = async (sessionId: string) => {
+  return manageTwoFactor(sessionId, 'enable');
+};
+
+export const disableTwoFactor = async (sessionId: string) => {
+  return manageTwoFactor(sessionId, 'disable');
+};
+
 export async function generateTwoFactor(sessionId: string) {
   try {
     const { success, user, error } = await validateUser(sessionId);
@@ -85,33 +119,3 @@ export async function validateTwoFactor(sessionId: string, otp: string) {
     return { success: false, error: 'Failed to validate two factor' };
   }
 }
-
-export async function manageTwoFactor(
-  sessionId: string,
-  action: 'enable' | 'disable',
-) {
-  try {
-    const { success, user, error } = await validateUser(sessionId);
-    if (!success) return { success, error };
-
-    if (!user) {
-      return { success: false, error: 'User not found' };
-    }
-
-    await db.user.update({
-      where: { id: user.id },
-      data: {
-        twoFactorToken: action === 'disable' ? null : undefined,
-        twoFactorEnabled: action === 'enable',
-      },
-    });
-
-    return { success: true };
-  } catch (error) {
-    return { success: false, error: `Failed to ${action} two factor` };
-  }
-}
-
-export const disableTwoFactor = async (sessionId: string) => {
-  return manageTwoFactor(sessionId, 'disable');
-};
