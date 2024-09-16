@@ -19,7 +19,7 @@ export default async function ProfilePage() {
   if (!user || !session) redirect('/sign-in');
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+    <div className="flex flex-col flex-1 items-center justify-center p-4">
       <h1 className="text-3xl font-bold mb-6">Profile</h1>
 
       <Card className="w-full max-w-md">
