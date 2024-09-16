@@ -33,12 +33,8 @@ export function LoginForm() {
   const router = useRouter();
   const [isEmailNotVerified, setIsEmailNotVerified] = useState(false);
   const [email, setEmail] = useState('');
-
+  const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [showCountdown, setShowCountdown] = useState(false);
-
-  const handleCountdownComplete = () => {
-    setShowCountdown(false);
-  };
 
   const onSubmit = async (values: LoginSchema) => {
     const response = await signIn(values);
@@ -47,13 +43,20 @@ export function LoginForm() {
       if (response.error === 'Email not verified') {
         setIsEmailNotVerified(true);
         setEmail(values.email);
+      } else if (response.error === 'Two-factor authentication required') {
+        setShowTwoFactor(true);
+        toast.info('Please enter your two-factor authentication code');
+        return;
+      } else {
+        toast.error(response.error);
       }
-      toast.error(response.error);
       return;
     }
 
-    toast.success('Logged in successfully');
-    router.push('/');
+    if (response.success) {
+      toast.success('Logged in successfully');
+      router.push('/');
+    }
   };
 
   const handleSendVerificationEmail = async () => {
@@ -75,9 +78,12 @@ export function LoginForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <LoginFormFields control={form.control} />
+            <LoginFormFields
+              control={form.control}
+              showTwoFactor={showTwoFactor}
+            />
             <Button type="submit" className="w-full">
-              Sign In
+              {showTwoFactor ? 'Verify' : 'Sign In'}
             </Button>
           </form>
         </Form>

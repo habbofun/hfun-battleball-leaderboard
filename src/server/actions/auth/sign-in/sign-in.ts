@@ -7,6 +7,7 @@ import { verify } from '@node-rs/argon2';
 import db from '@/lib/db';
 import { hashSettings } from '@/lib/hash';
 import { type LoginSchema, loginSchema } from '@/schemas/auth';
+import { validateTwoFactor } from '@/server/actions/auth/two-factor/two-factor';
 import { lucia } from '@/server/lucia';
 
 export async function signIn(values: LoginSchema) {
@@ -42,7 +43,7 @@ export async function signIn(values: LoginSchema) {
     if (!passwordMatch) {
       return {
         success: false,
-        error: 'Failed to sign in (-3)',
+        error: 'Failed to sign in (-4)',
       };
     }
 
@@ -51,6 +52,27 @@ export async function signIn(values: LoginSchema) {
         success: false,
         error: 'Email not verified',
       };
+    }
+
+    if (user.twoFactorEnabled) {
+      if (!data.twoFactorCode) {
+        return {
+          success: false,
+          error: 'Two-factor authentication required',
+        };
+      }
+
+      const twoFactorResult = await validateTwoFactor(
+        user.id, // !! THIS NEEDS TO BE THE SESSION ID, BUT WE DON'T HAVE A SESSION, WE'RE LOGGIN IN...
+        data.twoFactorCode,
+      );
+
+      if (!twoFactorResult.success) {
+        return {
+          success: false,
+          error: 'Invalid two-factor code',
+        };
+      }
     }
 
     const session = await lucia.createSession(user.id, {});
