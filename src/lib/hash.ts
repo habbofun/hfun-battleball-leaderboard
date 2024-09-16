@@ -17,3 +17,7 @@ export const generateRandomToken = async (length: number) => {
 export const generateNumericToken = async (length: number) => {
   return generateRandomString(length, alphabet('0-9'));
 };
+
+export const generateAlphanumericToken = async (length: number) => {
+  return generateRandomString(length, alphabet('0-9', 'a-z', 'A-Z'));
+};
