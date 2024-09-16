@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { getCurrentUser } from '@/data/session';
+import { getCurrentUser } from '@/lib/session';
 import { logout } from '@/server/actions/auth/logout/logout';
 
 export default async function UserButton() {

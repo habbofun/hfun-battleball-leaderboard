@@ -3,8 +3,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { getCurrentSession } from '@/data/session';
 import db from '@/lib/db';
+import { getCurrentSession } from '@/lib/session';
 import { lucia } from '@/server/lucia';
 
 export async function logout() {

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { getCurrentSession, getCurrentUser } from '@/data/session';
+import { getCurrentSession, getCurrentUser } from '@/lib/session';
 
 export default async function ProfilePage() {
   const user = await getCurrentUser();
