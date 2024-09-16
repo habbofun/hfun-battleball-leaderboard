@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import TwoFactorAuthSetup from '@/components/auth/two-factor/two-factor-enable';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -37,7 +36,7 @@ export function TwoFactorAuthButton({
         {isTwoFactorEnabled ? (
           <p>Flow to disable two-factor authentication</p>
         ) : (
-          <TwoFactorAuthSetup sessionId={sessionId} />
+          <p>Flow to enable two-factor authentication</p>
         )}
       </DialogContent>
     </Dialog>
