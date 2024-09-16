@@ -46,6 +46,7 @@ export default async function ProfilePage() {
           <TwoFactorAuthButton
             sessionId={session.id}
             isTwoFactorEnabled={user.twoFactorEnabled}
+            hasTwoFactorToken={user.hasTwoFactorToken}
           />
         </CardFooter>
       </Card>

@@ -100,7 +100,7 @@ export async function validateTwoFactor(sessionId: string, otp: string) {
       return { success: false, error: 'Two-factor authentication not set up' };
     }
 
-    const totp = new TOTPController().verify(
+    const totp = await new TOTPController().verify(
       otp,
       decodeHex(dbUser.twoFactorToken),
     );
