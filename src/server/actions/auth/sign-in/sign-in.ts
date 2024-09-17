@@ -58,12 +58,13 @@ export async function signIn(values: LoginSchema) {
       if (!data.twoFactorCode) {
         return {
           success: false,
-          error: 'Two-factor authentication required',
+          requiresTwoFactor: true,
+          userId: user.id,
         };
       }
 
       const twoFactorResult = await validateTwoFactor(
-        user.id, // !! THIS NEEDS TO BE THE SESSION ID, BUT WE DON'T HAVE A SESSION, WE'RE LOGGIN IN...
+        user.id,
         data.twoFactorCode,
       );
 

@@ -82,7 +82,36 @@ export async function generateTwoFactor(sessionId: string) {
   }
 }
 
-export async function validateTwoFactor(sessionId: string, otp: string) {
+export async function validateTwoFactor(userId: string, otp: string) {
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { id: userId },
+      select: { twoFactorToken: true, twoFactorEnabled: true },
+    });
+
+    if (!dbUser || !dbUser.twoFactorToken) {
+      return { success: false, error: 'Two-factor authentication not set up' };
+    }
+
+    const totp = await new TOTPController().verify(
+      otp,
+      decodeHex(dbUser.twoFactorToken),
+    );
+
+    if (!totp) {
+      return { success: false, error: 'Invalid code' };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: 'Failed to validate two factor' };
+  }
+}
+
+export async function enableTwoFactorWithSession(
+  sessionId: string,
+  otp: string,
+) {
   try {
     const { success, user, error } = await validateUser(sessionId);
     if (!success) return { success, error };
@@ -111,11 +140,13 @@ export async function validateTwoFactor(sessionId: string, otp: string) {
 
     await db.user.update({
       where: { id: user.id },
-      data: { twoFactorEnabled: true },
+      data: {
+        twoFactorEnabled: true,
+      },
     });
 
     return { success: true };
   } catch (error) {
-    return { success: false, error: 'Failed to validate two factor' };
+    return { success: false, error: 'Failed to enable two factor' };
   }
 }
