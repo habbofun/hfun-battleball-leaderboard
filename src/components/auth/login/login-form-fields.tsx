@@ -51,25 +51,6 @@ export function LoginFormFields({
         label="Password"
         description="Enter your password"
       />
-      {showTwoFactor && (
-        <FormField
-          control={control}
-          name="twoFactorCode"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Two-Factor Code</FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  placeholder="Enter your 2FA code"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
     </>
   );
 }

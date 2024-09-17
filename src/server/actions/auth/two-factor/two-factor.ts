@@ -82,8 +82,22 @@ export async function generateTwoFactor(sessionId: string) {
   }
 }
 
-export async function validateTwoFactor(userId: string, otp: string) {
+export async function validateTwoFactor(
+  userIdOrSessionId: string,
+  otp: string,
+) {
   try {
+    let userId: string;
+
+    // Check if the input is a sessionId
+    const sessionResult = await lucia.validateSession(userIdOrSessionId);
+    if (sessionResult.session) {
+      userId = sessionResult.session.userId;
+    } else {
+      // If not a valid session, assume it's a userId
+      userId = userIdOrSessionId;
+    }
+
     const dbUser = await db.user.findUnique({
       where: { id: userId },
       select: { twoFactorToken: true, twoFactorEnabled: true },
