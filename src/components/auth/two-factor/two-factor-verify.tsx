@@ -27,6 +27,7 @@ import {
 import {
   disableTwoFactor,
   enableTwoFactor,
+  enableTwoFactorWithSession,
   validateTwoFactor,
 } from '@/server/actions/auth/two-factor/two-factor';
 
@@ -50,7 +51,12 @@ export function TwoFactorVerify({ sessionId, action }: TwoFactorVerifyProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
-    const result = await validateTwoFactor(sessionId, values.otp);
+    let result;
+    if (action === 'enable') {
+      result = await enableTwoFactorWithSession(sessionId, values.otp);
+    } else {
+      result = await validateTwoFactor(sessionId, values.otp);
+    }
 
     if (!result.success) {
       toast.error('Invalid two-factor code. Please try again.');
@@ -61,13 +67,6 @@ export function TwoFactorVerify({ sessionId, action }: TwoFactorVerifyProps) {
     setVerificationSuccess(true);
 
     if (action === 'enable') {
-      const enableResult = await enableTwoFactor(sessionId);
-      if (!enableResult.success) {
-        toast.error(
-          'Failed to enable two-factor authentication. Please try again.',
-        );
-        return;
-      }
       toast.success('Two-factor authentication has been enabled successfully!');
     } else {
       toast.success(
