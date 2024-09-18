@@ -6,11 +6,10 @@ import { NotLoggedIn } from '@/components/auth/not-logged-in';
 import { HobbasList } from '@/components/habbo/hobbas/hobbas';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
-import { getCurrentSession, getCurrentUser } from '@/lib/session';
+import { getUserAndSession } from '@/lib/session';
 
 export default async function HobbaPage() {
-  const user = await getCurrentUser();
-  const session = await getCurrentSession();
+  const { user, session } = await getUserAndSession();
 
   const isAdmin = user?.role === 'admin';
 
