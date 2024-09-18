@@ -69,7 +69,7 @@ export async function updateAllHobbaData() {
           where: { id: hobba.id },
           data: {
             imageUrl: `https://www.habbo.es/habbo-imaging/avatarimage?&figure=${userInfo.data.figureString}`,
-            lastOnline: new Date(userInfo.data.lastAccessTime),
+            lastOnline: userInfo.data.online ? new Date() : hobba.lastOnline, // Update lastOnline only if user is currently online
             updatedAt: new Date(),
           },
         });
