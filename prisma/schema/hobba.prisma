@@ -6,7 +6,7 @@ enum HobbaGroup {
 model Hobba {
     id String @id @default(cuid())
 
-    name             String
+    name             String   @unique
     imageUrl         String
     lastOnline       DateTime
     accountCreatedAt DateTime
