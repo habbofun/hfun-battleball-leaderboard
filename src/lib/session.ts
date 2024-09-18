@@ -23,3 +23,13 @@ export const getCurrentSession = cache(async () => {
 
   return session.session;
 });
+
+export const getCurrentUserRole = cache(async () => {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    return null;
+  }
+
+  return user.role;
+});
