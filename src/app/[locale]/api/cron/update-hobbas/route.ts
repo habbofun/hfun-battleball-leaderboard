@@ -15,14 +15,11 @@ export async function GET(request: Request) {
     const result = await updateAllHobbaData();
 
     if (!result.success) {
-      console.error('Error updating hobba data:', result.error);
       return NextResponse.json(result, { status: 500 });
     }
 
-    console.log('Hobba data updated:', result);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error('Error updating hobba data:', error);
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 },

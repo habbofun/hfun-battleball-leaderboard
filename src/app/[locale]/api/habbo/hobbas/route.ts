@@ -11,7 +11,7 @@ async function getHobbasHandler(req: NextRequest) {
 
     if (!session) {
       return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
+        { success: false, message: 'Unauthorized', unauthorized: true },
         { status: 401 },
       );
     }
@@ -27,7 +27,6 @@ async function getHobbasHandler(req: NextRequest) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
       { success: false, message: 'Internal server error' },
       { status: 500 },

@@ -19,13 +19,11 @@ export const useHobbasStore = create<HobbaState>((set) => ({
       const response = await localApiClient.get('/api/habbo/hobbas');
 
       if (!response.data.success) {
-        console.error('Failed to fetch hobbas:', response.data.message);
         return;
       }
 
       set({ hobbas: response.data.data, loading: false });
     } catch (error) {
-      console.error('Error fetching hobbas:', error);
       set({ loading: false });
     }
   },

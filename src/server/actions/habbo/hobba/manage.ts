@@ -93,7 +93,6 @@ export async function updateAllHobbaData() {
       errors: errors.length > 0 ? errors : undefined,
     };
   } catch (error) {
-    console.error('Failed to update hobba data:', error);
     return { success: false, error: 'Failed to update hobba data' };
   }
 }

@@ -23,8 +23,6 @@ export const DeleteHobbaForm = () => {
   const handleDeleteHobba = async () => {
     const result = await removeHobbaMember(username);
 
-    console.log(result);
-
     if (!result.success) {
       toast.error(result.error);
       return;
