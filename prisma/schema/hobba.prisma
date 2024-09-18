@@ -3,7 +3,7 @@ enum HobbaGroup {
     SILVER
 }
 
-model HabboStaff {
+model Hobba {
     id String @id @default(cuid())
 
     name             String
@@ -15,5 +15,5 @@ model HabboStaff {
 
     updatedAt DateTime @updatedAt
 
-    @@map("habbo_staff")
+    @@map("hobba")
 }

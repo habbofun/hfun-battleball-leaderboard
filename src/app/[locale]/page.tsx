@@ -30,8 +30,8 @@ export default function HomePage({
           <Link href="/finder" rel="noopener noreferrer">
             <Button variant="ghost">{t('finder')}</Button>
           </Link>
-          <Link href="/staff" rel="noopener noreferrer">
-            <Button variant="ghost">{t('staff')}</Button>
+          <Link href="/hobbas" rel="noopener noreferrer">
+            <Button variant="ghost">{t('hobbas')}</Button>
           </Link>
         </div>
         <Separator className="my-8 w-full max-w-sm" />

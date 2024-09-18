@@ -2,40 +2,40 @@
 
 import { cache } from 'react';
 
-import { HabboStaff } from '@prisma/client';
+import { Hobba } from '@prisma/client';
 
 import { prisma } from '@/lib/db';
 
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-let cachedData: HabboStaff[] | null = null;
+let cachedData: Hobba[] | null = null;
 let lastFetchTime = 0;
 
-export const fetchStaffData = cache(
+export const fetchHobbaData = cache(
   async (): Promise<{
-    staff: HabboStaff[];
+    hobbas: Hobba[];
     nextUpdateIn: number;
   }> => {
     const currentTime = Date.now();
 
     if (cachedData && currentTime - lastFetchTime < CACHE_DURATION) {
       return {
-        staff: cachedData,
+        hobbas: cachedData,
         nextUpdateIn: CACHE_DURATION - (currentTime - lastFetchTime),
       };
     }
 
     try {
-      const staff = await prisma.habboStaff.findMany({
+      const hobbas = await prisma.hobba.findMany({
         orderBy: { lastOnline: 'desc' },
       });
 
-      cachedData = staff;
+      cachedData = hobbas;
       lastFetchTime = currentTime;
 
-      return { staff, nextUpdateIn: CACHE_DURATION };
+      return { hobbas, nextUpdateIn: CACHE_DURATION };
     } catch (error) {
-      throw new Error('Failed to fetch staff data');
+      throw new Error('Failed to fetch hobba data');
     }
   },
 );

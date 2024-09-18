@@ -22,9 +22,9 @@ export const routing = defineRouting({
       en: '/finder',
       es: '/buscador',
     },
-    '/staff': {
-      en: '/staff',
-      es: '/staff',
+    '/hobbas': {
+      en: '/hobbas',
+      es: '/hobbas',
     },
     '/redirect': '/redirect',
   },
