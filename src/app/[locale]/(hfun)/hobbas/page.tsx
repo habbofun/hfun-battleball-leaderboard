@@ -2,14 +2,21 @@ import { Suspense } from 'react';
 
 import Link from 'next/link';
 
+import { NotLoggedIn } from '@/components/auth/not-logged-in';
 import { HobbasList } from '@/components/habbo/hobbas/hobbas';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
-import { getCurrentUserRole } from '@/lib/session';
+import { getCurrentSession, getCurrentUser } from '@/lib/session';
 
 export default async function HobbaPage() {
-  const role = await getCurrentUserRole();
-  const isAdmin = role === 'admin';
+  const user = await getCurrentUser();
+  const session = await getCurrentSession();
+
+  const isAdmin = user?.role === 'admin';
+
+  if (!session) {
+    return <NotLoggedIn />;
+  }
 
   return (
     <div className="flex flex-col flex-1">
