@@ -2,8 +2,9 @@
 
 import { cache } from 'react';
 
+import type { Hobba } from '@prisma/client';
+
 import { prisma } from '@/lib/db';
-import { Hobba } from '@/types/hobba';
 
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 

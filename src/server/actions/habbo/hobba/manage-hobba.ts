@@ -1,6 +1,6 @@
 'use server';
 
-import { HobbaGroup } from '@prisma/client';
+import type { HobbaGroup } from '@prisma/client';
 
 import { prisma } from '@/lib/db';
 import { fetchHabboUserInfo } from '@/server/actions/habbo/user/fetch-user-data';

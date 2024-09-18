@@ -1,3 +1,5 @@
-import { HobbaGroup, Hobba as OriginalHobba } from '@prisma/client';
+import type { Hobba } from '@prisma/client';
 
-export type Hobba = OriginalHobba & { hobbaGroup: HobbaGroup };
+export interface FetchHobbaResponse {
+  hobba: Hobba[];
+}
