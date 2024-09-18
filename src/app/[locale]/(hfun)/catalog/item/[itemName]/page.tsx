@@ -7,7 +7,7 @@ import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
-import type { CatalogItem } from '@/types/habbo.d';
+import type { CatalogItem } from '@/types/habbo';
 
 // Dynamically import the chart component with SSR disabled
 const DynamicItemChart = dynamic(
