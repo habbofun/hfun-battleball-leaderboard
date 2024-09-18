@@ -1,4 +1,4 @@
-import type { NextRequest} from 'next/server';
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { getAllHobbas, getHobba } from '@/data/hobbas';
@@ -19,11 +19,9 @@ async function getHobbasHandler(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const username = searchParams.get('username');
 
-    if (username) {
-      return await getHobba(username);
-    }
+    const result = username ? await getHobba(username) : await getAllHobbas();
 
-    return await getAllHobbas();
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

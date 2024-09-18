@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const result = await updateAllHobbaData();
 
     console.log('Hobba data updated:', result);
-    return NextResponse.json(result);
+    return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error('Error updating hobba data:', error);
     return NextResponse.json(
