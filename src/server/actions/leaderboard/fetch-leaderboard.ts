@@ -1,6 +1,6 @@
 'use server';
 
-import { apiClient } from '@/lib/api-client';
+import { leaderboardApiClient } from '@/lib/api';
 import type { LeaderboardData } from '@/types/leaderboard';
 
 export async function fetchLeaderboardData(
@@ -8,12 +8,15 @@ export async function fetchLeaderboardData(
   perPage: number,
 ) {
   try {
-    const { data } = await apiClient.get<LeaderboardData>('/leaderboard', {
-      params: {
-        page: currentPage,
-        per_page: perPage,
+    const { data } = await leaderboardApiClient.get<LeaderboardData>(
+      '/leaderboard',
+      {
+        params: {
+          page: currentPage,
+          per_page: perPage,
+        },
       },
-    });
+    );
 
     return {
       leaderboard: data.leaderboard,
