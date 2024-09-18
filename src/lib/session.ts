@@ -4,6 +4,16 @@ import 'server-only';
 
 import { validateRequest } from '@/server/validate';
 
+export const getUserAndSession = cache(async () => {
+  const session = await validateRequest();
+
+  if (!session.user) {
+    return { user: null, session: null };
+  }
+
+  return { user: session.user, session: session.session };
+});
+
 export const getCurrentUser = cache(async () => {
   const session = await validateRequest();
 
