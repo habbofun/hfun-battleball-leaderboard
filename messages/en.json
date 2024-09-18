@@ -11,8 +11,8 @@
     "hobbas": "Hobbas",
     "message": "Browse the page with the menu"
   },
-  "NotFoundPage": {
-    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
-    "title": "Page not found"
+  "NotFound": {
+    "title": "404 - Page Not Found",
+    "message": "Sorry, we couldn't find the page you're looking for. Please check the URL or try navigating back to the homepage."
   }
 }

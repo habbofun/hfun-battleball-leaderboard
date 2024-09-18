@@ -11,8 +11,8 @@
     "hobbas": "Hobbas",
     "message": "Usa el menú para navegar entre páginas"
   },
-  "NotFoundPage": {
-    "description": " por favor, verifique la barra de dirección del navegador o utilice la navegación para ir a una página conocida.",
-    "title": "Página no encontrada"
+  "NotFound": {
+    "title": "404 - Página no encontrada",
+    "message": "Lo sentimos, no pudimos encontrar la página que estás buscando. Por favor, verifica la URL o intenta volver a la página de inicio."
   }
 }

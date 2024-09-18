@@ -1,5 +1,12 @@
 import type { ReactNode } from 'react';
 
+import Link from 'next/link';
+
+import { AlertCircle } from 'lucide-react';
+
+import { TryAgainButton } from '@/components/not-found/try-again-button';
+import { Button } from '@/components/ui/button';
+
 type Props = {
   children?: ReactNode;
   title: ReactNode;
@@ -7,15 +14,17 @@ type Props = {
 
 export function NotFound({ children, title }: Props) {
   return (
-    <div className="relative flex grow flex-col  py-36">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute left-0 top-1 h-[20500px] w-[20500px] translate-x-[-47.5%] rounded-full " />
-      </div>
-      <div className="container relative flex grow flex-col px-4">
-        <h1 className="text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl">
-          {title}
-        </h1>
-        <div className="mt-6 text-gray-400 md:text-lg">{children}</div>
+    <div className="flex flex-col flex-1 items-center justify-center bg-background text-foreground p-4">
+      <div className="text-center max-w-md">
+        <AlertCircle className="mx-auto text-destructive w-16 h-16 mb-4" />
+        <h1 className="text-3xl font-bold mb-4">{title}</h1>
+        <div className="text-muted-foreground mb-8">{children}</div>
+        <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+          <TryAgainButton />
+          <Link href="/" passHref>
+            <Button variant="outline">Go Home</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
