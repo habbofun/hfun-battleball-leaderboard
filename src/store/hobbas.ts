@@ -2,16 +2,9 @@ import type { Hobba, HobbaGroup } from '@prisma/client';
 import { create } from 'zustand';
 
 import { localApiClient } from '@/lib/api';
-
-interface HobbaState {
-  hobbas: Hobba[];
-  loading: boolean;
-  hobbasList: [string, Hobba[]][];
-  fetchHobbas: () => Promise<void>;
-}
+import type { HobbaState } from '@/types/hobba';
 
 export const useHobbasStore = create<HobbaState>((set) => ({
-  hobbas: [],
   loading: false,
   hobbasList: [],
 
@@ -26,7 +19,6 @@ export const useHobbasStore = create<HobbaState>((set) => ({
       }
 
       const hobbas: Hobba[] = response.data.data;
-      set({ hobbas, loading: false });
 
       // Group and sort hobbas
       const groupedHobbas = hobbas.reduce<Record<HobbaGroup, Hobba[]>>(
@@ -47,7 +39,7 @@ export const useHobbasStore = create<HobbaState>((set) => ({
         },
       );
 
-      set({ hobbasList: sortedGroups as [string, Hobba[]][] });
+      set({ hobbasList: sortedGroups as [string, Hobba[]][], loading: false });
     } catch (error) {
       set({ loading: false });
     }
