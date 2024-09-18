@@ -25,6 +25,4 @@ export async function GET(request: Request) {
   }
 }
 
-export const config = {
-  maxDuration: 300, // 5 minutes
-};
+export const maxDuration = 300; // 5 minutes
