@@ -29,9 +29,18 @@ export async function addHobbaMember(name: string, hobbaGroup: HobbaGroup) {
 
 export async function removeHobbaMember(id: string) {
   try {
+    const hobba = await prisma.hobba.findUnique({
+      where: { id },
+    });
+
+    if (!hobba) {
+      return { success: false, error: 'Hobba member not found' };
+    }
+
     await prisma.hobba.delete({
       where: { id },
     });
+
     return { success: true };
   } catch (error) {
     return { success: false, error: 'Failed to remove hobba member' };

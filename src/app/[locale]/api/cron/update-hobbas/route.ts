@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { updateAllHobbaData } from '@/server/actions/habbo/hobba/manage-hobba';
+import { updateAllHobbaData } from '@/server/actions/habbo/hobba/manage';
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get('authorization');
