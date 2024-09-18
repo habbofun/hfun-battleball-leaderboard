@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 
+import { HobbasList } from '@/components/auth/hobbas/hobbas-list';
 import { getCurrentUser } from '@/lib/session';
 
 export default async function HobbaPage() {
@@ -13,7 +14,7 @@ export default async function HobbaPage() {
         <Suspense
           fallback={<div className="text-center">Loading hobbas data...</div>}
         >
-          <p>Hobba data loaded</p>
+          <HobbasList />
         </Suspense>
         {isAdmin && (
           <div className="mt-12">
