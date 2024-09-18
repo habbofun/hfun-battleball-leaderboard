@@ -41,21 +41,18 @@ export async function removeHobbaMember(id: string) {
 export async function updateAllHobbaData() {
   try {
     const hobbas = await prisma.hobba.findMany();
-    const updatedHobbas = [];
-    const errors = [];
 
     if (hobbas.length === 0) {
       return { success: false, error: 'No hobbas found' };
     }
 
-    for (const hobba of hobbas) {
+    const updatePromises = hobbas.map(async (hobba) => {
       const userInfo = await fetchHabboUserInfo(hobba.name);
       if (userInfo.error || !userInfo.data) {
-        errors.push({
+        return {
           name: hobba.name,
           error: userInfo.error || 'Failed to fetch hobba data',
-        });
-        continue;
+        };
       }
 
       try {
@@ -67,11 +64,18 @@ export async function updateAllHobbaData() {
             updatedAt: new Date(),
           },
         });
-        updatedHobbas.push(updatedHobba);
+        return { success: true, hobba: updatedHobba };
       } catch (updateError) {
-        errors.push({ name: hobba.name, error: 'Failed to update hobba data' });
+        return { name: hobba.name, error: 'Failed to update hobba data' };
       }
-    }
+    });
+
+    const results = await Promise.all(updatePromises);
+
+    const updatedHobbas = results
+      .filter((result) => result.success)
+      .map((result) => result.hobba);
+    const errors = results.filter((result) => !result.success);
 
     return {
       success: true,
