@@ -8,7 +8,11 @@ import { HobbaGroup } from './list/hobba-group';
 import { HobbaListSkeleton } from './list/hobba-list-skeleton';
 
 export const HobbasList = () => {
-  const { hobbasList, fetchHobbas, loading } = useHobbasStore();
+  const { hobbasList, fetchHobbas, loading } = useHobbasStore((state) => ({
+    hobbasList: state.hobbasList,
+    fetchHobbas: state.Actions.fetchHobbas,
+    loading: state.loading,
+  }));
 
   useEffect(() => {
     fetchHobbas();
