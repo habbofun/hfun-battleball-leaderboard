@@ -15,7 +15,7 @@ import { InfoItem } from '@/components/habbo/finder/info-item';
 import { ProgressBar } from '@/components/habbo/finder/progress-bar';
 import { StatusBadge } from '@/components/habbo/finder/status-badge';
 import { Progress } from '@/components/ui/progress';
-import { HabboUserInfo } from '@/types/habbo';
+import type { HabboUserInfo } from '@/types/habbo';
 
 interface UserProfileProps {
   userInfo: HabboUserInfo;

@@ -1,4 +1,4 @@
-import { Control } from 'react-hook-form';
+import type { Control } from 'react-hook-form';
 
 import { Mail, User } from 'lucide-react';
 
@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
-import { RegisterSchema } from '@/schemas/auth';
+import type { RegisterSchema } from '@/schemas/auth';
 
 interface RegisterFormFieldsProps {
   control: Control<RegisterSchema>;

@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { type Variants, motion } from 'framer-motion';
-import { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 
 type PresetType = 'blur' | 'shake' | 'scale' | 'fade' | 'slide';
 

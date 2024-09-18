@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CatalogData, CatalogItem } from '@/types/habbo';
+import type { CatalogData, CatalogItem } from '@/types/habbo';
 
 import { ComparisonChart } from './comparison-chart';
 import { ItemSelector } from './item-selector';

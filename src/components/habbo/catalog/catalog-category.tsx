@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { CatalogItem as CatalogItemType } from '@/types/habbo';
+import type { CatalogItem as CatalogItemType } from '@/types/habbo';
 
 interface CatalogCategoryProps {
   category: string;

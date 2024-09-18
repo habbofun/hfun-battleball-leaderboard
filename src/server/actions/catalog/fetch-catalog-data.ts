@@ -3,7 +3,7 @@
 import { cache } from 'react';
 
 import { prisma } from '@/lib/db';
-import { CatalogData, CatalogItem } from '@/types/habbo';
+import type { CatalogData, CatalogItem } from '@/types/habbo';
 
 const CACHE_DURATION = 60 * 60 * 1000;
 

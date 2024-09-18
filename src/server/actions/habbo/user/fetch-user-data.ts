@@ -1,7 +1,7 @@
 'use server';
 
 import HttpStatusCode from '@/enums/http-error-codes';
-import { HabboErrorResponse, HabboUserInfo } from '@/types/habbo';
+import type { HabboErrorResponse, HabboUserInfo } from '@/types/habbo';
 
 export async function fetchHabboUserInfo(
   username: string,

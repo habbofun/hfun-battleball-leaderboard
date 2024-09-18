@@ -4,7 +4,7 @@ import { useHobbasStore } from '@/store/hobbas';
 
 export const HobbasList = () => {
   const hobbas = useHobbasStore((state) => state.hobbas);
-  console.log('Fetched hobbas from hobbas page:', hobbas);
+  console.log('Got hobbas on component: ', hobbas);
 
   if (hobbas.length === 0) {
     return <div>No hobbas found</div>;

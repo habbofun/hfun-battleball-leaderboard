@@ -10,7 +10,7 @@ import { SearchBar } from '@/components/habbo/finder/search-bar';
 import { UserProfile } from '@/components/habbo/finder/user-profile';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchHabboUserInfo } from '@/server/actions/habbo/user/fetch-user-data';
-import { HabboUserInfo as HabboUserInfoType } from '@/types/habbo';
+import type { HabboUserInfo as HabboUserInfoType } from '@/types/habbo';
 
 export function HabboUserInfo() {
   const [userInfo, setUserInfo] = useState<HabboUserInfoType | null>(null);

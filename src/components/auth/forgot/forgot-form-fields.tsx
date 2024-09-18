@@ -1,4 +1,4 @@
-import { Control } from 'react-hook-form';
+import type { Control } from 'react-hook-form';
 
 import { Mail } from 'lucide-react';
 
@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
-import { ForgotPasswordSchema } from '@/schemas/auth';
+import type { ForgotPasswordSchema } from '@/schemas/auth';
 
 interface ForgotFormFieldsProps {
   control: Control<ForgotPasswordSchema>;

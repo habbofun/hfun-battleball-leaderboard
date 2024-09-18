@@ -1,5 +1,5 @@
 import { PrismaAdapter } from '@lucia-auth/adapter-prisma';
-import { Role } from '@prisma/client';
+import type { Role } from '@prisma/client';
 import { Lucia } from 'lucia';
 
 import db from '@/lib/db';

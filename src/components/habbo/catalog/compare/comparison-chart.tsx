@@ -18,7 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { CatalogItem } from '@/types/habbo';
+import type { CatalogItem } from '@/types/habbo';
 
 interface ComparisonChartProps {
   items: CatalogItem[];

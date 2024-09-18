@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest} from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { verifyEmail } from '@/data/email';
 

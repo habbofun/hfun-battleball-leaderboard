@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { CatalogData, CatalogItem } from '@/types/habbo';
+import type { CatalogData, CatalogItem } from '@/types/habbo';
 
 interface ItemSelectorProps {
   onSelect: (item: CatalogItem) => void;

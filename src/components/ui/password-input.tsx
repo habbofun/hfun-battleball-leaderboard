@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Control, FieldPath, FieldValues } from 'react-hook-form';
+import type { Control, FieldPath, FieldValues } from 'react-hook-form';
 
 import { Eye, EyeOff, Lock } from 'lucide-react';
 

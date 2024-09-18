@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CatalogItem as CatalogItemType } from '@/types/habbo';
+import type { CatalogItem as CatalogItemType } from '@/types/habbo';
 
 interface CatalogItemProps {
   item: CatalogItemType;

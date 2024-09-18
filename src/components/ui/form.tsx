@@ -1,16 +1,17 @@
 'use client';
 
 import * as React from 'react';
-import {
-  Controller,
+import type {
   ControllerProps,
   FieldPath,
-  FieldValues,
+  FieldValues} from 'react-hook-form';
+import {
+  Controller,
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
 
-import * as LabelPrimitive from '@radix-ui/react-label';
+import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 
 import { Label } from '@/components/ui/label';
