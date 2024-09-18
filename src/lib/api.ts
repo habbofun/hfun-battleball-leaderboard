@@ -5,8 +5,5 @@ export const leaderboardApiClient = axios.create({
 });
 
 export const localApiClient = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'https://hfun.info',
+  baseURL: process.env.AUTH_URL,
 });
