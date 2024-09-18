@@ -27,18 +27,18 @@ export async function addHobbaMember(name: string, hobbaGroup: HobbaGroup) {
   }
 }
 
-export async function removeHobbaMember(id: string) {
+export async function removeHobbaMember(username: string) {
   try {
-    const hobba = await prisma.hobba.findUnique({
-      where: { id },
+    const dbHobba = await prisma.hobba.findUnique({
+      where: { name: username },
     });
 
-    if (!hobba) {
-      return { success: false, error: 'Hobba member not found' };
+    if (!dbHobba) {
+      return { success: false, error: 'Hobba not found' };
     }
 
     await prisma.hobba.delete({
-      where: { id },
+      where: { id: dbHobba.id },
     });
 
     return { success: true };
