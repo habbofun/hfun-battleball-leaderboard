@@ -13,6 +13,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  }).format(date);
+};
+
 export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
   const isOnline =
     new Date(hobba.lastOnline).getTime() > Date.now() - 5 * 60 * 1000; // Consider online if last seen within 5 minutes
@@ -60,11 +68,11 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
         <div className="w-full text-xs text-muted-foreground mt-auto">
           <p className="flex justify-between">
             <span>Last Seen:</span>
-            <span>{new Date(hobba.lastOnline).toLocaleDateString()}</span>
+            <span>{formatDate(new Date(hobba.lastOnline))}</span>
           </p>
           <p className="flex justify-between">
             <span>Registered:</span>
-            <span>{new Date(hobba.accountCreatedAt).toLocaleDateString()}</span>
+            <span>{formatDate(new Date(hobba.accountCreatedAt))}</span>
           </p>
         </div>
       </CardContent>
