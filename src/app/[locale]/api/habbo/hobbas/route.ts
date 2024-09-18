@@ -21,6 +21,10 @@ async function getHobbasHandler(req: NextRequest) {
 
     const result = username ? await getHobba(username) : await getAllHobbas();
 
+    if (!result.success) {
+      return NextResponse.json(result, { status: 404 });
+    }
+
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error(error);

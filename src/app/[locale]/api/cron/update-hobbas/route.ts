@@ -14,6 +14,11 @@ export async function GET(request: Request) {
   try {
     const result = await updateAllHobbaData();
 
+    if (!result.success) {
+      console.error('Error updating hobba data:', result.error);
+      return NextResponse.json(result, { status: 500 });
+    }
+
     console.log('Hobba data updated:', result);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
