@@ -29,6 +29,7 @@ export async function generateMetadata({
     description: 'Habbo Origins: ES | Fansite',
   };
 }
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
