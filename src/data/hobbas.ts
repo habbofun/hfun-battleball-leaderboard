@@ -1,17 +1,16 @@
-import { NextResponse } from 'next/server';
+import type { Hobba } from '@prisma/client';
 
 import db from '@/lib/db';
 
-export async function getHobba(username: string) {
+export async function getHobba(
+  username: string,
+): Promise<{ success: boolean; data?: Hobba; message?: string }> {
   const dbHobba = await db.hobba.findFirst({
     where: { name: username },
   });
 
   if (!dbHobba) {
-    return NextResponse.json(
-      { success: false, message: 'Hobba not found' },
-      { status: 404 },
-    );
+    return { success: false, message: 'Hobba not found' };
   }
 
   const hobba = {
@@ -21,19 +20,21 @@ export async function getHobba(username: string) {
     hobbaGroup: dbHobba.hobbaGroup,
     lastOnline: dbHobba.lastOnline,
     accountCreatedAt: dbHobba.accountCreatedAt,
+    updatedAt: dbHobba.updatedAt,
   };
 
-  return NextResponse.json({ success: true, data: hobba }, { status: 200 });
+  return { success: true, data: hobba };
 }
 
-export async function getAllHobbas() {
+export async function getAllHobbas(): Promise<{
+  success: boolean;
+  data?: Hobba[];
+  message?: string;
+}> {
   const dbHobbas = await db.hobba.findMany();
 
   if (!dbHobbas || dbHobbas.length === 0) {
-    return NextResponse.json(
-      { success: false, message: 'No hobbas found' },
-      { status: 404 },
-    );
+    return { success: false, message: 'No hobbas found' };
   }
 
   const hobbas = dbHobbas.map((hobba) => ({
@@ -43,7 +44,8 @@ export async function getAllHobbas() {
     hobbaGroup: hobba.hobbaGroup,
     lastOnline: hobba.lastOnline,
     accountCreatedAt: hobba.accountCreatedAt,
+    updatedAt: hobba.updatedAt,
   }));
 
-  return NextResponse.json({ success: true, data: hobbas }, { status: 200 });
+  return { success: true, data: hobbas };
 }
