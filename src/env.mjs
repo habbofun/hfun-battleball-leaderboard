@@ -13,6 +13,7 @@ export const env = createEnv({
     RESEND_KEY: z.string().min(1),
     JWT_SECRET: z.string().min(1),
     AUTH_URL: z.string().url(),
+    CRON_SECRET: z.string().min(16),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -27,5 +28,6 @@ export const env = createEnv({
     RESEND_KEY: process.env.RESEND_KEY,
     JWT_SECRET: process.env.JWT_SECRET,
     AUTH_URL: process.env.AUTH_URL,
+    CRON_SECRET: process.env.CRON_SECRET,
   },
 });
