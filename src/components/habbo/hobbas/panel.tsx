@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { RoleGate } from '@/components/auth/role-gate/role-gate';
 import { AddHobbaForm } from '@/components/habbo/hobbas/admin/add-hobba-form';
 import { DeleteHobbaForm } from '@/components/habbo/hobbas/admin/delete-hobba-form';
 import { Button } from '@/components/ui/button';
@@ -18,8 +19,10 @@ export const HobbasAdminPanel = () => {
           <CardTitle>Hobba Management</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <AddHobbaForm />
-          <DeleteHobbaForm />
+          <RoleGate allowedRole="admin">
+            <AddHobbaForm />
+            <DeleteHobbaForm />
+          </RoleGate>
         </CardContent>
       </Card>
     </div>
