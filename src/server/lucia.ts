@@ -23,6 +23,7 @@ export const lucia = new Lucia(adapter, {
       emailVerified: attributes.emailVerified,
       twoFactorEnabled: attributes.twoFactorEnabled,
       hasTwoFactorToken: typeof attributes.twoFactorToken === 'string',
+      habboVerifiedUsername: attributes.habboVerifiedUsername,
     };
   },
 });
@@ -41,4 +42,5 @@ interface DatabaseUserAttributes {
   emailVerified: boolean;
   twoFactorEnabled: boolean;
   twoFactorToken: string | null;
+  habboVerifiedUsername: string | null;
 }
