@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,24 +18,31 @@ interface TwoFactorAuthButtonProps {
   sessionId: string;
   isTwoFactorEnabled: boolean;
   hasTwoFactorToken: boolean;
+  icon?: React.ReactNode;
 }
 
 export function TwoFactorAuthButton({
   sessionId,
   isTwoFactorEnabled,
   hasTwoFactorToken,
+  icon,
 }: TwoFactorAuthButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenChange = useCallback((open: boolean) => {
-    setIsOpen(open);
-  }, []);
-
-  const dialogContent = useMemo(
-    () => (
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant={isTwoFactorEnabled ? 'destructive' : 'default'}>
+          {icon}
+          {isTwoFactorEnabled ? 'Disable' : 'Enable'} Two-Factor Auth
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Two-Factor Authentication</DialogTitle>
+          <DialogTitle>
+            {isTwoFactorEnabled ? 'Disable' : 'Enable'} Two-Factor
+            Authentication
+          </DialogTitle>
         </DialogHeader>
         {isTwoFactorEnabled ? (
           <DisableTwoFactor sessionId={sessionId} />
@@ -46,18 +53,6 @@ export function TwoFactorAuthButton({
           />
         )}
       </DialogContent>
-    ),
-    [sessionId, isTwoFactorEnabled, hasTwoFactorToken],
-  );
-
-  return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant={isTwoFactorEnabled ? 'destructive' : 'default'}>
-          {isTwoFactorEnabled ? 'Disable' : 'Enable'} Two-Factor Authentication
-        </Button>
-      </DialogTrigger>
-      {dialogContent}
     </Dialog>
   );
 }
