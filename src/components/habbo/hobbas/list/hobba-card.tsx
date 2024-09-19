@@ -3,8 +3,8 @@ import Image from 'next/image';
 import type { Hobba } from '@prisma/client';
 import { CircleIcon } from 'lucide-react';
 
+import { Card3D } from '@/components/ui/3d-card';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
@@ -23,27 +23,31 @@ const formatDate = (date: Date) => {
 
 export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
   const isOnline =
-    new Date(hobba.lastOnline).getTime() > Date.now() - 5 * 60 * 1000; // Consider online if last seen within 5 minutes
+    new Date(hobba.lastOnline).getTime() > Date.now() - 5 * 60 * 1000;
 
   return (
-    <Card className="flex flex-col h-full relative shadow-md hover:shadow-lg transition-shadow duration-300">
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <CircleIcon
-              className={`absolute top-2 right-2 h-3 w-3 ${
-                isOnline ? 'text-green-500' : 'text-gray-400'
-              }`}
-            />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{isOnline ? 'Online' : 'Offline'}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <CardContent className="flex flex-col items-center p-4 h-full">
-        <h3 className="font-bold text-center mb-2">{hobba.name}</h3>
-        <div className="relative w-24 h-24 mb-2">
+    <Card3D className="w-full h-full" maxRotation={10} scale={1.02}>
+      <div className="bg-card text-card-foreground rounded-lg border shadow-md hover:shadow-lg transition-shadow duration-300 h-full w-full flex flex-col items-center p-4">
+        <div className="absolute top-2 right-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <CircleIcon
+                  className={`h-3 w-3 ${
+                    isOnline ? 'text-green-500' : 'text-gray-400'
+                  }`}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{isOnline ? 'Online' : 'Offline'}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+
+        <h3 className="font-bold text-center mb-2 mt-2">{hobba.name}</h3>
+
+        <div className="w-24 h-24 mb-2 relative">
           <Image
             src={hobba.imageUrl}
             alt={hobba.name}
@@ -54,6 +58,7 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
             priority
           />
         </div>
+
         <Badge
           variant="outline"
           className={`mb-2 ${
@@ -64,7 +69,8 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
         >
           {hobba.hobbaGroup}
         </Badge>
-        <Separator className="w-full my-2" />
+
+        <Separator className="my-2 w-full" />
         <div className="w-full text-xs text-muted-foreground mt-auto">
           <p className="flex justify-between">
             <span>Last Seen:</span>
@@ -75,7 +81,7 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
             <span>{formatDate(new Date(hobba.accountCreatedAt))}</span>
           </p>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </Card3D>
   );
 };
