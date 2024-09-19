@@ -1,8 +1,6 @@
-import Link from 'next/link';
-
 import { ShieldAlert } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { BackButton } from '@/components/ui/back-to-button';
 
 export default function AccessDeniedPage() {
   return (
@@ -13,9 +11,7 @@ export default function AccessDeniedPage() {
         <div className="text-muted-foreground mb-8">
           You do not have the required permissions to view this content.
         </div>
-        <Link href="/">
-          <Button variant="outline">Go back to the homepage</Button>
-        </Link>
+        <BackButton href="/" text="homepage" />
       </div>
     </div>
   );
