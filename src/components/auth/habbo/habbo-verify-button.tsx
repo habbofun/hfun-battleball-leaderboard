@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { LinkIcon, UnlinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { ConfirmationAlert } from '@/components/confirmation/confirmation-alert';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -53,10 +54,16 @@ export function HabboVerifyButton({
 
   if (isVerified) {
     return (
-      <Button variant="destructive" onClick={handleUnlink}>
-        <UnlinkIcon className="mr-2 h-4 w-4" />
-        Unlink Habbo Account
-      </Button>
+      <ConfirmationAlert
+        message="Are you sure you want to unlink your Habbo account? This action cannot be undone."
+        onConfirm={handleUnlink}
+        trigger={
+          <Button variant="destructive">
+            <UnlinkIcon className="mr-2 h-4 w-4" />
+            Unlink Habbo Account
+          </Button>
+        }
+      />
     );
   }
 
