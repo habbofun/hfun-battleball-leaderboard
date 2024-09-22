@@ -15,6 +15,7 @@ export async function addHobbaMember(name: string, hobbaGroup: HobbaGroup) {
     await prisma.hobba.create({
       data: {
         name: userInfo.data!.name,
+        motto: userInfo.data!.motto,
         imageUrl: `https://www.habbo.es/habbo-imaging/avatarimage?&figure=${userInfo.data!.figureString}`,
         hobbaGroup,
         lastOnline: new Date(userInfo.data!.lastAccessTime),
@@ -68,6 +69,7 @@ export async function updateAllHobbaData() {
         const updatedHobba = await prisma.hobba.update({
           where: { id: hobba.id },
           data: {
+            motto: userInfo.data.motto,
             imageUrl: `https://www.habbo.es/habbo-imaging/avatarimage?&figure=${userInfo.data.figureString}`,
             lastOnline: userInfo.data.online ? new Date() : hobba.lastOnline, // Update lastOnline only if user is currently online
             updatedAt: new Date(),

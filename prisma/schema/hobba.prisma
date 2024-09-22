@@ -7,6 +7,7 @@ model Hobba {
     id String @id @default(cuid())
 
     name             String   @unique
+    motto            String?
     imageUrl         String
     lastOnline       DateTime
     accountCreatedAt DateTime

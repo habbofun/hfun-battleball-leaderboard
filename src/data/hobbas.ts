@@ -16,6 +16,7 @@ export async function getHobba(
   const hobba = {
     id: dbHobba.id,
     name: dbHobba.name,
+    motto: dbHobba.motto,
     imageUrl: dbHobba.imageUrl,
     hobbaGroup: dbHobba.hobbaGroup,
     lastOnline: dbHobba.lastOnline,
@@ -40,6 +41,7 @@ export async function getAllHobbas(): Promise<{
   const hobbas = dbHobbas.map((hobba) => ({
     id: hobba.id,
     name: hobba.name,
+    motto: hobba.motto,
     imageUrl: hobba.imageUrl,
     hobbaGroup: hobba.hobbaGroup,
     lastOnline: hobba.lastOnline,
