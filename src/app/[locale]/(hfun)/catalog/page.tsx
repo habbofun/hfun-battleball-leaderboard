@@ -11,11 +11,11 @@ export default async function CatalogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <Alert className="p-4 rounded-md mb-4">
+      <Alert className="mb-4">
         <Terminal className="h-4 w-4" />
-        <AlertTitle>Warning!</AlertTitle>
-        <AlertDescription className="text-muted-foreground">
-          Some data might be test data yet.
+        <AlertTitle>Heads up!</AlertTitle>
+        <AlertDescription>
+          This is a beta version of the catalog. Prices may not be accurate.
         </AlertDescription>
       </Alert>
       <CatalogTabs catalogData={catalogData} />
