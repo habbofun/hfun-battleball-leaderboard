@@ -15,7 +15,7 @@ export default function HomePage({
 
   return (
     <div className="flex flex-col flex-1 bg-background text-foreground">
-      <main className="flex-grow flex flex-col justify-center items-center p-4">
+      <div className="flex-grow flex flex-col justify-center items-center p-4">
         <h1 className="text-6xl font-bold">HFUN.</h1>
         <p className="text-sm text-muted-foreground text-center mt-2 mb-4">
           {t('message')}
@@ -35,7 +35,7 @@ export default function HomePage({
           </Link>
         </div>
         <Separator className="my-8 w-full max-w-sm" />
-      </main>
+      </div>
     </div>
   );
 }
