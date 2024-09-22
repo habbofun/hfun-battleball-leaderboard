@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
-import { BackButton } from '@/components/ui/back-to-button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
@@ -46,7 +45,6 @@ export default async function ItemPage({
 
   return (
     <div className="container mx-auto p-4">
-      <BackButton href="/catalog" text="catalog" />
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
