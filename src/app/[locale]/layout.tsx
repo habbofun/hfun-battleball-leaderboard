@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter as FontSans } from 'next/font/google';
 
+import { DynamicBreadcrumb } from '@/components/navigation/dynamic-breadcrumb';
 import { Providers } from '@/components/providers/providers';
 import { PageFooter } from '@/components/static/page-footer';
 import { PageHeader } from '@/components/static/page-header';
@@ -53,8 +54,13 @@ export default async function LocaleLayout({
       >
         <Providers>
           <PageHeader />
-          {modal}
-          <main className="flex justify-center flex-grow">{children}</main>
+          <DynamicBreadcrumb />
+          <div className="flex-grow flex flex-col">
+            {modal}
+            <main className="w-full max-w-7xl px-4 py-4 mx-auto flex-grow flex flex-col">
+              {children}
+            </main>
+          </div>
           <PageFooter />
         </Providers>
       </body>
