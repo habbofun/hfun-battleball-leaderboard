@@ -32,11 +32,19 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <CircleIcon
-                  className={`h-3 w-3 ${
-                    isOnline ? 'text-green-500' : 'text-gray-400'
-                  }`}
-                />
+                <div className={`relative ${isOnline ? 'animate-pulse' : ''}`}>
+                  <CircleIcon
+                    className={`h-3 w-3 ${
+                      isOnline ? 'text-green-500' : 'text-gray-400'
+                    }`}
+                  />
+                  {isOnline && (
+                    <CircleIcon
+                      className="h-3 w-3 text-green-500 absolute top-0 left-0 animate-ping"
+                      style={{ animationDuration: '3s' }}
+                    />
+                  )}
+                </div>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{isOnline ? 'Online' : 'Offline'}</p>
@@ -45,9 +53,9 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
           </TooltipProvider>
         </div>
 
-        <h3 className="font-bold text-center mb-2 mt-2">{hobba.name}</h3>
+        <h3 className="font-bold text-center mb-4">{hobba.name}</h3>
 
-        <div className="w-24 h-24 mb-2 relative">
+        <div className="w-24 h-24 mb-4 relative">
           <Image
             src={hobba.imageUrl}
             alt={hobba.name}
@@ -59,9 +67,19 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
           />
         </div>
 
+        <div className="h-12 flex items-center justify-center mb-4">
+          <p className="italic text-center text-sm text-muted-foreground px-2 w-full break-words">
+            {hobba.motto && hobba.motto.trim() !== ''
+              ? `"${hobba.motto}"`
+              : 'User has no motto'}
+          </p>
+        </div>
+
+        <Separator className="w-full mb-4" />
+
         <Badge
           variant="outline"
-          className={`mb-2 ${
+          className={`mb-4 ${
             hobba.hobbaGroup === 'GOLD'
               ? 'bg-yellow-100 text-yellow-800 border-yellow-300'
               : 'bg-gray-100 text-gray-800 border-gray-300'
@@ -70,8 +88,7 @@ export const HobbaCard = ({ hobba }: { hobba: Hobba }) => {
           {hobba.hobbaGroup}
         </Badge>
 
-        <Separator className="my-2 w-full" />
-        <div className="w-full text-xs text-muted-foreground mt-auto">
+        <div className="w-full text-xs text-muted-foreground mt-auto space-y-1">
           <p className="flex justify-between">
             <span>Last Seen:</span>
             <span>{formatDate(new Date(hobba.lastOnline))}</span>
