@@ -40,13 +40,17 @@ export function HabboUserInfo() {
       <CardContent>
         <SearchBar onSearch={handleSearch} loading={loading} />
         {loading && <LoadingSkeleton />}
-        {userInfo && (
+        {userInfo ? (
           <div className="mt-8 space-y-8">
             <UserProfile userInfo={userInfo} />
             {userInfo.selectedBadges.length > 0 && (
               <BadgeList badges={userInfo.selectedBadges} />
             )}
           </div>
+        ) : (
+          <p className="text-muted-foreground mt-8 text-center">
+            Search for a Origins ES user to learn more about them.
+          </p>
         )}
       </CardContent>
     </Card>
