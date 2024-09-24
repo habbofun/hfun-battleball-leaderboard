@@ -58,6 +58,13 @@ export default async function ProfilePage() {
                 readOnly
               />
             </div>
+            <div className="space-y-2">
+              <Label>Registered</Label>
+              <Input
+                value={new Date(user.registeredAt).toLocaleDateString()}
+                readOnly
+              />
+            </div>
           </div>
         </CardContent>
         <CardFooter>
