@@ -1,5 +1,5 @@
+import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Badge } from '@/components/ui/badge';

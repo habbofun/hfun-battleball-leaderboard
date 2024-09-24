@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useRouter } from 'next/navigation';
+import { useTransitionRouter } from 'next-view-transitions';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -38,7 +38,7 @@ export function LoginFormModal() {
     },
   });
 
-  const router = useRouter();
+  const router = useTransitionRouter();
   const [isEmailNotVerified, setIsEmailNotVerified] = useState(false);
   const [email, setEmail] = useState('');
   const [showTwoFactor, setShowTwoFactor] = useState(false);

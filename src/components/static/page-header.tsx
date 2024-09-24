@@ -1,3 +1,5 @@
+import { Link } from 'next-view-transitions';
+
 import { Menu } from 'lucide-react';
 
 import UserButton from '@/components/auth/user/user-button';
@@ -7,7 +9,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DrawerTrigger } from '@/components/ui/drawer';
 import { TextEffect } from '@/components/ui/text-effect';
-import { Link } from '@/i18n/routing';
 
 import { LanguageToggle } from '../languaje-switcher/language-switcher';
 

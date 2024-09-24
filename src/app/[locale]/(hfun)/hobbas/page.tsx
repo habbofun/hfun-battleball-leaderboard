@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 import { NotLoggedIn } from '@/components/auth/not-logged-in';
 import { HobbasList } from '@/components/habbo/hobbas/hobbas';
