@@ -34,11 +34,11 @@ export default async function ProfilePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Username</Label>
-                <Input value={user.username} readOnly />
+                <Input value={user.username} disabled />
               </div>
               <div className="space-y-2">
                 <Label>Role</Label>
-                <Input value={user.role} readOnly />
+                <Input value={user.role} disabled />
               </div>
             </div>
             <div className="space-y-2">
@@ -46,7 +46,7 @@ export default async function ProfilePage() {
                 <Label>Email</Label>
                 <VerificationStatus isVerified={user.emailVerified} />
               </div>
-              <Input value={user.email} readOnly />
+              <Input value={user.email} disabled />
             </div>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
@@ -55,14 +55,14 @@ export default async function ProfilePage() {
               </div>
               <Input
                 value={user.habboVerifiedUsername || 'Not verified'}
-                readOnly
+                disabled
               />
             </div>
             <div className="space-y-2">
               <Label>Registered</Label>
               <Input
                 value={new Date(user.registeredAt).toLocaleDateString()}
-                readOnly
+                disabled
               />
             </div>
           </div>
