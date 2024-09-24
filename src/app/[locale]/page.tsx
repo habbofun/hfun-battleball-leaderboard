@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
-import { Link } from 'next-view-transitions';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Link } from '@/i18n/routing';
 
 export default function HomePage({
   params: { locale },

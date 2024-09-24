@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 import { ArrowRight, Github, Globe, Home, MessageCircle } from 'lucide-react';
 

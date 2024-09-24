@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 import { CatalogCategory } from '@/components/habbo/catalog/catalog-category';
 import { Button } from '@/components/ui/button';

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 
 import { AlertCircle } from 'lucide-react';
 
