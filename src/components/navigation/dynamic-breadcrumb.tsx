@@ -22,7 +22,7 @@ type BreadcrumbItem = {
 const generateBreadcrumbs = (path: string): BreadcrumbItem[] => {
   const parts = path.split('/').filter(Boolean);
   return parts.map((part, index) => ({
-    label: part.charAt(0).toUpperCase() + part.slice(1),
+    label: decodeURIComponent(part.charAt(0).toUpperCase() + part.slice(1)),
     href: `/${parts.slice(0, index + 1).join('/')}`,
   }));
 };
