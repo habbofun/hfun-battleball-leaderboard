@@ -20,9 +20,13 @@ type BreadcrumbItem = {
 };
 
 const generateBreadcrumbs = (path: string): BreadcrumbItem[] => {
-  const parts = path.split('/').filter(Boolean);
+  const parts = path
+    .split('/')
+    .filter((segment) => segment !== 'en' && segment !== 'es')
+    .filter(Boolean)
+    .map((part) => decodeURIComponent(part));
   return parts.map((part, index) => ({
-    label: decodeURIComponent(part.charAt(0).toUpperCase() + part.slice(1)),
+    label: part.charAt(0).toUpperCase() + part.slice(1),
     href: `/${parts.slice(0, index + 1).join('/')}`,
   }));
 };
