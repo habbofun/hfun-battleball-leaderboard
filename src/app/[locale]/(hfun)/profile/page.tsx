@@ -13,7 +13,14 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { getCurrentSession, getCurrentUser } from '@/lib/session';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Profile',
+  });
+}
 
 export default async function ProfilePage() {
   const user = await getCurrentUser();

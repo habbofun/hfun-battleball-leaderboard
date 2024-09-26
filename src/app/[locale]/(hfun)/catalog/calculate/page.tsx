@@ -1,5 +1,12 @@
 import TradingCalculator from '@/components/habbo/catalog/calculate/trading-calculator';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Catalog calculate',
+  });
+}
 
 export default async function TradePage() {
   const catalogData = await fetchCatalogData();

@@ -3,6 +3,13 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import { LeaderboardSkeleton } from '@/components/habbo/leaderboard/leaderboard-skeleton';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Leaderboard',
+  });
+}
 
 const LeaderboardContent = dynamic(
   () => import('@/components/habbo/leaderboard/leaderboard-content'),

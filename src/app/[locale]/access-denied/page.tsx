@@ -1,6 +1,13 @@
 import { ShieldAlert } from 'lucide-react';
 
 import { BackButton } from '@/components/ui/back-to-button';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Access denied',
+  });
+}
 
 export default function AccessDeniedPage() {
   return (

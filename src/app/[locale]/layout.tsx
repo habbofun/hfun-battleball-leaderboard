@@ -9,6 +9,7 @@ import { Providers } from '@/components/providers/providers';
 import { PageFooter } from '@/components/static/page-footer';
 import { PageHeader } from '@/components/static/page-header';
 import { routing } from '@/i18n/routing';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 
 const fontSans = FontSans({
@@ -25,10 +26,9 @@ type Props = {
 export async function generateMetadata({
   params: { locale },
 }: Omit<Props, 'children'>) {
-  return {
+  return generatePageMetadata({
     title: 'hfun.info',
-    description: 'Habbo Origins: ES | Fansite',
-  };
+  });
 }
 
 export function generateStaticParams() {

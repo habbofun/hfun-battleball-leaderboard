@@ -8,6 +8,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Sign in',
+  });
+}
 
 export default function DialogSignIn() {
   return (

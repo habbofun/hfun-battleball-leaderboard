@@ -4,6 +4,13 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from '@/i18n/routing';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Home',
+  });
+}
 
 export default function HomePage({
   params: { locale },

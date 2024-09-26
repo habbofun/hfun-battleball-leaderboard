@@ -1,4 +1,11 @@
 import { HabboUserInfo } from '@/components/habbo/finder/habbo-user-info';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Habbo user finder',
+  });
+}
 
 export default function FinderPage() {
   return (

@@ -5,7 +5,14 @@ import Link from 'next/link';
 import { HobbasList } from '@/components/habbo/hobbas/hobbas';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { getUserAndSession } from '@/lib/session';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Hobbas',
+  });
+}
 
 export default async function HobbaPage() {
   const { user, session } = await getUserAndSession();

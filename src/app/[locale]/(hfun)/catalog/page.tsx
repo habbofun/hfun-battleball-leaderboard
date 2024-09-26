@@ -2,7 +2,14 @@ import { Terminal } from 'lucide-react';
 
 import { CatalogTabs } from '@/components/habbo/catalog/catalog-tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Catalog',
+  });
+}
 
 export const revalidate = 3600; // Revalidate every hour
 

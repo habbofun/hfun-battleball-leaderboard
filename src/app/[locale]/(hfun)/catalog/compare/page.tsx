@@ -1,5 +1,12 @@
 import { CompareCatalogItems } from '@/components/habbo/catalog/compare/compare-items';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
+
+export async function generateMetadata() {
+  return generatePageMetadata({
+    description: 'Catalog compare',
+  });
+}
 
 export default async function ComparePageWrapper() {
   const catalogData = await fetchCatalogData();

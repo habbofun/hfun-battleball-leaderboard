@@ -5,8 +5,19 @@ import { notFound } from 'next/navigation';
 import { PriceDisplay } from '@/components/habbo/catalog/price-display';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 import { fetchCatalogData } from '@/server/actions/catalog/fetch-catalog-data';
 import type { CatalogItem } from '@/types/habbo';
+
+export async function generateMetadata({
+  params: { itemName },
+}: {
+  params: { itemName: string };
+}) {
+  return generatePageMetadata({
+    description: 'Catalog item: ' + itemName,
+  });
+}
 
 // Dynamically import the chart component with SSR disabled
 const DynamicItemChart = dynamic(
