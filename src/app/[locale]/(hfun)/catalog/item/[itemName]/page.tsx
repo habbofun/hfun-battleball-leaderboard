@@ -14,8 +14,9 @@ export async function generateMetadata({
 }: {
   params: { itemName: string };
 }) {
+  const decodedItemName = decodeURIComponent(itemName);
   return generatePageMetadata({
-    description: 'Catalog item: ' + itemName,
+    description: 'Catalog item: ' + decodedItemName,
   });
 }
 
@@ -33,7 +34,7 @@ export default async function ItemPage({
 }: {
   params: { itemName: string };
 }) {
-  const { itemName } = params;
+  const decodedItemName = decodeURIComponent(params.itemName);
   const catalogData = await fetchCatalogData();
 
   // Find the item and its category in the catalog data
@@ -41,9 +42,7 @@ export default async function ItemPage({
   let itemCategory: string | undefined;
 
   for (const [category, items] of Object.entries(catalogData)) {
-    item = items.find(
-      (i: CatalogItem) => i.name === decodeURIComponent(itemName),
-    );
+    item = items.find((i: CatalogItem) => i.name === decodedItemName);
     if (item) {
       itemCategory = category;
       break;
