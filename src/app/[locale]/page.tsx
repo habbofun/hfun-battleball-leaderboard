@@ -3,6 +3,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { navigationLinks } from '@/config/navigation';
 import { Link } from '@/i18n/routing';
 import { generateMetadata as generatePageMetadata } from '@/lib/metadata';
 
@@ -28,23 +29,16 @@ export default function HomePage({
           {t('message')}
         </p>
         <div className="flex flex-wrap justify-center gap-2">
-          <Link href="/catalog" rel="noopener noreferrer">
-            <Button variant="ghost">{t('catalog')}</Button>
-          </Link>
-          <Link href="/leaderboard" rel="noopener noreferrer">
-            <Button variant="ghost">{t('leaderboard')}</Button>
-          </Link>
-          <Link href="/finder" rel="noopener noreferrer">
-            <Button variant="ghost">{t('finder')}</Button>
-          </Link>
-          <Link href="/team" rel="noopener noreferrer">
-            <Button variant="ghost">{t('team')}</Button>
-          </Link>
-          <Link href="/hobbas" rel="noopener noreferrer">
-            <Button variant="ghost">{t('hobbas')}</Button>
-          </Link>
+          {navigationLinks.map(({ href, icon: Icon, label }) => (
+            <Link key={href} href={href} rel="noopener noreferrer">
+              <Button variant="ghost" className="gap-2">
+                <Icon className="w-4 h-4" />
+                {t(label)}
+              </Button>
+            </Link>
+          ))}
         </div>
-        <Separator className="my-8 w-full max-w-sm" />
+        <Separator className="my-4 w-full max-w-sm" />
       </div>
     </div>
   );
