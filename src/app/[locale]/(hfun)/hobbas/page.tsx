@@ -13,16 +13,12 @@ export default async function HobbaPage() {
 
   const isAdmin = user?.role === 'admin';
 
-  if (!session) {
-    return <NotLoggedIn />;
-  }
-
   return (
     <div className="flex flex-col flex-1">
       <main className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Hobbas</h1>
-          {isAdmin && (
+          {session && isAdmin && (
             <Link href="/hobbas/admin">
               <Button>Admin</Button>
             </Link>
