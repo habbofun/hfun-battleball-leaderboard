@@ -102,6 +102,7 @@ export async function verifyHabboAccount(token: string) {
       },
       data: {
         habboVerifiedUsername: habboUser.data.name,
+        habboVerifiedUsernameUpdatedAt: new Date(),
       },
     });
 
@@ -118,9 +119,53 @@ export async function verifyHabboAccount(token: string) {
 
 export async function unlinkHabboAccount(userId: string) {
   try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: {
+        habboVerifiedUsername: true,
+        habboVerifiedUsernameUpdatedAt: true,
+      },
+    });
+
+    if (!user || !user.habboVerifiedUsername) {
+      return {
+        success: false,
+        error: 'No linked Habbo account found',
+      };
+    }
+
+    if (!user.habboVerifiedUsernameUpdatedAt) {
+      return {
+        success: false,
+        error: 'Please speak with an admin to unlink your Habbo account (-1)',
+      };
+    }
+
+    const twoWeeksAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+    const canUnlinkAt = new Date(
+      user.habboVerifiedUsernameUpdatedAt.getTime() + 14 * 24 * 60 * 60 * 1000,
+    );
+
+    if (canUnlinkAt > twoWeeksAgo) {
+      return {
+        success: false,
+        error: `At least 14 days must pass before you can unlink your Habbo account. You can unlink your Habbo account on ${canUnlinkAt.toLocaleDateString(
+          'en-US',
+          {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          },
+        )}.`,
+      };
+    }
+
     await db.user.update({
       where: { id: userId },
-      data: { habboVerifiedUsername: null },
+      data: {
+        habboVerifiedUsername: null,
+        habboVerifiedUsernameUpdatedAt: null,
+      },
     });
 
     return { success: true };
