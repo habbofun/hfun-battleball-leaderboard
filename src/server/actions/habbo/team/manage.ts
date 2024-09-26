@@ -17,7 +17,7 @@ export async function addTeamMember(name: string, role: TeamRole) {
     });
 
     if (!user) {
-      return { success: false, error: 'User not found' };
+      return { success: false, error: 'Verified user not found' };
     }
 
     const teamMember = await prisma.teamMember.findFirst({
@@ -71,12 +71,14 @@ export async function updateAllTeamMemberData() {
     const teamMembers = await prisma.teamMember.findMany();
 
     if (teamMembers.length === 0) {
+      console.warn('No team members found');
       return { success: false, error: 'No team members found' };
     }
 
     const updatePromises = teamMembers.map(async (member) => {
       const userInfo = await fetchHabboUserInfo(member.name);
       if (userInfo.error || !userInfo.data) {
+        console.warn(`Failed to fetch team member data for ${member.name}`);
         return {
           name: member.name,
           error: userInfo.error || 'Failed to fetch team member data',
@@ -95,6 +97,7 @@ export async function updateAllTeamMemberData() {
         });
         return { success: true, member: updatedMember };
       } catch (updateError) {
+        console.warn(`Failed to update team member data for ${member.name}`);
         return {
           name: member.name,
           error: 'Failed to update team member data',
@@ -108,6 +111,10 @@ export async function updateAllTeamMemberData() {
       .filter((result) => result.success)
       .map((result) => result.member);
     const errors = results.filter((result) => !result.success);
+
+    console.log(
+      `Updated ${updatedMembers.length} team member data, with ${errors.length} errors`,
+    );
 
     return {
       success: true,
