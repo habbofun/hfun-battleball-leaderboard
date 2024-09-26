@@ -20,3 +20,10 @@ model PriceHistory {
 
     @@index([itemId, date])
 }
+
+enum CatalogCategory {
+    Rare
+    MegaRare
+    FunkyFriday
+    HabboClub
+}
