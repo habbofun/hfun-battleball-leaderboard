@@ -28,10 +28,10 @@ export default function HomePage({
         <p className="text-sm text-muted-foreground text-center mt-2 mb-4">
           {t('message')}
         </p>
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center">
           {navigationLinks.map(({ href, icon: Icon, label }) => (
             <Link key={href} href={href} rel="noopener noreferrer">
-              <Button variant="ghost" className="gap-2">
+              <Button variant="ghost" className="gap-1">
                 <Icon className="w-4 h-4" />
                 {t(label)}
               </Button>
