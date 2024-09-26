@@ -30,6 +30,9 @@ export default function HomePage({
           <Link href="/finder" rel="noopener noreferrer">
             <Button variant="ghost">{t('finder')}</Button>
           </Link>
+          <Link href="/team" rel="noopener noreferrer">
+            <Button variant="ghost">{t('team')}</Button>
+          </Link>
           <Link href="/hobbas" rel="noopener noreferrer">
             <Button variant="ghost">{t('hobbas')}</Button>
           </Link>
