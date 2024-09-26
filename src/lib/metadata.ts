@@ -7,6 +7,6 @@ export function generateMetadata({
 }) {
   return {
     title,
-    description: 'Habbo Origins: ES | Fansite' + description,
+    description: 'Habbo Origins: ES | Fansite | ' + description,
   };
 }
