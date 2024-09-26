@@ -29,7 +29,13 @@ const sortTeamMembersByRole = (
   );
 
   return Object.entries(groupedMembers).sort(([roleA], [roleB]) => {
-    const roleOrder = ['Owner', 'Admin', 'Moderator', 'Helper'];
+    const roleOrder = [
+      'Admin',
+      'Developer',
+      'Designer',
+      'Headwriter',
+      'Writer',
+    ];
     return roleOrder.indexOf(roleA) - roleOrder.indexOf(roleB);
   });
 };
