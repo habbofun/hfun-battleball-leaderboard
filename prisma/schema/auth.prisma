@@ -14,7 +14,8 @@ model User {
     twoFactorEnabled Boolean @default(false)
     twoFactorToken   String?
 
-    habboVerifiedUsername String?
+    habboVerifiedUsername          String?
+    habboVerifiedUsernameUpdatedAt DateTime?
 
     sessions                      Session[]
     EmailVerificationToken        EmailVerificationToken[]
