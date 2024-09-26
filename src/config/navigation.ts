@@ -1,7 +1,6 @@
-import { Book, Home, Search, Star, Trophy, Users } from 'lucide-react';
+import { Book, Search, Star, Trophy, Users } from 'lucide-react';
 
 export const navigationLinks = [
-  { href: '/', icon: Home, label: 'home' },
   { href: '/catalog', icon: Book, label: 'catalog' },
   { href: '/leaderboard', icon: Trophy, label: 'leaderboard' },
   { href: '/finder', icon: Search, label: 'finder' },
