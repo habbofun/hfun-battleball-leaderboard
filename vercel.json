@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/update-hobbas",
       "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/update-team-members",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
