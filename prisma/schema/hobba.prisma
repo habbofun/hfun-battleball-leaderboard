@@ -6,15 +6,14 @@ enum HobbaGroup {
 model Hobba {
     id String @id @default(cuid())
 
-    name             String   @unique
-    motto            String?
-    imageUrl         String
-    lastOnline       DateTime
-    accountCreatedAt DateTime
-
+    name       String     @unique
+    motto      String?
+    imageUrl   String
     hobbaGroup HobbaGroup
 
-    updatedAt DateTime @updatedAt
+    lastOnline       DateTime
+    accountCreatedAt DateTime
+    updatedAt        DateTime @updatedAt
 
     @@map("hobba")
 }
