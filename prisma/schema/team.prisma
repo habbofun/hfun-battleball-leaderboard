@@ -1,0 +1,25 @@
+enum TeamRole {
+    ADMIN
+    DEVELOPER
+    DESIGNER
+    HEADWRITER
+    WRITER
+}
+
+model TeamMember {
+    id String @id @default(cuid())
+
+    name     String   @unique
+    motto    String?
+    imageUrl String
+    role     TeamRole
+
+    lastOnline       DateTime
+    accountCreatedAt DateTime
+    updatedAt        DateTime @updatedAt
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @unique
+
+    @@map("team_member")
+}
