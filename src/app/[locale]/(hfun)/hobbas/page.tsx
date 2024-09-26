@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 
 import Link from 'next/link';
 
-import { NotLoggedIn } from '@/components/auth/not-logged-in';
 import { HobbasList } from '@/components/habbo/hobbas/hobbas';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/ui/loader';
